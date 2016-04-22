@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "ynapi",
+    "password": null,
+    "database": "yn",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "ynapi",
+    "password": null,
+    "database": "yn",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "ynapi",
+    "password": "dRtB{}sZnB",
+    "database": "yn",
+    "host": "zerobeta.me",
+    "dialect": "mysql"
+  }
+}
