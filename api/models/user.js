@@ -1,0 +1,45 @@
+/**
+ * Created by Aurelien PRIEUR on 22/04/16 for api.
+ */
+"use strict";
+
+var Friend = require('friend.js');
+
+module.exports = function(sequelize, DataTypes) {
+    var user = sequelize.define('User', {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        firstname: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        lastname: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        username: DataTypes.STRING,
+        email: DataTypes.STRING,
+        phone: DataTypes.STRING,
+        password: DataTypes.STRING,
+        authWithFacebook: DataTypes.BOOLEAN,
+        createdAt: {
+            defaultValue: sequelize.NOW,
+            type: DataTypes.DATETIME
+        }
+        },
+        {
+        classMethods: {
+            associate: function(models) {
+                models.User.hasMany(models.Friend, { foreignKey: { name: 'fk_friend', allowNull: false }, onDelete: 'CASCADE' });
+                models.User.hasMany(models.Question, { foreignKey: { name: 'fk_question', allowNull: true }, onDelete: 'CASCADE'})
+            }
+        }
+    });
+
+    return user;
+};
+
+
