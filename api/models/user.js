@@ -3,8 +3,6 @@
  */
 "use strict";
 
-var Friend = require('friend.js');
-
 module.exports = function(sequelize, DataTypes) {
     var user = sequelize.define('User', {
         id: {
@@ -27,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
         authWithFacebook: DataTypes.BOOLEAN,
         createdAt: {
             defaultValue: sequelize.NOW,
-            type: DataTypes.DATETIME
+            type: DataTypes.DATE
         }
         },
         {

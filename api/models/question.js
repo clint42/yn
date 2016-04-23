@@ -22,13 +22,14 @@ module.exports = function(sequelize, DataTypes) {
         status: DataTypes.ENUM('OPEN', 'CLOSED'),
         createdAt: {
             defaultValue: sequelize.NOW,
-            type: DataTypes.DATETIME
+            type: DataTypes.DATE
         }
     },
     {
         classMethods: {
             associate: function(models) {
-                models.question.belongsTo(models.User, { foreignKey: 'userId' });
+                /*models.Question.belongsTo(models.User, { foreignKey: 'userId' });*/
+                /*models.Question.hasMany(models.User, {foreignKey: 'userAsked'});*/
             }
         }
     });

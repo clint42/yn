@@ -12,16 +12,16 @@ module.exports = function(sequelize, DataTypes) {
         },
         requestStatus: DataTypes.ENUM('SENT', 'REFUSED', 'ACCEPTED'),
         createdAt: {
-            type: DataTypes.DATETIME,
+            type: DataTypes.DATE,
             defaultValue: sequelize.NOW
         }
     },
     {
         classMethods: {
-            associate: function(models) {
+            /*associate: function(models) {
                 models.Friend.hasOne(models.User, { foreignKey: 'userId1' });
                 models.Friend.hasOne(models.User, { foreignKey: 'userId2' });
-            }
+            }*/
         }
     });
 
