@@ -18,8 +18,8 @@ module.exports = function(sequelize, DataTypes) {
         },{
         classMethods: {
             associate: function(models) {
-                models.Answer.hasOne(models.Question, {foreignKey: 'fkQuestionId'});
-                models.Answer.hasOne(models.User, {foreignKey: 'fkUserId'});
+                models.Answer.belongsTo(models.Question, {foreignKey: 'questionId'});
+                models.Answer.belongsTo(models.User, {foreignKey: 'userId'});
             }
         }
     });

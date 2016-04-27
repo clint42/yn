@@ -28,8 +28,7 @@ module.exports = function(sequelize, DataTypes) {
     {
         classMethods: {
             associate: function(models) {
-                /*models.Question.belongsTo(models.User, { foreignKey: 'userId' });*/
-                /*models.Question.hasMany(models.User, {foreignKey: 'userAsked'});*/
+                models.Question.hasMany(models.Answer, { foreignKey: 'questionId', onDelete: 'CASCADE'});
             }
         }
     });

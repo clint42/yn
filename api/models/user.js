@@ -31,8 +31,8 @@ module.exports = function(sequelize, DataTypes) {
         {
         classMethods: {
             associate: function(models) {
-                models.User.hasMany(models.Friend, { foreignKey: { name: 'fk_friend', allowNull: false }, onDelete: 'CASCADE' });
-                models.User.hasMany(models.Question, { foreignKey: { name: 'fk_question', allowNull: true }, onDelete: 'CASCADE'})
+                models.User.hasMany(models.Friend, { foreignKey: { name: 'userId1', allowNull: false }, onDelete: 'CASCADE' });
+                models.User.hasMany(models.Question, { foreignKey: { name: 'userId', allowNull: true }, onDelete: 'CASCADE'})
             }
         }
     });

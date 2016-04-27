@@ -18,10 +18,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     {
         classMethods: {
-            /*associate: function(models) {
-                models.Friend.hasOne(models.User, { foreignKey: 'userId1' });
-                models.Friend.hasOne(models.User, { foreignKey: 'userId2' });
-            }*/
+            associate: function(models) {
+                models.Friend.belongsTo(models.User, {foreignKey: 'userId1'});
+                models.Friend.belongsTo(models.User, {foreignKey: 'userId2'});
+            }
         }
     });
 
