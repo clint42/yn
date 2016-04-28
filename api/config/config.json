@@ -17,7 +17,7 @@
     "username": "ynapi",
     "password": "dRtB{}sZnB",
     "database": "yn",
-    "host": "zerobeta.me",
+    "host": "localhost",
     "dialect": "mysql"
   }
 }
