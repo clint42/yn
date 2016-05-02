@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="z2o-A6-cme">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Create Question View Controller-->
+        <scene sceneID="wYf-af-7p6">
+            <objects>
+                <viewController id="cfS-bT-JJO" customClass="CreateQuestionViewController" customModule="yn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Rqe-1Q-kNG"/>
+                        <viewControllerLayoutGuide type="bottom" id="o1E-wd-Ocr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cgw-Mt-71N">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ASK - CreateQuestion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iB0-jw-gzO">
+                                <rect key="frame" x="216" y="289" width="169" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="16O-L1-idd">
+                                <rect key="frame" x="262" y="318" width="77" height="30"/>
+                                <state key="normal" title="Test Segue"/>
+                                <connections>
+                                    <action selector="testButtonTapped:" destination="cfS-bT-JJO" eventType="touchUpInside" id="Veo-3W-Mbb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="16O-L1-idd" firstAttribute="centerX" secondItem="iB0-jw-gzO" secondAttribute="centerX" id="8WI-op-Cgo"/>
+                            <constraint firstItem="iB0-jw-gzO" firstAttribute="centerX" secondItem="cgw-Mt-71N" secondAttribute="centerX" id="AKs-lY-2Wi"/>
+                            <constraint firstItem="16O-L1-idd" firstAttribute="top" secondItem="iB0-jw-gzO" secondAttribute="bottom" constant="8" symbolic="YES" id="P8c-ME-b8Y"/>
+                            <constraint firstItem="iB0-jw-gzO" firstAttribute="centerY" secondItem="cgw-Mt-71N" secondAttribute="centerY" id="Uod-w8-CHr"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="WeX-US-0ex"/>
+                    <connections>
+                        <segue destination="ENg-cW-up2" kind="show" identifier="testSegue" id="AB6-ri-RX6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0LF-1R-KZR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="319" y="1106"/>
+        </scene>
+        <!--Send Question View Controller-->
+        <scene sceneID="ko8-eH-6nI">
+            <objects>
+                <viewController id="ENg-cW-up2" customClass="SendQuestionViewController" customModule="yn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="q0T-Mo-D3X"/>
+                        <viewControllerLayoutGuide type="bottom" id="te1-es-1VZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="E0n-da-O3d">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ASK - SendQuestion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jua-F6-ktO">
+                                <rect key="frame" x="222" y="289" width="157" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kfg-4M-JF3">
+                                <rect key="frame" x="267" y="318" width="67" height="30"/>
+                                <state key="normal" title="Test Back"/>
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="ENg-cW-up2" eventType="touchUpInside" id="rHk-7i-paJ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Jua-F6-ktO" firstAttribute="centerY" secondItem="E0n-da-O3d" secondAttribute="centerY" id="4hp-2f-iaj"/>
+                            <constraint firstItem="Kfg-4M-JF3" firstAttribute="top" secondItem="Jua-F6-ktO" secondAttribute="bottom" constant="8" symbolic="YES" id="Hxc-8Y-Npu"/>
+                            <constraint firstItem="Jua-F6-ktO" firstAttribute="centerX" secondItem="E0n-da-O3d" secondAttribute="centerX" id="udb-Rc-uLP"/>
+                            <constraint firstItem="Kfg-4M-JF3" firstAttribute="centerX" secondItem="Jua-F6-ktO" secondAttribute="centerX" id="xD8-aE-A4I"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BuC-U6-UHm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="319" y="1881"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="CTW-gb-OvF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="z2o-A6-cme" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AxD-og-vu9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <outlet property="delegate" destination="R0K-ud-EZb" id="flP-ya-pgN"/>
+                        <segue destination="cfS-bT-JJO" kind="relationship" relationship="rootViewController" id="fmJ-n4-WzA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UUm-9f-Q3w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="R0K-ud-EZb" customClass="SectionNavigationControllerDelegate" customModule="yn" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="319" y="316"/>
+        </scene>
+    </scenes>
+</document>

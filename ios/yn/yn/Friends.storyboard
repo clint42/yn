@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EKP-11-8mD">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Friends List View Controller-->
+        <scene sceneID="iQ4-9b-a6X">
+            <objects>
+                <viewController id="kXL-kY-qk7" customClass="FriendsListViewController" customModule="yn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Jct-Jo-xO6"/>
+                        <viewControllerLayoutGuide type="bottom" id="8Zd-vx-I3i"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vMw-R2-jBE">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRIENDS - List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33T-UR-Eng">
+                                <rect key="frame" x="244" y="289" width="113" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="33T-UR-Eng" firstAttribute="centerX" secondItem="vMw-R2-jBE" secondAttribute="centerX" id="9BN-Lw-DWf"/>
+                            <constraint firstItem="33T-UR-Eng" firstAttribute="centerY" secondItem="vMw-R2-jBE" secondAttribute="centerY" id="PY6-DB-CGo"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="8S7-HN-XcL"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8nG-Jj-SV6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="217" y="1021"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Myo-aM-URV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="EKP-11-8mD" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mAx-3g-DbS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <outlet property="delegate" destination="51F-ib-5j6" id="dDz-lg-8Uv"/>
+                        <segue destination="kXL-kY-qk7" kind="relationship" relationship="rootViewController" id="kKd-cb-rHl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uht-Gj-nlS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="51F-ib-5j6" customClass="SectionNavigationControllerDelegate" customModule="yn" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="217" y="225"/>
+        </scene>
+    </scenes>
+</document>
