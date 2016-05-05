@@ -60,6 +60,14 @@ module.exports = function(sequelize, DataTypes) {
             }
         },
         instanceMethods: {
+            toJSON: function() {
+                var resp = this.get();
+                delete resp.authToken;
+                delete resp.password;
+                delete resp.phone;
+                delete resp.email;
+                return resp;
+            },
             verifyPassword: function(plainPassword) {
                 var self = this;
                 return new Promise(function(resolve, reject) {
@@ -85,12 +93,16 @@ module.exports = function(sequelize, DataTypes) {
                    });
                 });
             },
-            getFriendUsers: function() {
+            getFriendUsers: function(nbPerPage, offset) {
+                var pagination = nbPerPage && offset;
                 var query = "SELECT *, Users.id AS id, Friends.id as friendshipId FROM " + sequelize.models.User.tableName +
                             " INNER JOIN " + sequelize.models.Friend.tableName + " ON Friends.UserId=Users.id OR Friends.FriendId=Users.id " +
                             "WHERE (Friends.UserId="+this.id+" OR Friends.FriendId="+this.id+") AND Users.id!="+this.id+" AND Friends.status='ACCEPTED'";
+                if (pagination) {
+                    query += " LIMIT " + offset + "," + nbPerPage;
+                }
                 return new Promise(function(resolve, reject) {
-                   sequelize.query(query, {type: sequelize.QueryTypes.SELECT}).then(function(users) {
+                   sequelize.query(query, {type: sequelize.QueryTypes.SELECT, model: sequelize.models.User}).then(function(users) {
                        resolve(users);
                    }).catch(function(err) {
                        reject(err);
@@ -98,11 +110,15 @@ module.exports = function(sequelize, DataTypes) {
                 });
             },
             getFriendRequestUsers: function() {
+                var pagination = nbPerPage && offset;
                 var query = "SELECT *, Users.id AS id, Friends.id as friendshipId FROM " + sequelize.models.User.tableName +
                             " INNER JOIN " + sequelize.models.Friend.tableName + " ON Friends.FriendId=Users.id" +
                             "WHERE Friends.FriendId="+this.id+" AND Users.id!="+this.id+" AND status='PENDING'";
+                if (pagination) {
+                    query += " LIMIT " + offset + "," + nbPerPage
+                }
                 return new Promise(function(resolve, reject) {
-                   sequelize.query(query, {type: sequelize.QueryTypes.SELECT}).then(function(users) {
+                   sequelize.query(query, {type: sequelize.QueryTypes.SELECT, model: sequelize.models.User}).then(function(users) {
                         resolve(users);
                    }).catch(function(err) {
                         reject(err);
@@ -110,11 +126,15 @@ module.exports = function(sequelize, DataTypes) {
                 });
             },
             getFriendPendingRequestUsers: function() {
+                var pagination = nbPerPage && offset;
                 var query = "SELECT *, Users.id AS id, Friends.id as friendshipId FROM " + sequelize.models.User.tableName +
                             " INNER JOIN " + sequelize.models.Friend.tableName + " ON Friends.UserId=Users.id" +
                             "WHERE Friends.UserId="+this.id+" AND Users.id!="+this.id+" AND Friends.status='PENDING'";
+                if (pagination) {
+                    query += " LIMIT " + offset + "," + nbPerPage;
+                }
                 return new Promise(function(resolve, reject) {
-                   sequelize.query(query, {type: sequelize.QueryTypes.SELECT}).then(function(users) {
+                   sequelize.query(query, {type: sequelize.QueryTypes.SELECT, model: sequelize.models.User}).then(function(users) {
                        resolve(users);
                    }).catch(function(err) {
                        reject(err);

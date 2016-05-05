@@ -12,68 +12,39 @@ var auth = require(path.resolve('middlewares/authentication'));
 router.get('/my', auth, function(req, res, next) {
     var nResults = req.body.nResults || 10;
     var offset = req.body.offset || 0;
-    models.Friend.findAll({
-        where: {
-            'UserId': req.currentUser.id
-        }
-    });
-    models.User.findAll({
-        where: {
-            'id': req.currentUser.id
-        },
-        include: [{
-            model: models.Friend,
-            through: {where: {
-                'Friend.statusRequest': 'ACCEPTED'
-            }}
-        }]
-    }).then(function(friends) {
-        res.json({
-            friends: friends
-        });
+    req.currentUser.getFriendUsers(nResults, offset).then(function(friends) {
+        res.json({friends: friends});
     }).catch(function(err) {
-        console.log("Error while retreving friends: " + err);
-        next("Error while retriveing friends", req, res);
+       //TODO: Error handling
+        next(err, req, res);
     });
 });
 
-router.get('/requests', auth, function(req, res, next) {
+router.get('/receivedRequests', auth, function(req, res, next) {
     var nResults = req.body.nResults ||10;
     var offset = req.body.offset || 0;
-    models.Friend.findAll({
-        where: {
-            'UserId': req.currentUser.id,
-            'requestStatus': 'SENT'
-        },
-        include: [models.User]
-    }).then(function(friendRequests) {
-        /*console.log(friendRequests[0]);
-        friendRequests.prototype.toJSON = function() {
-            var resp = this.get();
-            delete resp.User.password;
-            return resp;
-        };*/
-        res.json({friendRequests: friendRequests});
+    req.currentUser.getFriendRequestUsers(nResults, offset).then(function(usersWithRequest) {
+        res.json({
+            usersRequests: usersWithRequest
+        });
     }).catch(function(err) {
-        console.log(err);
+       //TODO: Error handling
+        next(err, req, res);
     });
+});
 
-    /*req.currentUser.getFriends({
-        limit: parseInt(nResults),
-        offset: parseInt(offset),
-        where: {
-            'Friends.UserId': req.currentUser.id,
-            'Friends.requestStatus': 'SENT'
-        },
-        include: [models.Friend]
-    }).then(function(friends) {
-        for (var i = 0; i < friends.length; ++i) {
-            console.log(friends[0].email);
-        }
+router.get('/sendedRequests', auth, function(req, res, next) {
+    var nResults = req.body.nResults || 10;
+    var offset = req.body.offset || 0;
+    req.currentUser.getFriendPendingRequestUsers(nResults, offset).then(function(usersWithRequest) {
+        res.json({
+            usersRequests: usersWithRequest
+        });
     }).catch(function(err) {
-        console.log("Error: " + err);
-    });*/
-    //res.json({devMsg: 'Not implemented yet'});
+        //TODO: Error handling
+        next(err, req, res);
+    })
+
 });
 
 router.post('/add', auth, function(req, res, next) {
@@ -81,22 +52,19 @@ router.post('/add', auth, function(req, res, next) {
     if (identifier) {
         //Retrieve user to add as friend
         models.User.getUser(identifier).then(function(userToAdd) {
-            console.log('UserToAdd');
+            //Associate friend
             req.currentUser.addFriend(userToAdd, {requestStatus: 'PENDING'}).then(function(associated) {
-                console.log("Associate 1: " + associated);
-                userToAdd.addFriend(req.currentUser).then(function(associated) {
-                    console.log("Associate 2: " + associated);
-                }).catch(function(err) {
-                    console.log("Error Associate 2:  " + err);
-                })
+                res.status(201);
+                res.json({success: 'Request sent'});
             }).catch(function(err) {
-                console.log("Error Associate 1: " + err);
+                //TODO: Error handling
+                next(err, req, res);
             })
         }).catch(function(err) {
-            console.log("Error while retrieving user to add: " + err);
+            //TODO: Error Handling
+            next(err, req, res);
         });
     }
-    res.json({devMsg: "Not implemented yet"});
 });
 
 
