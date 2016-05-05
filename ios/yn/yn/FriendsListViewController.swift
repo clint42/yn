@@ -8,11 +8,18 @@
 
 import UIKit
 
-class FriendsListViewController: UIViewController {
+class FriendsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var tableView: UITableView!
 
+    var paginationOffset: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        tabBarController!.tabBar.items![0].badgeValue = "2"
+        FriendsApiController.sharedInstance.getFriends() { (users: [User], err: String?) in
+            print("getFriends Callback")
+            print("err: \(err)")
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -21,7 +28,26 @@ class FriendsListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: - UITableViewDataSource
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("friendCell") as! FriendTableViewCell
+        return cell
+    }
 
+    //MARK: - API communication methods
+    private func fetchFriends() {
+        let apiHandler = ApiHandler.sharedInstance
+        
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -32,4 +58,8 @@ class FriendsListViewController: UIViewController {
     }
     */
 
+}
+
+class FriendTableViewCell: UITableViewCell {
+    @IBOutlet weak var usernameLabel: UILabel!
 }
