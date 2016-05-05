@@ -3,7 +3,7 @@ var router = express.Router();
 var path = require('path');
 var models = require(path.resolve('models'));
 
-/*router.post('/test', function(req, res, next) {
+router.post('/test', function(req, res, next) {
   models.User.create({
     email: 'a@a.com',
     username: 'a',
@@ -39,7 +39,7 @@ router.get('/test', function(req, res, next) {
     }).then(function(user2) {
       console.log('USER2 OK');
       user.addFriend(user2, {status: 'PENDING'});
-      user2.addFriend(user, {status: 'PENDING'});
+      //user2.addFriend(user, {status: 'PENDING'});
       console.log(user2);
     }).catch(function(err) {
       console.log(err);
@@ -57,23 +57,30 @@ router.get('/testFriend', function(req, res, next) {
     }
   }).then(function(user) {
     console.log("USER OK: " + user.id);
-    user.getFriends({
-      through: {
+    /*user.getFriends({
+      /*through: {
         where: {
           status: 'ACCEPTED'
         }
-      }
+      }*!/
     }).then(function(friends) {
       console.log(friends);
       res.json(friends);
     }).catch(function(err) {
       console.log(err);
+    })*/
+    user.getFriendUsers().then(function(users) {
+      console.log('users: ' + users);
+      res.json(users);
+    }).catch(function(err) {
+      console.log('err: ' + err);
+      res.json(err);
     })
   }).catch(function(err) {
     console.log(err);
-  })
+  });
   //res.json({dev: 'DEV ROUTE ONLY'});
-});*/
+});
 
 router.post('/signin', function(req, res, next) {
   var identifier = req.body.identifier;
@@ -82,18 +89,7 @@ router.post('/signin', function(req, res, next) {
     next("Identifier or password missing", req, res);
   }
   else {
-    models.User.findOne({
-      where: {
-        $or: [
-          {
-            email: identifier
-          },
-          {
-            phone: identifier
-          }
-        ]
-      }
-    }).then(function (user) {
+    models.User.getUser(identifier).then(function (user) {
       if (!user) {
         //TODO: Error handling
         next("User not found", req, res);

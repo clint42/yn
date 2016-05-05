@@ -36,8 +36,27 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 models.User.belongsToMany(models.User, {as: 'Friends', through: models.Friend})
-                //models.User.hasMany(models.Friend, {foreignKey: 'userId1', allowNull: false});
-                //models.User.hasMany(models.Friend, {foreignKey: 'userId2', allowNull: false});
+            },
+            getUser: function(identifier) {
+                var self = this;
+                return new Promise(function(resolve, reject) {
+                    self.findOne({
+                        where: {
+                            $or: [{
+                                email: identifier
+                            },{
+                                phone: identifier
+                            },{
+                                username: identifier
+                            }
+                            ]
+                        }
+                    }).then(function(user) {
+                        resolve(user);
+                    }).catch(function(err) {
+                        reject(err);
+                    });
+                });
             }
         },
         instanceMethods: {
@@ -64,6 +83,42 @@ module.exports = function(sequelize, DataTypes) {
                    }).catch(function(err) {
                       reject(false);
                    });
+                });
+            },
+            getFriendUsers: function() {
+                var query = "SELECT *, Users.id AS id, Friends.id as friendshipId FROM " + sequelize.models.User.tableName +
+                            " INNER JOIN " + sequelize.models.Friend.tableName + " ON Friends.UserId=Users.id OR Friends.FriendId=Users.id " +
+                            "WHERE (Friends.UserId="+this.id+" OR Friends.FriendId="+this.id+") AND Users.id!="+this.id+" AND Friends.status='ACCEPTED'";
+                return new Promise(function(resolve, reject) {
+                   sequelize.query(query, {type: sequelize.QueryTypes.SELECT}).then(function(users) {
+                       resolve(users);
+                   }).catch(function(err) {
+                       reject(err);
+                   });
+                });
+            },
+            getFriendRequestUsers: function() {
+                var query = "SELECT *, Users.id AS id, Friends.id as friendshipId FROM " + sequelize.models.User.tableName +
+                            " INNER JOIN " + sequelize.models.Friend.tableName + " ON Friends.FriendId=Users.id" +
+                            "WHERE Friends.FriendId="+this.id+" AND Users.id!="+this.id+" AND status='PENDING'";
+                return new Promise(function(resolve, reject) {
+                   sequelize.query(query, {type: sequelize.QueryTypes.SELECT}).then(function(users) {
+                        resolve(users);
+                   }).catch(function(err) {
+                        reject(err);
+                   });
+                });
+            },
+            getFriendPendingRequestUsers: function() {
+                var query = "SELECT *, Users.id AS id, Friends.id as friendshipId FROM " + sequelize.models.User.tableName +
+                            " INNER JOIN " + sequelize.models.Friend.tableName + " ON Friends.UserId=Users.id" +
+                            "WHERE Friends.UserId="+this.id+" AND Users.id!="+this.id+" AND Friends.status='PENDING'";
+                return new Promise(function(resolve, reject) {
+                   sequelize.query(query, {type: sequelize.QueryTypes.SELECT}).then(function(users) {
+                       resolve(users);
+                   }).catch(function(err) {
+                       reject(err);
+                   })
                 });
             }
         },

@@ -79,19 +79,10 @@ router.get('/requests', auth, function(req, res, next) {
 router.post('/add', auth, function(req, res, next) {
     var identifier = req.body.identifier;
     if (identifier) {
-        //Create Friend
-
-        models.User.findOne({
-            where: {
-                $or: [{
-                    email: identifier
-                }, {
-                    phone: identifier
-                }]
-            }
-        }).then(function(userToAdd) {
+        //Retrieve user to add as friend
+        models.User.getUser(identifier).then(function(userToAdd) {
             console.log('UserToAdd');
-            req.currentUser.addFriend(userToAdd, {requestStatus: 'ACCEPTED'}).then(function(associated) {
+            req.currentUser.addFriend(userToAdd, {requestStatus: 'PENDING'}).then(function(associated) {
                 console.log("Associate 1: " + associated);
                 userToAdd.addFriend(req.currentUser).then(function(associated) {
                     console.log("Associate 2: " + associated);
