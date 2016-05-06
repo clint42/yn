@@ -113,7 +113,7 @@ router.post('/signin', function(req, res, next) {
               });
             }
             else {
-              res.json({token: user.authToken});
+              res.json({token: user.authToken, userId: user.id});
             }
           }
         }).catch(function(err) {
@@ -166,6 +166,37 @@ router.post('/signup', function(req, res, next) {
       next("Sequelize error" + err, req, res);
     });
   };
+});
+
+router.get('/search', function(req, res, next) {
+  var searchString = req.query.searchString;
+  if (searchString) {
+    models.User.findAll({
+      where: {
+        $or: [
+          models.sequelize.where(
+              models.sequelize.fn('lower', models.sequelize.col('username')), ' LIKE ', models.sequelize.fn('lower', searchString+'%')
+          ),
+          models.sequelize.where(
+              models.sequelize.fn('lower', models.sequelize.col('phone')), models.sequelize.fn('lower', searchString)
+          ), models.sequelize.where(
+              models.sequelize.fn('lower', models.sequelize.col('email')), models.sequelize.fn('lower', searchString)
+          )]
+      }
+    }).then(function(users) {
+      res.send({
+        users: users
+      });
+    }).catch(function(err) {
+      console.log("Error while searching users: " + err);
+      //TODO: Error Handling
+      next(err, req, res);
+    })
+  }
+  else {
+    res.status(422);
+    res.json({error: "Missing parameters"});
+  }
 });
 
 module.exports = router;

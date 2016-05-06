@@ -27,15 +27,11 @@ module.exports = function(sequelize, DataTypes) {
         phone: DataTypes.STRING,
         password: DataTypes.STRING,
         authWithFacebook: DataTypes.BOOLEAN,
-        authToken: DataTypes.STRING,
-        createdAt: {
-            defaultValue: sequelize.NOW,
-            type: DataTypes.DATE
-        }
+        authToken: DataTypes.STRING
     }, {
         classMethods: {
             associate: function(models) {
-                models.User.belongsToMany(models.User, {as: 'Friends', through: models.Friend})
+                models.User.belongsToMany(models.User, {as: 'Friends', through: models.Friend, onDelete: 'CASCADE', onUpdate: 'CASCADE'})
             },
             getUser: function(identifier) {
                 var self = this;
@@ -57,6 +53,9 @@ module.exports = function(sequelize, DataTypes) {
                         reject(err);
                     });
                 });
+            },
+            hashPasswordSync: function(password) {
+                return bcrypt.hashSync(password, null, null);
             }
         },
         instanceMethods: {
@@ -93,13 +92,17 @@ module.exports = function(sequelize, DataTypes) {
                    });
                 });
             },
-            getFriendUsers: function(nbPerPage, offset) {
+            getFriendUsers: function(nbPerPage, offset, orderBy, orderRule) {
                 var pagination = nbPerPage && offset;
+
                 var query = "SELECT *, Users.id AS id, Friends.id as friendshipId FROM " + sequelize.models.User.tableName +
                             " INNER JOIN " + sequelize.models.Friend.tableName + " ON Friends.UserId=Users.id OR Friends.FriendId=Users.id " +
-                            "WHERE (Friends.UserId="+this.id+" OR Friends.FriendId="+this.id+") AND Users.id!="+this.id+" AND Friends.status='ACCEPTED'";
+                            "WHERE (Friends.UserId="+this.id+" OR Friends.FriendId="+this.id+") AND Users.id!="+this.id+" AND Friends.status='ACCEPTED' ";
                 if (pagination) {
                     query += " LIMIT " + offset + "," + nbPerPage;
+                }
+                if (orderBy) {
+                    query += " ORDER BY " + orderBy + " " + orderRule
                 }
                 return new Promise(function(resolve, reject) {
                    sequelize.query(query, {type: sequelize.QueryTypes.SELECT, model: sequelize.models.User}).then(function(users) {
