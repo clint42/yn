@@ -25,7 +25,15 @@ class User {
         self.lastname = lastname
     }
     
-    convenience init(json: Dictionary<String, AnyObject>) {
-        self.init(id: 0, username: "test");
+    convenience init(json: Dictionary<String, AnyObject>) throws {
+        guard let id = json["id"] as? Int
+            else {
+                throw ApiError.ResponseInvalidData
+        }
+        guard let username = json["username"] as? String
+            else {
+                throw ApiError.ResponseInvalidData
+        }
+        self.init(id: id, username: username, email: json["email"] as? String, phone: json["phone"] as? String, firstname: json["firstname"] as? String, lastname: json["lastname"] as? String);
     }
 }

@@ -39,6 +39,8 @@
 		0D8EADAC1CDAE42A00A4DAED /* ApiUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADAB1CDAE42A00A4DAED /* ApiUrls.swift */; };
 		0D8EADAF1CDAE56F00A4DAED /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADAE1CDAE56F00A4DAED /* ApiError.swift */; };
 		0D8EADB11CDAE60E00A4DAED /* ApiUrls.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D8EADB01CDAE60E00A4DAED /* ApiUrls.plist */; };
+		0D8EADB31CDBF1EF00A4DAED /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADB21CDBF1EF00A4DAED /* AddFriendViewController.swift */; };
+		0D8EADB51CDD3F3000A4DAED /* UsersApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADB41CDD3F3000A4DAED /* UsersApiController.swift */; };
 		219EE88753B35D34D88A8646 /* Pods_yn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6D8597E64AAAE0D10DCC61E /* Pods_yn.framework */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +113,8 @@
 		0D8EADAB1CDAE42A00A4DAED /* ApiUrls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiUrls.swift; sourceTree = "<group>"; };
 		0D8EADAE1CDAE56F00A4DAED /* ApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		0D8EADB01CDAE60E00A4DAED /* ApiUrls.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiUrls.plist; sourceTree = "<group>"; };
+		0D8EADB21CDBF1EF00A4DAED /* AddFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
+		0D8EADB41CDD3F3000A4DAED /* UsersApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersApiController.swift; sourceTree = "<group>"; };
 		6555A07611012DCEE3DF650E /* Pods-yn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yn.release.xcconfig"; path = "Pods/Target Support Files/Pods-yn/Pods-yn.release.xcconfig"; sourceTree = "<group>"; };
 		9C6B85502A8AB8B0D77D403D /* Pods-yn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-yn/Pods-yn.debug.xcconfig"; sourceTree = "<group>"; };
 		B6D8597E64AAAE0D10DCC61E /* Pods_yn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,7 +191,6 @@
 				0D13AFF61CD591F100D7D51F /* Sansation_Light.ttf */,
 				0D13AFF71CD591F100D7D51F /* Sansation_Regular.ttf */,
 				0D13AFFB1CD5941700D7D51F /* UIColorExtension.swift */,
-				0D8EADB01CDAE60E00A4DAED /* ApiUrls.plist */,
 			);
 			path = yn;
 			sourceTree = "<group>";
@@ -225,7 +228,7 @@
 			children = (
 				0D13AFE21CD557E900D7D51F /* Friends.storyboard */,
 				0D13AFE41CD5587700D7D51F /* FriendsListViewController.swift */,
-				0D8EADA61CDAE34800A4DAED /* FriendsApiController.swift */,
+				0D8EADB21CDBF1EF00A4DAED /* AddFriendViewController.swift */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -260,9 +263,12 @@
 		0D8EADAD1CDAE56100A4DAED /* Api */ = {
 			isa = PBXGroup;
 			children = (
+				0D8EADB01CDAE60E00A4DAED /* ApiUrls.plist */,
 				0D8EADAB1CDAE42A00A4DAED /* ApiUrls.swift */,
 				0D13B0091CD8007000D7D51F /* ApiHandler.swift */,
 				0D8EADAE1CDAE56F00A4DAED /* ApiError.swift */,
+				0D8EADA61CDAE34800A4DAED /* FriendsApiController.swift */,
+				0D8EADB41CDD3F3000A4DAED /* UsersApiController.swift */,
 			);
 			name = Api;
 			sourceTree = "<group>";
@@ -488,7 +494,9 @@
 				0D13B00D1CD845DE00D7D51F /* User.swift in Sources */,
 				0D8EADAC1CDAE42A00A4DAED /* ApiUrls.swift in Sources */,
 				0D13B0001CD5A1C600D7D51F /* SignupViewController.swift in Sources */,
+				0D8EADB51CDD3F3000A4DAED /* UsersApiController.swift in Sources */,
 				0D13AFF01CD578FB00D7D51F /* SigninViewController.swift in Sources */,
+				0D8EADB31CDBF1EF00A4DAED /* AddFriendViewController.swift in Sources */,
 				0D13AFDC1CD548FD00D7D51F /* SectionNavigationControllerDelegate.swift in Sources */,
 				0D13AFFC1CD5941700D7D51F /* UIColorExtension.swift in Sources */,
 				0D13AF971CD2C91D00D7D51F /* MasterViewController.swift in Sources */,

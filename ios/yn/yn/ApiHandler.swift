@@ -60,26 +60,25 @@ class ApiHandler {
         }
     }
     
-    func request(method: Alamofire.Method, URLString: URLStringConvertible, parameters: [String: AnyObject]?, completion: (result: Array<Dictionary<String, AnyObject>>?, err: String?) -> Void) {
-        do {
-            try Alamofire.request(method, URLString, parameters: parameters, encoding: ParameterEncoding.URL, headers: getAuthHeaders()).responseJSON { (response) in
+    func request(method: Alamofire.Method, URLString: URLStringConvertible, parameters: [String: AnyObject]?, completion: (result: Dictionary<String, AnyObject>?, err: ApiError?) -> Void) throws -> Request {
+            return try Alamofire.request(method, URLString, parameters: parameters, encoding: ParameterEncoding.URL, headers: getAuthHeaders()).validate().responseJSON { (response) in
                 if response.result.isSuccess {
-                    completion(result: response.result.value as? Array<Dictionary<String, AnyObject>>, err: nil)
+                    completion(result: response.result.value as? Dictionary<String, AnyObject>, err: nil)
+                }
+                else if let response = response.response {
+                    switch response.statusCode {
+                    case 404:
+                        completion(result: nil, err: ApiError.NotFound)
+                    case 422:
+                        completion(result: nil, err: ApiError.MissingParameters)
+                    default:
+                        completion(result: nil, err: ApiError.Unexpected)
+                    }
                 }
             }
-        } catch let error as ApiError {
-            print("Error: \(error)")
-            if error == ApiError.UserNotAuthenticated {
-                //TODO: Ask for authentication (not defined yet, could use notification to push AuthStoryboard)
-            }
-            else {
-                
-            }
-        } catch {
-            print("Unexpected error")
-        }
     }
     
+    //TODO: Re-implement this request method (does not work) as the one above ^
     func request(method: Alamofire.Method, URLString: URLStringConvertible, parameters: [String: AnyObject]?, encoding: ParameterEncoding, headers: [String: String]?, completion: (result: Array<Dictionary<String, AnyObject>>?, err: String?) -> Void) {
         Alamofire.request(method, URLString, parameters: parameters, encoding: encoding, headers: headers).responseJSON { (response) in
             if response.result.isSuccess {

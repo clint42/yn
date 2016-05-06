@@ -12,17 +12,29 @@ enum ApiError: ErrorType {
     case UserNotAuthenticated
     case RouteNotDefined
     case NetworkError
+    case NotFound
+    case MissingParameters
+    case ResponseInvalidData
+    case Unexpected
 }
 
 extension ApiError: CustomStringConvertible {
     var description: String {
         switch self {
+        case .UserNotAuthenticated:
+            return "User is not authenticated"
         case .RouteNotDefined:
             return "Route is not defined"
         case .NetworkError:
             return "Network error"
-        default:
-            return "Unknown ApiError exception"
+        case .NotFound:
+            return "Route not found (HTTP 404)"
+        case .MissingParameters:
+            return "Missing parameter(s)"
+        case .Unexpected:
+            return "Unexpected error"
+        case .ResponseInvalidData:
+            return "Response received contains invalid data"
         }
     }
 }

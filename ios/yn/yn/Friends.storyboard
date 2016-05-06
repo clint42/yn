@@ -7,6 +7,7 @@
     <customFonts key="customFonts">
         <mutableArray key="Sansation_Regular.ttf">
             <string>Sansation</string>
+            <string>Sansation</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -61,16 +62,14 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Friends" image="friendsButton" id="WqD-VF-ocW"/>
-                    <navigationItem key="navigationItem" title="Friends" id="8S7-HN-XcL">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="apb-we-PKx"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="8S7-HN-XcL"/>
                     <connections>
                         <outlet property="tableView" destination="1XX-5S-LOO" id="3cV-Nk-WbB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8nG-Jj-SV6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-566" y="1862"/>
+            <point key="canvasLocation" x="-886" y="1886"/>
         </scene>
         <!--Friends Request-->
         <scene sceneID="16Q-2I-IgL">
@@ -107,14 +106,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CF7-A2-V5E" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="ThI-nk-JOs" customClass="SectionNavigationControllerDelegate" customModule="yn" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="217" y="321"/>
+            <point key="canvasLocation" x="-433" y="318"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Friends-->
         <scene sceneID="Lg9-v7-0l4">
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="j3c-6w-05J" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="o9I-dy-D1v"/>
+                    <navigationItem key="navigationItem" title="Friends" id="o9I-dy-D1v">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="vtP-nm-T21">
+                            <connections>
+                                <segue destination="D1k-sp-DeQ" kind="show" id="Zkd-dk-Ixw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Zla-Gh-raD">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -126,7 +131,95 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cz1-rD-1Dl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="217" y="1021"/>
+            <point key="canvasLocation" x="-433" y="1100"/>
+        </scene>
+        <!--Add Friend View Controller-->
+        <scene sceneID="VXu-Yk-tW3">
+            <objects>
+                <viewController id="D1k-sp-DeQ" customClass="AddFriendViewController" customModule="yn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3I3-tU-ehO"/>
+                        <viewControllerLayoutGuide type="bottom" id="dmQ-IC-nCc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Qa1-Lr-QNf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="4CU-kn-cUh">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WWc-vh-CAD">
+                                <rect key="frame" x="0.0" y="108" width="600" height="443"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="resultCell" id="t31-BZ-mtg" customClass="ResultCell" customModule="yn" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t31-BZ-mtg" id="B5U-fa-vIb">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5C-fe-O00">
+                                                    <rect key="frame" x="8" y="11" width="485" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kg-9b-hzy">
+                                                    <rect key="frame" x="501" y="6" width="91" height="31"/>
+                                                    <color key="backgroundColor" red="0.17647059261798859" green="0.40784314274787903" blue="0.66666668653488159" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="15"/>
+                                                    <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                                    <state key="normal" title="Add Friend">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="addFriendButtonTapped:" destination="t31-BZ-mtg" eventType="touchUpInside" id="08d-xu-H07"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="3kg-9b-hzy" firstAttribute="leading" secondItem="V5C-fe-O00" secondAttribute="trailing" constant="8" id="7Bx-d0-gX5"/>
+                                                <constraint firstItem="V5C-fe-O00" firstAttribute="trailing" secondItem="B5U-fa-vIb" secondAttribute="trailingMargin" id="DSF-5O-cq6"/>
+                                                <constraint firstItem="3kg-9b-hzy" firstAttribute="centerY" secondItem="B5U-fa-vIb" secondAttribute="centerY" id="R9T-RN-Y8J"/>
+                                                <constraint firstItem="V5C-fe-O00" firstAttribute="centerY" secondItem="B5U-fa-vIb" secondAttribute="centerY" id="cX6-Jk-JO6"/>
+                                                <constraint firstItem="V5C-fe-O00" firstAttribute="leading" secondItem="B5U-fa-vIb" secondAttribute="leadingMargin" id="jGv-yE-088"/>
+                                                <constraint firstAttribute="trailing" secondItem="3kg-9b-hzy" secondAttribute="trailing" constant="8" id="yj7-ya-hWO"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="DSF-5O-cq6"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="addFriendButton" destination="3kg-9b-hzy" id="4a2-YF-yiZ"/>
+                                            <outlet property="usernameLabel" destination="V5C-fe-O00" id="eJE-ey-dnq"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dmQ-IC-nCc" firstAttribute="top" secondItem="WWc-vh-CAD" secondAttribute="bottom" id="IIB-AW-mX0"/>
+                            <constraint firstItem="WWc-vh-CAD" firstAttribute="leading" secondItem="Qa1-Lr-QNf" secondAttribute="leading" id="PbD-Mz-JkS"/>
+                            <constraint firstAttribute="trailing" secondItem="WWc-vh-CAD" secondAttribute="trailing" id="aOd-TV-UN9"/>
+                            <constraint firstItem="WWc-vh-CAD" firstAttribute="top" secondItem="4CU-kn-cUh" secondAttribute="bottom" id="fIg-Ln-z8k"/>
+                            <constraint firstAttribute="trailing" secondItem="4CU-kn-cUh" secondAttribute="trailing" id="g9K-Uu-10t"/>
+                            <constraint firstItem="4CU-kn-cUh" firstAttribute="top" secondItem="3I3-tU-ehO" secondAttribute="bottom" id="oFC-LY-tyh"/>
+                            <constraint firstItem="4CU-kn-cUh" firstAttribute="leading" secondItem="Qa1-Lr-QNf" secondAttribute="leading" id="woZ-FN-y9E"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="4CU-kn-cUh" id="nOU-uE-XSe"/>
+                        <outlet property="tableView" destination="WWc-vh-CAD" id="EvZ-y0-au8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KqV-DJ-anR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="323" y="1100"/>
         </scene>
     </scenes>
     <resources>

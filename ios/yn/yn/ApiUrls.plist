@@ -4,8 +4,12 @@
 <dict>
 	<key>signin</key>
 	<string>/users/signin</string>
+	<key>searchUsers</key>
+	<string>/users/search</string>
 	<key>addFriend</key>
 	<string>/friends/add</string>
+	<key>myFriends</key>
+	<string>/friends/my</string>
 	<key>host</key>
 	<string>http://localhost:3000</string>
 </dict>

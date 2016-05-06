@@ -22,6 +22,13 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var verticalSpacingSigninViewSignupBtn: NSLayoutConstraint!
     @IBOutlet weak var verticalSpacingSignupBtnBottom: NSLayoutConstraint!
     
+    //TODO: REMOVE, DEV ONLY
+    private func tmpAutoLog() {
+        identifierTextField.text = "test0@test.com"
+        passwordTextField.text = "test"
+        signin();
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillShow), name:UIKeyboardWillShowNotification, object: nil)
@@ -30,6 +37,10 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.delegate = self
         applyStyle()
         addTapGestureRecognizer()
+        
+        //TODO: Remove, DEV ONLY
+        tmpAutoLog()
+        
         // Do any additional setup after loading the view.
     }
     
