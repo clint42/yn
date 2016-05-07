@@ -31,8 +31,6 @@
 		0D13AFFA1CD5922400D7D51F /* Sansation_Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D13AFF61CD591F100D7D51F /* Sansation_Light.ttf */; };
 		0D13AFFC1CD5941700D7D51F /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13AFFB1CD5941700D7D51F /* UIColorExtension.swift */; };
 		0D13B0001CD5A1C600D7D51F /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13AFFF1CD5A1C600D7D51F /* SignupViewController.swift */; };
-		0D13B0061CD8000500D7D51F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D13B0011CD7FF6F00D7D51F /* Alamofire.framework */; };
-		0D13B0071CD8000500D7D51F /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0D13B0011CD7FF6F00D7D51F /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0D13B00A1CD8007000D7D51F /* ApiHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13B0091CD8007000D7D51F /* ApiHandler.swift */; };
 		0D13B00D1CD845DE00D7D51F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13B00C1CD845DE00D7D51F /* User.swift */; };
 		0D8EADA71CDAE34800A4DAED /* FriendsApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADA61CDAE34800A4DAED /* FriendsApiController.swift */; };
@@ -60,20 +58,6 @@
 			remoteInfo = yn;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		0D13B0081CD8000500D7D51F /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				0D13B0071CD8000500D7D51F /* Alamofire.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0D13AF911CD2C91C00D7D51F /* yn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,7 +110,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				219EE88753B35D34D88A8646 /* Pods_yn.framework in Frameworks */,
-				0D13B0061CD8000500D7D51F /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +287,6 @@
 				0D13AF8F1CD2C91C00D7D51F /* Resources */,
 				2E758E7FE9233901C7980A0C /* Embed Pods Frameworks */,
 				FB1F6B560AD1D9813A792834 /* Copy Pods Resources */,
-				0D13B0081CD8000500D7D51F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
