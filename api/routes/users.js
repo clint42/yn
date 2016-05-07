@@ -108,7 +108,7 @@ router.post('/signin', function(req, res, next) {
                   next("Error", req, res);
                 }
                 else {
-                  res.json({token: token});
+                  res.json({userId: user.id, token: user.authToken});
                 }
               });
             }
