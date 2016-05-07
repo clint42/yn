@@ -4,6 +4,8 @@
 <dict>
 	<key>signin</key>
 	<string>/users/signin</string>
+	<key>signup</key>
+	<string>/users/signup</string>
 	<key>searchUsers</key>
 	<string>/users/search</string>
 	<key>addFriend</key>

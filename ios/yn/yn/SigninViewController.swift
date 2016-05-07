@@ -39,7 +39,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         addTapGestureRecognizer()
         
         //TODO: Remove, DEV ONLY
-        tmpAutoLog()
+        //tmpAutoLog()
         
         // Do any additional setup after loading the view.
     }

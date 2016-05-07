@@ -154,26 +154,32 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
             if (lastnameTextField.text?.isEmpty == false) {
                 params["lastname"] = lastnameTextField.text!
             }
-            Alamofire.request(.POST, "http://192.168.0.11:3000/users/signup", parameters: params).responseJSON(completionHandler: { (response) in
-                let apiHandler = ApiHandler.sharedInstance
-                let password = params["password"]!
-                apiHandler.authenticate(identifier: identifier, password: password, completion: { (success: Bool) in
-                    if success {
-                        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                        let vc = mainStoryboard.instantiateInitialViewController()
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.presentViewController(vc!, animated: true, completion: nil)
-                        })
-                    }
-                    else {
-                        let alertController = UIAlertController(title: "An error occured", message: "Sorry, something went wrong. Our tech team work on this issue, please try again later", preferredStyle: UIAlertControllerStyle.Alert)
-                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.presentViewController(alertController, animated: true, completion: nil)
-                        })
-                    }
+            do {
+                try Alamofire.request(.POST, ApiUrls.getUrl("signup"), parameters: params).responseJSON(completionHandler: { (response) in
+                    let apiHandler = ApiHandler.sharedInstance
+                    let password = params["password"]!
+                    apiHandler.authenticate(identifier: identifier, password: password, completion: { (success: Bool) in
+                        if success {
+                            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                            let vc = mainStoryboard.instantiateInitialViewController()
+                            dispatch_async(dispatch_get_main_queue(), {
+                                self.presentViewController(vc!, animated: true, completion: nil)
+                            })
+                        }
+                        else {
+                            let alertController = UIAlertController(title: "An error occured", message: "Sorry, something went wrong. Our tech team work on this issue, please try again later", preferredStyle: UIAlertControllerStyle.Alert)
+                            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                            dispatch_async(dispatch_get_main_queue(), {
+                                self.presentViewController(alertController, animated: true, completion: nil)
+                            })
+                        }
+                    })
                 })
-            });
+            } catch let error as ApiError {
+                print("error: \(error)")
+            } catch {
+                print("Unexpected error")
+            }
         }
     }
     
