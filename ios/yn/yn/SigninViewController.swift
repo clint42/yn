@@ -26,7 +26,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
     private func tmpAutoLog() {
         identifierTextField.text = "test0@test.com"
         passwordTextField.text = "test"
-        signin();
+        signin()
     }
     
     override func viewDidLoad() {
@@ -39,7 +39,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         addTapGestureRecognizer()
         
         //TODO: Remove, DEV ONLY
-        //tmpAutoLog()
+        tmpAutoLog()
         
         // Do any additional setup after loading the view.
     }

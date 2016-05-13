@@ -33,6 +33,8 @@
 		0D13B0001CD5A1C600D7D51F /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13AFFF1CD5A1C600D7D51F /* SignupViewController.swift */; };
 		0D13B00A1CD8007000D7D51F /* ApiHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13B0091CD8007000D7D51F /* ApiHandler.swift */; };
 		0D13B00D1CD845DE00D7D51F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13B00C1CD845DE00D7D51F /* User.swift */; };
+		0D4E24A71CE53B0E0035B42D /* CameraError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4E24A61CE53B0E0035B42D /* CameraError.swift */; };
+		0D4E24A91CE56D650035B42D /* EditQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4E24A81CE56D650035B42D /* EditQuestionViewController.swift */; };
 		0D8EADA71CDAE34800A4DAED /* FriendsApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADA61CDAE34800A4DAED /* FriendsApiController.swift */; };
 		0D8EADAC1CDAE42A00A4DAED /* ApiUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADAB1CDAE42A00A4DAED /* ApiUrls.swift */; };
 		0D8EADAF1CDAE56F00A4DAED /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADAE1CDAE56F00A4DAED /* ApiError.swift */; };
@@ -93,6 +95,8 @@
 		0D13B0011CD7FF6F00D7D51F /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../Library/Developer/Xcode/DerivedData/yn-gyyyktjxsilbfugxwxrnrnqxnluo/Build/Products/Debug-iphonesimulator/Alamofire.framework"; sourceTree = "<group>"; };
 		0D13B0091CD8007000D7D51F /* ApiHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiHandler.swift; sourceTree = "<group>"; };
 		0D13B00C1CD845DE00D7D51F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0D4E24A61CE53B0E0035B42D /* CameraError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraError.swift; sourceTree = "<group>"; };
+		0D4E24A81CE56D650035B42D /* EditQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditQuestionViewController.swift; sourceTree = "<group>"; };
 		0D8EADA61CDAE34800A4DAED /* FriendsApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsApiController.swift; sourceTree = "<group>"; };
 		0D8EADAB1CDAE42A00A4DAED /* ApiUrls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiUrls.swift; sourceTree = "<group>"; };
 		0D8EADAE1CDAE56F00A4DAED /* ApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
@@ -202,6 +206,8 @@
 				0D13AFD41CD2E1C300D7D51F /* Ask.storyboard */,
 				0D13AFC41CD2D27800D7D51F /* CreateQuestionViewController.swift */,
 				0D13AFD71CD5446300D7D51F /* SendQuestionViewController.swift */,
+				0D4E24A61CE53B0E0035B42D /* CameraError.swift */,
+				0D4E24A81CE56D650035B42D /* EditQuestionViewController.swift */,
 			);
 			name = Ask;
 			sourceTree = "<group>";
@@ -476,6 +482,7 @@
 				0D13B00D1CD845DE00D7D51F /* User.swift in Sources */,
 				0D8EADAC1CDAE42A00A4DAED /* ApiUrls.swift in Sources */,
 				0D13B0001CD5A1C600D7D51F /* SignupViewController.swift in Sources */,
+				0D4E24A71CE53B0E0035B42D /* CameraError.swift in Sources */,
 				0D8EADB51CDD3F3000A4DAED /* UsersApiController.swift in Sources */,
 				0D13AFF01CD578FB00D7D51F /* SigninViewController.swift in Sources */,
 				0D8EADB31CDBF1EF00A4DAED /* AddFriendViewController.swift in Sources */,
@@ -484,6 +491,7 @@
 				0D13AF971CD2C91D00D7D51F /* MasterViewController.swift in Sources */,
 				0D13B00A1CD8007000D7D51F /* ApiHandler.swift in Sources */,
 				0D13AF951CD2C91D00D7D51F /* AppDelegate.swift in Sources */,
+				0D4E24A91CE56D650035B42D /* EditQuestionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
