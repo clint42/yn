@@ -9,12 +9,18 @@
 import UIKit
 import Alamofire
 
-class AddFriendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+protocol ResultCellProtocol: class {
+    func addFriendButtonDidTapped(identifier: String)
+    func searchUsers(identifier: String)
+}
+
+class AddFriendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, ResultCellProtocol {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
     let apiHandler = ApiHandler.sharedInstance
     var searchRequest: Request?
+    var searchText: String?
     
     var users = [User]()
     
@@ -25,7 +31,7 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
         searchBar.delegate = self
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -44,6 +50,7 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
         let cell = tableView.dequeueReusableCellWithIdentifier("resultCell")! as! ResultCell
         cell.applyStyle()
         cell.usernameLabel.text = users[indexPath.row].username
+        cell.delegate = self
         return cell
     }
     
@@ -53,12 +60,13 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     // MARK: - UISearchBarDelegate
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(searchBar: UISearchBar, textDidChange _searchText: String) {
         //TODO: Cancel search request if any
         searchRequest?.cancel()
+        searchText = _searchText
         
         //TODO: Perform new search request
-        searchUsers(searchText)
+        searchUsers(searchText!)
         
     }
     
@@ -84,21 +92,29 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func addFriendButtonDidTapped(identifier: String) {
+        let alert = UIAlertController(title: "Add request", message: "Your request has been sent to " + identifier, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        searchBar.text = ""
     }
-    */
-
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 class ResultCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var addFriendButton: UIButton!
+    var delegate: ResultCellProtocol?
     
     func applyStyle() {
         addFriendButton.layer.cornerRadius = 4
@@ -107,5 +123,20 @@ class ResultCell: UITableViewCell {
     }
     
     @IBAction func addFriendButtonTapped(sender: UIButton) {
+        do {
+            try FriendsApiController.sharedInstance.addFriend(usernameLabel.text!) { (success: Bool?, err: ApiError?) in
+                if (err == nil && success == true) {
+                    self.delegate?.addFriendButtonDidTapped(self.usernameLabel.text!)
+                }
+                else {
+                    print("err: \(err)")
+                }
+            }
+            
+        } catch let error as ApiError {
+            print("error: \(error)")
+        } catch {
+            print("Unexpected error")
+        }
     }
 }

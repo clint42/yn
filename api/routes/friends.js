@@ -14,7 +14,7 @@ router.get('/my', auth, function(req, res, next) {
     var offset = req.body.offset || 0;
     var orderBy = req.body.orderBy || undefined;
     var orderRule = req.body.orderRule || "ASC";
-    var wrongValue = false
+    var wrongValue = false;
     switch (orderBy) {
         case "username":
             orderBy = "username";
