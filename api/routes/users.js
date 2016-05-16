@@ -200,4 +200,39 @@ router.get('/search', function(req, res, next) {
     }
 });
 
+router.post('/find', function(req, res, next) {
+    var numbersOrEmails = req.body.findArray;
+    if (numbersOrEmails) {
+        models.User.findAll({
+            where: {
+                $or: [
+                    {
+                        email: {
+                            in: numbersOrEmails
+                        }
+                    },
+                    {
+                        phone: {
+                            in: numbersOrEmails
+                        }
+                    }
+                ]
+            }
+        }).then(function(users) {
+            res.send({
+                users: users,
+                count: users.length
+            });
+        }).catch(function(err) {
+            console.log("Error while searching users: " + err);
+            //TODO: Error Handling
+            next(err, req, res);
+        })
+    }
+    else {
+        res.status(422);
+        res.json({error: "Missing parameters"});
+    }
+});
+
 module.exports = router;

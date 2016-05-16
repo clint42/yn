@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import Contacts
 
 protocol ResultCellProtocol: class {
     func addFriendButtonDidTapped(identifier: String)
@@ -29,6 +30,7 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
+        getFriendsFromPhone()
         // Do any additional setup after loading the view.
     }
     
@@ -93,10 +95,50 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func addFriendButtonDidTapped(identifier: String) {
+        let confirmClosure: ((UIAlertAction!) -> Void)! = { action in
+            self.searchBar.text = ""
+            self.users.removeAll()
+            self.tableView.reloadData()
+        }
         let alert = UIAlertController(title: "Add request", message: "Your request has been sent to " + identifier, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: confirmClosure))
         self.presentViewController(alert, animated: true, completion: nil)
-        searchBar.text = ""
+    }
+    
+    func getFriendsFromPhone() {
+        let store = CNContactStore()
+        store.requestAccessForEntityType(.Contacts) { granted, error in
+            guard granted else {
+                print("erroooooooor")
+                return
+            }
+            
+            // get the contacts
+            
+            var contacts = [CNContact]()
+            let request = CNContactFetchRequest(keysToFetch: [CNContactIdentifierKey, CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName), CNContactPhoneNumbersKey])
+            do {
+                try store.enumerateContactsWithFetchRequest(request) { contact, stop in
+                    contacts.append(contact)
+                }
+            } catch {
+                print(error)
+            }
+            
+            // do something with the contacts array (e.g. print the names)
+            
+            let formatter = CNContactFormatter()
+            formatter.style = .FullName
+            for contact in contacts {
+                if (contact.isKeyAvailable(CNContactPhoneNumbersKey)) {
+                    for phoneNumber:CNLabeledValue in contact.phoneNumbers {
+                        let a = phoneNumber.value as! CNPhoneNumber
+                        print("\(formatter.stringFromContact(contact)) : +\(a.valueForKey("countryCode") as! String) \(a.valueForKey("digits") as! String)")
+                    }
+                }
+                //print(formatter.stringFromContact(contact))
+            }
+        }
     }
     
     /*
