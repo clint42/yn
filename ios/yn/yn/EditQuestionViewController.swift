@@ -8,13 +8,21 @@
 
 import UIKit
 
-class EditQuestionViewController: UIViewController {
+class EditQuestionViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var questionTextView: UITextView!
+    @IBOutlet weak var sendButton: UIButton!
+    
+    @IBOutlet weak var sendButtonBottomConstraint: NSLayoutConstraint!
+    
+    var originContentInset: UIEdgeInsets!
+    
+    var questionTextViewIsEdited = false
+    var keyboardIsVisible = false
     
     var imageData: NSData? {
         willSet {
@@ -31,33 +39,92 @@ class EditQuestionViewController: UIViewController {
         if imageData != nil {
             imageView.image = UIImage(data: imageData!)
         }
+        
+        questionTextView.delegate = self
+        
+        applyStyle()
+        
+        addTapGestureRecognizer()
     }
 
     override func viewDidLayoutSubviews() {
-        scrollView.contentSize = CGSizeMake(view.frame.width, 1200)
+        scrollView.contentSize = CGSizeMake(view.frame.width, contentView.frame.size.height)
+        originContentInset = scrollView.contentInset
     }
     
     // MARK: - Keyboard scrollview handlers
     @objc private func keyboardWillShow(notification: NSNotification) {
-        var userInfo = notification.userInfo!
-        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
-        keyboardFrame = self.view.convertRect(keyboardFrame, fromView: nil)
-        
-        var contentInset:UIEdgeInsets = self.scrollView.contentInset
-        print("KeyboardContentInsetBottom: \(keyboardFrame.size.height)")
-        contentInset.bottom = keyboardFrame.size.height
-        scrollView.contentInset = contentInset
+        if !keyboardIsVisible {
+            keyboardIsVisible = true
+            var userInfo = notification.userInfo!
+            var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
+            keyboardFrame = self.view.convertRect(keyboardFrame, fromView: nil)
+            
+            self.sendButtonBottomConstraint.constant = self.sendButtonBottomConstraint.constant + keyboardFrame.size.height
+            UIView.animateWithDuration(1) {
+                self.view.layoutIfNeeded()
+            }
+            
+            
+            var contentInset:UIEdgeInsets = self.scrollView.contentInset
+            contentInset.bottom = keyboardFrame.size.height
+            scrollView.contentInset = contentInset
+        }
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
-        let contentInset:UIEdgeInsets = UIEdgeInsetsZero
-        scrollView.contentInset = contentInset
+        keyboardIsVisible = false
+        scrollView.contentInset = originContentInset
+        
+        self.sendButtonBottomConstraint.constant = 0
+        UIView.animateWithDuration(1) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    private func addTapGestureRecognizer() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped))
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc private func viewTapped() {
+        view.endEditing(true)
+    }
+    
+    private func applyStyle() {
+        setQuestionTextViewPlaceholder()
+        
+        titleTextField.borderStyle = UITextBorderStyle.None
+        
+        sendButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+    }
+    
+    private func setQuestionTextViewPlaceholder() {
+        questionTextView.text = "Ask something..."
+        questionTextView.textColor = UIColor.lightGrayColor()
+        questionTextViewIsEdited = false
+    }
+    
+    // MARK: - UITextViewDelegate
+    func textViewDidBeginEditing(textView: UITextView) {
+        if !questionTextViewIsEdited && textView == questionTextView {
+            questionTextViewIsEdited = true
+            questionTextView.textColor = UIColor.blackColor()
+            questionTextView.text = ""
+        }
+    }
+    
+    func textViewDidEndEditing(textView: UITextView) {
+        if textView == questionTextView && textView.text.isEmpty {
+            setQuestionTextViewPlaceholder()
+        }
+    }
+    
     
     // MARK: - @IBActions
     @IBAction func sendButtonTapped(sender: UIButton) {
