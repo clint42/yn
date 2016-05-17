@@ -14,15 +14,21 @@
 	<string>/friends/delete</string>
 	<key>signin</key>
 	<string>/users/signin</string>
+	<key>fbSignin</key>
+	<string>/users/fb-signin</string>
 	<key>signup</key>
 	<string>/users/signup</string>
+	<key>fbSignup</key>
+	<string>/users/fb-signup</string>
 	<key>searchUsers</key>
 	<string>/users/search</string>
 	<key>addFriend</key>
 	<string>/friends/add</string>
 	<key>myFriends</key>
 	<string>/friends/my</string>
+	<key>askQuestion</key>
+	<string>/questions</string>
 	<key>host</key>
-	<string>http://localhost:3000</string>
+	<string>http://192.168.0.11:3000</string>
 </dict>
 </plist>

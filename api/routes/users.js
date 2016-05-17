@@ -3,85 +3,7 @@ var router = express.Router();
 var path = require('path');
 var models = require(path.resolve('models'));
 var auth = require(path.resolve('middlewares/authentication'));
-
-router.post('/test', function(req, res, next) {
-    models.User.create({
-        email: 'a@a.com',
-        username: 'a',
-        password: 'a'
-    }).then(function(user) {
-        console.log(user);
-        models.User.create({
-            email: 'b@b.com',
-            username: 'b',
-            password: 'b'
-        }).then(function(user) {
-            console.log(user);
-        }).catch(function(err) {
-            console.log(err);
-        })
-    }).catch(function(err) {
-        console.log(err);
-    });
-    res.json({dev: 'DEV ROUTE ONLY'});
-});
-
-router.get('/test', function(req, res, next) {
-    models.User.findOne({
-        where: {
-            email: 'a@a.com'
-        }
-    }).then(function(user) {
-        console.log('USER1 OK');
-        models.User.findOne({
-            where: {
-                email: 'b@b.com'
-            }
-        }).then(function(user2) {
-            console.log('USER2 OK');
-            user.addFriend(user2, {status: 'PENDING'});
-            //user2.addFriend(user, {status: 'PENDING'});
-            console.log(user2);
-        }).catch(function(err) {
-            console.log(err);
-        })
-    }).catch(function(err) {
-        console.log(err);
-    });
-    res.json({dev: 'DEV ROUTE ONLY'});
-});
-
-router.get('/testFriend', function(req, res, next) {
-    models.User.findOne({
-        where: {
-            email: 'a@a.com'
-        }
-    }).then(function(user) {
-        console.log("USER OK: " + user.id);
-        /*user.getFriends({
-         /*through: {
-         where: {
-         status: 'ACCEPTED'
-         }
-         }*!/
-         }).then(function(friends) {
-         console.log(friends);
-         res.json(friends);
-         }).catch(function(err) {
-         console.log(err);
-         })*/
-        user.getFriendUsers().then(function(users) {
-            console.log('users: ' + users);
-            res.json(users);
-        }).catch(function(err) {
-            console.log('err: ' + err);
-            res.json(err);
-        })
-    }).catch(function(err) {
-        console.log(err);
-    });
-    //res.json({dev: 'DEV ROUTE ONLY'});
-});
+var request = require('request');
 
 router.post('/signin', function(req, res, next) {
     var identifier = req.body.identifier;
@@ -126,6 +48,61 @@ router.post('/signin', function(req, res, next) {
     }
 });
 
+router.post('/fb-signin', function(req, res, next) {
+    var token = req.body.token;
+    var fbUserId = req.body.userId;
+    if (token && fbUserId) {
+        var options = {
+            url: "https://graph.facebook.com/me?fields=email&access_token="+token,
+            method: 'GET'
+        };
+        request(options, function(error, response, body) {
+            if (!error) {
+                var result = JSON.parse(body);
+                console.log(result);
+                models.User.getUser(result.email).then(function(user) {
+                    if (user) {
+                        if (!user.authToken) {
+                            user.generateToken().then(function (token) {
+                                console.log("token: " + token);
+                                res.json({
+                                    success: true,
+                                    token: token,
+                                    userId: user.id
+                                });
+                            }).catch(function (err) {
+                                console.log(err);
+                            });
+                        }
+                        else {
+                            console.log("authToken: " + user.authToken);
+                            res.json({
+                                success: true,
+                                token: user.authToken,
+                                userId: user.id
+                            })
+                        }
+                    }
+                    else {
+                        res.json({
+                            success: false,
+                            error: 'userNotFound'
+                        });
+                    }
+                }).catch(function(err) {
+                    console.log(err);
+                })
+            }
+            console.log(result);
+        });
+        //res.json({dev: "Not implemented yet"});
+    }
+    else {
+        res.status(422);
+        res.json({error: "Missing parameters"});
+    }
+});
+
 router.post('/signup', function(req, res, next) {
     var email = (req.body.email) ? req.body.email : undefined;
     var phone = (req.body.phone) ? req.body.phone : undefined;
@@ -167,6 +144,48 @@ router.post('/signup', function(req, res, next) {
             next("Sequelize error" + err, req, res);
         });
     };
+});
+
+router.post('/fb-signup', function(req, res, next) {
+    var email = req.body.email;
+    var phone = req.body.phone;
+    var username = req.body.username;
+    var firstname = req.body.firstname;
+    var lastname = req.body.lastname;
+    if (email && username) {
+        var user = {
+            email: email,
+            username: username,
+            authWithFacebook: true
+        };
+        if (phone) {
+            user.phone = phone;
+        }
+        if (firstname) {
+            user.firstname = firstname;
+        }
+        if (lastname) {
+            user.lastname = lastname;
+        }
+        models.User.create(user).then(function(user) {
+            if (user) {
+                res.status(201);
+                res.json({user: user});
+            }
+            else {
+                //TODO: Error handling
+                res.status(500);
+                res.json({error: "An error occured while creating user"});
+            }
+        }).catch(function(err) {
+            res.status(500);
+            res.json({error: "An error occured while creating user: " + err});
+        })
+    }
+    else {
+        res.status(422);
+        res.json({error: "Missing parameters"});
+    }
 });
 
 router.get('/search', function(req, res, next) {
