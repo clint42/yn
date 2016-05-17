@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var models = require(path.resolve('models'));
+var auth = require(path.resolve('middlewares/authentication'));
 var request = require('request');
 
 router.post('/signin', function(req, res, next) {
@@ -219,27 +220,11 @@ router.get('/search', function(req, res, next) {
     }
 });
 
-router.post('/find', function(req, res, next) {
+router.post('/find', auth, function(req, res, next) {
     var numbersOrEmails = JSON.parse(req.body.findArray);
     if (numbersOrEmails) {
-        models.User.findAll({
-            where: {
-                $or: [
-                    {
-                        email: {
-                            in: numbersOrEmails
-                        }
-                    },
-                    {
-                        phone: {
-                            in: numbersOrEmails
-                        }
-                    }
-                ]
-            }
-        }).then(function(users) {
-            //console.log(users);
-            res.send({
+        req.currentUser.findUsers(numbersOrEmails).then(function(users) {
+            res.json({
                 friends: users,
                 count: users.length
             });
