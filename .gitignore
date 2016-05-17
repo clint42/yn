@@ -34,3 +34,7 @@ node_modules
 
 # Pods
 ios/yn/Pods
+
+ios/yn/yn.xcworkspace/xcuserdata/Aurelien.xcuserdatad/UserInterfaceState.xcuserstate
+ios/yn/yn.xcworkspace/xcuserdata/julie.xcuserdatad/UserInterfaceState.xcuserstate
+api/config/config.json

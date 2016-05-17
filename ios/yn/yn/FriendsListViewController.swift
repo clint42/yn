@@ -20,11 +20,12 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBarController!.tabBar.items![0].badgeValue = "2"
-        tableView.delegate = self
-        tableView.dataSource = self
-        fetchFriends()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        loadData()
+        getCountPendingRequests()
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,12 +33,51 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
         // Dispose of any resources that can be recreated.
     }
     
+    private func loadData() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        fetchFriends()
+    }
+    
     //MARK: - UITableViewDataSource
+    private func getCountPendingRequests() {
+        do {
+            try FriendsApiController.sharedInstance.getNumberOfPendingRequests({ (count: Int?, err: ApiError?) in
+                if (err == nil && count != nil) {
+                    if count! > 0 {
+                        self.tabBarController!.tabBar.items![1].badgeValue = String(count!)
+                    } else {
+                        self.tabBarController!.tabBar.items![1].badgeValue = nil
+                    }
+                }
+                else {
+                    print("error: \(err)")
+                }
+            })
+        } catch let error as ApiError {
+            print("error: \(error)")
+        } catch {
+            print("Unexpected error")
+        }
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return friends[section].count
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if friendsSections.count > 0 {
+            tableView.backgroundView = nil
+            tableView.separatorStyle = .SingleLine
+        } else {
+            let noDataLabel: UILabel = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
+            noDataLabel.text = "No friends"
+            noDataLabel.textColor = UIColor.lightGrayColor()
+            noDataLabel.textAlignment = NSTextAlignment.Center
+            noDataLabel.font = UIFont(name: "Sansation", size: 30)
+            tableView.backgroundView = noDataLabel
+            tableView.separatorStyle = .None
+        }
         return friendsSections.count
     }
     
@@ -74,9 +114,20 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     //MARK: - Data processing methods
+    private func resetFriendsList() {
+        var index = 0
+        for _ in self.friendsSections {
+            self.friends[index].removeAll()
+            index += 1
+        }
+        friendsSections.removeAll()
+        friends.removeAll()
+    }
+    
     private func fetchFriends() {
+        resetFriendsList()
         do {
-            try FriendsApiController.sharedInstance.getFriends(nResults: 20, offset: friends.count, orderBy: "username", orderRule: "ASC", completion: { (users: [User]?, err: ApiError?) in
+            try FriendsApiController.sharedInstance.getFriends(nResults: 20, offset: 0, orderBy: "username", orderRule: "ASC", completion: { (users: [User]?, err: ApiError?) in
                 if (err == nil && users != nil) {
                     self.addFriendsToSectionRowArrays(users!)
                     self.tableView.reloadData()
@@ -124,6 +175,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
                    index = friendsSections.indexOf(String(firstChar))!
                 }
                 friends[index].append(user)
+                friends[index].sortInPlace({ $0.username < $1.username })
             }
         }
     }
