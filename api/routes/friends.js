@@ -10,10 +10,10 @@ var models = require(path.resolve('models'));
 var auth = require(path.resolve('middlewares/authentication'));
 
 router.get('/my', auth, function(req, res, next) {
-    var nResults = req.body.nResults || 10;
-    var offset = req.body.offset || 0;
-    var orderBy = req.body.orderBy || undefined;
-    var orderRule = req.body.orderRule || "ASC";
+    var nResults = req.query.nResults || 10;
+    var offset = req.query.offset || 0;
+    var orderBy = req.query.orderBy || undefined;
+    var orderRule = req.query.orderRule || "ASC";
     var wrongValue = false;
     switch (orderBy) {
         case "username":
@@ -88,5 +88,22 @@ router.post('/add', auth, function(req, res, next) {
     }
 });
 
+router.post('/delete', auth, function(req, res, next) {
+   var identifier = req.body.identifier;
+    if (identifier) {
+        models.User.getUser(identifier).then(function(userToDelete) {
+           req.currentUser.deleteFriend(userToDelete).then(function(associated) {
+             res.status(201);
+               res.json({success: true});
+           }).catch(function(err) {
+               //TODO: Error handling
+               next(err, req, res);
+           })
+        }).catch(function(err) {
+            //TODO: Error handling
+            next(err, req, res);
+        });
+    }
+});
 
 module.exports = router;
