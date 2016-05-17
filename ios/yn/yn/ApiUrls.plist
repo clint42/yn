@@ -8,8 +8,12 @@
 	<string>/friends/delete</string>
 	<key>signin</key>
 	<string>/users/signin</string>
+	<key>fbSignin</key>
+	<string>/users/fb-signin</string>
 	<key>signup</key>
 	<string>/users/signup</string>
+	<key>fbSignup</key>
+	<string>/users/fb-signup</string>
 	<key>searchUsers</key>
 	<string>/users/search</string>
 	<key>addFriend</key>

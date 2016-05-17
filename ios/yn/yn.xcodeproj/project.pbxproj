@@ -33,6 +33,8 @@
 		0D13B0001CD5A1C600D7D51F /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13AFFF1CD5A1C600D7D51F /* SignupViewController.swift */; };
 		0D13B00A1CD8007000D7D51F /* ApiHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13B0091CD8007000D7D51F /* ApiHandler.swift */; };
 		0D13B00D1CD845DE00D7D51F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13B00C1CD845DE00D7D51F /* User.swift */; };
+		0D24606E1CEAEA49000BCEB4 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D24606D1CEAEA49000BCEB4 /* FBSDKLoginKit.framework */; };
+		0D2460731CEB103A000BCEB4 /* SignupWithFacebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2460721CEB1039000BCEB4 /* SignupWithFacebookViewController.swift */; };
 		0D4E24A71CE53B0E0035B42D /* CameraError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4E24A61CE53B0E0035B42D /* CameraError.swift */; };
 		0D4E24A91CE56D650035B42D /* EditQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4E24A81CE56D650035B42D /* EditQuestionViewController.swift */; };
 		0D8EADA71CDAE34800A4DAED /* FriendsApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADA61CDAE34800A4DAED /* FriendsApiController.swift */; };
@@ -95,8 +97,10 @@
 		0D13AFFB1CD5941700D7D51F /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		0D13AFFF1CD5A1C600D7D51F /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		0D13B0011CD7FF6F00D7D51F /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../Library/Developer/Xcode/DerivedData/yn-gyyyktjxsilbfugxwxrnrnqxnluo/Build/Products/Debug-iphonesimulator/Alamofire.framework"; sourceTree = "<group>"; };
-		0D13B0091CD8007000D7D51F /* ApiHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiHandler.swift; sourceTree = "<group>"; };
+		0D13B0091CD8007000D7D51F /* ApiHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiHandler.swift; path = yn/ApiHandler.swift; sourceTree = SOURCE_ROOT; };
 		0D13B00C1CD845DE00D7D51F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0D24606D1CEAEA49000BCEB4 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		0D2460721CEB1039000BCEB4 /* SignupWithFacebookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupWithFacebookViewController.swift; sourceTree = "<group>"; };
 		0D4E24A61CE53B0E0035B42D /* CameraError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraError.swift; sourceTree = "<group>"; };
 		0D4E24A81CE56D650035B42D /* EditQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditQuestionViewController.swift; sourceTree = "<group>"; };
 		0D8EADA61CDAE34800A4DAED /* FriendsApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsApiController.swift; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 			files = (
 				219EE88753B35D34D88A8646 /* Pods_yn.framework in Frameworks */,
 				0DB736AF1CEAE439001C5B86 /* FBSDKCoreKit.framework in Frameworks */,
+				0D24606E1CEAEA49000BCEB4 /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +248,7 @@
 				0D13AFEB1CD5618D00D7D51F /* AuthStoryboard.storyboard */,
 				0D13AFEF1CD578FB00D7D51F /* SigninViewController.swift */,
 				0D13AFFF1CD5A1C600D7D51F /* SignupViewController.swift */,
+				0D2460721CEB1039000BCEB4 /* SignupWithFacebookViewController.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -271,6 +277,7 @@
 		42A931E7791806229422BC9F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0D24606D1CEAEA49000BCEB4 /* FBSDKLoginKit.framework */,
 				0DB736AE1CEAE439001C5B86 /* FBSDKCoreKit.framework */,
 				0D13B0011CD7FF6F00D7D51F /* Alamofire.framework */,
 				B6D8597E64AAAE0D10DCC61E /* Pods_yn.framework */,
@@ -491,6 +498,7 @@
 				0D8EADAF1CDAE56F00A4DAED /* ApiError.swift in Sources */,
 				0D13AFEA1CD55BA900D7D51F /* QuestionsListViewController.swift in Sources */,
 				0D8EADA71CDAE34800A4DAED /* FriendsApiController.swift in Sources */,
+				0D2460731CEB103A000BCEB4 /* SignupWithFacebookViewController.swift in Sources */,
 				0D13AFE51CD5587700D7D51F /* FriendsListViewController.swift in Sources */,
 				0D13AFC61CD2D27800D7D51F /* CreateQuestionViewController.swift in Sources */,
 				0D13AFDA1CD5453700D7D51F /* CustomSegue.swift in Sources */,

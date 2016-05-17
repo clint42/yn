@@ -9,8 +9,10 @@
 import Foundation
 import UIKit
 import Alamofire
+import FBSDKCoreKit
+import FBSDKLoginKit
 
-class SignupViewController: UIViewController, UITextFieldDelegate {
+class SignupViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var signupFormContainer: UIView!
     @IBOutlet weak var identifierTextField: UITextField!
@@ -23,9 +25,16 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var signinBtn: UIButton!
-    @IBOutlet weak var signupWithFacebookBtn: UIButton!
+    @IBOutlet weak var signupWithFacebookBtn: FBSDKLoginButton!
     
     @IBOutlet weak var contentView: UIView!
+    
+    var bypassToFbSignup: Bool?
+    
+    var fbEmail: String? = nil
+    var fbFirstname: String? = nil
+    var fbLastname: String? = nil
+    var fbAccessToken: FBSDKAccessToken? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +47,17 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         confirmPasswordTextField.delegate = self
         firstnameTextField.delegate = self
         lastnameTextField.delegate = self
+        configureFacebookButton()
         addTapGestureRecognizer()
         applyStyle()
+        if bypassToFbSignup == true {
+            if let token = FBSDKAccessToken.currentAccessToken() {
+                signupWithFacebook(token)
+            }
+            else {
+                signupWithFacebookBtn.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -48,6 +66,11 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    private func configureFacebookButton() {
+        signupWithFacebookBtn.delegate = self
+        signupWithFacebookBtn.readPermissions = ["public_profile", "email", "user_friends"]
     }
     
     private func applyStyle() {
@@ -212,6 +235,51 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    private func signupWithFacebook(token: FBSDKAccessToken) {
+        let req = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "email,first_name,last_name"], tokenString: token.tokenString, version: nil, HTTPMethod: "GET")
+        req.startWithCompletionHandler({ (requestConnection: FBSDKGraphRequestConnection!, object: AnyObject!, error: NSError!) in
+            if error == nil {
+                let graphResult = object as! Dictionary<String, AnyObject>
+                self.fbEmail = graphResult["email"] as? String
+                self.fbFirstname = graphResult["first_name"] as? String
+                self.fbLastname = graphResult["last_name"] as? String
+                self.fbAccessToken = token
+                if self.fbFirstname != nil && self.fbFirstname != nil && self.fbLastname != nil && self.fbAccessToken != nil {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.performSegueWithIdentifier("signupWithFacebook", sender: self)
+                    }
+                }
+                else {
+                    let alertView = UIAlertController(title: "An error occured", message: "Unable to fetch some information from Facebook", preferredStyle: UIAlertControllerStyle.Alert)
+                    alertView.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default
+                        , handler: nil))
+                    self.presentViewController(alertView, animated: true, completion: nil)
+                }
+            }
+            else {
+                print("error: \(error)")
+            }
+        })
+    }
+    
+    // MARK: - FBSDKLoginButtonDelegate
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        
+    }
+    
+    func loginButtonWillLogin(loginButton: FBSDKLoginButton!) -> Bool {
+        return true
+    }
+
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        if error == nil {
+            signupWithFacebook(result.token)
+        }
+        else {
+            //TODO: Error handling
+            print("error: \(error)")
+        }
+    }
     //MARK: - @IBAction
     @IBAction func signinButtonTapped(sender: UIButton) {
         navigationController?.popViewControllerAnimated(true)
@@ -222,7 +290,18 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         signup()
     }
     
-    @IBAction func signupWithFacebookTapped(sender: UIButton) {
+    @IBAction func signupWithFacebookButtonTapped(sender: FBSDKLoginButton) {
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "signupWithFacebook" {
+            let vc = segue.destinationViewController as! SignupWithFacebookViewController
+            vc.email = fbEmail
+            vc.firstname = fbFirstname
+            vc.lastname = fbLastname
+            vc.accessToken = fbAccessToken
+        }
     }
     
 }

@@ -24,7 +24,11 @@ module.exports = function(sequelize, DataTypes) {
         username: DataTypes.STRING,
         email: DataTypes.STRING,
         phone: DataTypes.STRING,
-        password: DataTypes.STRING,
+        password: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            defaultValue: null
+        },
         authWithFacebook: DataTypes.BOOLEAN,
         authToken: DataTypes.STRING
     }, {
@@ -69,14 +73,19 @@ module.exports = function(sequelize, DataTypes) {
             verifyPassword: function(plainPassword) {
                 var self = this;
                 return new Promise(function(resolve, reject) {
-                    bcrypt.compare(plainPassword, self.password, function(err, res) {
-                        if (err || !res) {
-                           reject(false);
-                        }
-                        else {
-                          resolve(true);
-                       }
-                    });
+                    if (self.password) {
+                        bcrypt.compare(plainPassword, self.password, function (err, res) {
+                            if (err || !res) {
+                                reject(false);
+                            }
+                            else {
+                                resolve(true);
+                            }
+                        });
+                    }
+                    else {
+                        reject(false);
+                    }
                 });
             },
             generateToken: function() {

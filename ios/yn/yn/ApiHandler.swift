@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import FBSDKLoginKit
 
 class ApiHandler {
     class var sharedInstance: ApiHandler {
@@ -36,7 +37,6 @@ class ApiHandler {
         self.identifier = identifier
         self.password = password
         do {
-            try print("ApiUrl: \(ApiUrls.getUrl("signin"))")
             try Alamofire.request(.POST, ApiUrls.getUrl("signin"), parameters: [
                 "identifier": identifier,
                 "password": password
@@ -63,6 +63,50 @@ class ApiHandler {
         }
     }
     
+    func authenticateWithFacebook(accessToken accessToken: FBSDKAccessToken, completion: (success: Bool, error: ApiError?) -> Void) {
+        do {
+            try Alamofire.request(.POST, ApiUrls.getUrl("fbSignin"), parameters: [
+                "token": accessToken.tokenString,
+                "userId": accessToken.userID,
+                "appId": accessToken.appID
+                ]).responseJSON(completionHandler: { (response: Response<AnyObject, NSError>) in
+                    if response.result.isSuccess {
+                        if let values = response.result.value as? Dictionary<String, AnyObject> {
+                            if values["success"] as? Bool == true {
+                                if let token = values["token"] as? String  {
+                                    if let userId = values["userId"] as? Int {
+                                        self.userToken = token
+                                        self.userId = userId
+                                        completion(success: true, error: nil)
+                                        return
+                                    }
+                                }
+                                completion(success: false, error: ApiError.ResponseInvalidData)
+                            }
+                            else if values["error"] != nil {
+                                if values["error"] as? String == "userNotFound" {
+                                    completion(success: false, error: ApiError.FBUserNotFound)
+                                }
+                                else {
+                                    completion(success: false, error: ApiError.Unexpected)
+                                }
+                            }
+                        }
+                        else {
+                            completion(success: false, error: ApiError.ResponseInvalidData)
+                        }
+                    }
+                    else {
+                        completion(success: false, error: ApiError.Unexpected)
+                    }
+                })
+        } catch let error as ApiError {
+            print("Error: \(error)")
+        } catch {
+            print("Unexpected error")
+        }
+    }
+    
     func request(method: Alamofire.Method, URLString: URLStringConvertible, parameters: [String: AnyObject]?, completion: (result: Dictionary<String, AnyObject>?, err: ApiError?) -> Void) throws -> Request {
             return try Alamofire.request(method, URLString, parameters: parameters, encoding: ParameterEncoding.URL, headers: getAuthHeaders()).validate().responseJSON { (response) in
                 if response.result.isSuccess {
@@ -79,6 +123,24 @@ class ApiHandler {
                     }
                 }
             }
+    }
+    
+    func requestAnonymous(method: Alamofire.Method, URLString: URLStringConvertible, parameters: [String: AnyObject]?, completion: (result: Dictionary<String, AnyObject>?, err: ApiError?) -> Void) -> Request {
+        return Alamofire.request(method, URLString, parameters: parameters, encoding: ParameterEncoding.URL, headers: nil).validate().responseJSON { (response) in
+            if response.result.isSuccess {
+                completion(result: response.result.value as? Dictionary<String, AnyObject>, err: nil)
+            }
+            else if let response = response.response {
+                switch response.statusCode {
+                case 404:
+                    completion(result: nil, err: ApiError.NotFound)
+                case 422:
+                    completion(result: nil, err: ApiError.MissingParameters)
+                default:
+                    completion(result: nil, err: ApiError.Unexpected)
+                }
+            }
+        }
     }
     
     func uploadMultiPartJpegImage(method: Alamofire.Method, URLString: URLStringConvertible, parameters: [String: String]?, images: [String: NSData]?, requestHandler: (request: Request?, error: ErrorType?) -> Void) throws {
@@ -125,6 +187,7 @@ class ApiHandler {
             }
         }
     }
+    
     func logout() {
         userToken = nil
         password = nil
