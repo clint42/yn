@@ -115,7 +115,7 @@ module.exports = function(sequelize, DataTypes) {
                 var pagination = nbPerPage && offset;
                 var query = "SELECT Users.*, Users.id AS id, Friends.id AS friendshipId FROM " + sequelize.models.User.tableName +
                             " INNER JOIN " + sequelize.models.Friend.tableName + " ON Friends.UserId = Users.id" +
-                            " WHERE Friends.FriendId =" + this.id + " AND Friends.UserId != "+ this.id +" AND status = 'PENDING'";
+                            " WHERE Friends.FriendId =" + this.id + " AND Friends.UserId != " + this.id + " AND status = 'PENDING'";
                 if (pagination) {
                     query += " LIMIT " + offset + "," + nbPerPage
                 }
@@ -125,6 +125,24 @@ module.exports = function(sequelize, DataTypes) {
                    }).catch(function(err) {
                         reject(err);
                    });
+                });
+            },
+            getNumberOfFriendRequestUsers: function() {
+                var self = this;
+                return new Promise(function(resolve, reject) {
+                    sequelize.models.Friend.count({
+                        where: {
+                            $not: {
+                                UserId: self.id
+                            },
+                            FriendId: self.id,
+                            status: 'PENDING'
+                        }
+                    }).then((success) => {
+                        resolve(success);
+                    }).catch(function(err) {
+                        reject(err);
+                    });
                 });
             },
             getFriendPendingRequestUsers: function(nbPerPage, offset, orderBy, orderRule) {
@@ -180,21 +198,36 @@ module.exports = function(sequelize, DataTypes) {
                 });
             },
             findUsers: function(numbersOrEmails) {
-                var mylist = "";
-                for (var count = 0; count < numbersOrEmails.length; count++) {
-                    mylist += "\"" + numbersOrEmails[count] + "\"";
-                    if (count < (numbersOrEmails.length - 1))
-                        mylist += ","
-                }
-                var query = "SELECT Users.* " +
-                    "FROM Users LEFT JOIN Friends ON (Friends.UserId = Users.id OR Friends.FriendId = Users.id) " +
-                    "WHERE (Users.email IN(" + mylist + ") OR `Users`.`phone` IN (" + mylist + ")) " +
-                    "AND ((Friends.UserId != " + this.id + " AND Friends.FriendId != " + this.id + ") OR (Friends.UserId IS NULL OR Friends.FriendId IS NULL)) " +
-                    "GROUP BY Users.username";
+                var queryId = "SELECT Users.id " +
+                    "FROM Users " +
+                    "INNER JOIN Friends ON (Users.id = Friends.UserId OR Users.id = Friends.FriendId) " +
+                    "WHERE ((Friends.UserId != " + this.id + " AND Friends.FriendId = " + this.id + ") " +
+                    "OR (Friends.FriendId != " + this.id + " AND Friends.UserId = " + this.id + ")) " +
+                    "AND Users.id != " + this.id + "";
                 return new Promise(function(resolve, reject) {
-                    sequelize.query(query, {type: sequelize.QueryTypes.SELECT, model: sequelize.models.User}).then(function(users) {
-                        resolve(users);
-                    }).catch(function(err) {
+                    sequelize.query(queryId, {type: sequelize.QueryTypes.SELECT, model: sequelize.models.User}).then(function(idFriends) {
+                        var notIn = "";
+                        for (var count = 0; count < idFriends.length; count++) {
+                            notIn += idFriends[count].id;
+                            if (count < (idFriends.length - 1))
+                                notIn += ",";
+                        }
+                        var mylist = "\"" + numbersOrEmails.join("\",\"") + "\"";
+                        var query = "SELECT Users.* " +
+                            "FROM Users " +
+                            "LEFT JOIN Friends ON (Friends.UserId = Users.id OR Friends.FriendId = Users.id) " +
+                            "WHERE (Users.email IN(" + mylist + ") OR `Users`.`phone` IN (" + mylist + ")) " +
+                            "AND Users.id NOT IN(" + notIn + ") " +
+                            "GROUP BY Users.username";
+                        sequelize.query(query, {
+                            type: sequelize.QueryTypes.SELECT,
+                            model: sequelize.models.User
+                        }).then(function (users) {
+                            resolve(users);
+                        }).catch(function (err) {
+                            reject(err);
+                        });
+                    }).catch(function (err) {
                         reject(err);
                     });
                 });

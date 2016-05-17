@@ -171,4 +171,17 @@ class FriendsApiController {
             });
         }
     }
+    
+    func getNumberOfPendingRequests(completion: (count: Int?, err: ApiError?) -> Void) throws -> Request {
+        do {
+            return try apiHandler.request(.GET, URLString: ApiUrls.getUrl("countPendingRequests"), parameters: nil, completion: { (result, err) in
+                if err == nil && result != nil && result!["count"] as? Int != nil {
+                    completion(count: result!["count"] as? Int, err: nil)
+                }
+                else {
+                    completion(count: 0, err: err)
+                }
+            });
+        }
+    }
 }

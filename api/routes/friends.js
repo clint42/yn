@@ -42,7 +42,7 @@ router.get('/my', auth, function(req, res, next) {
 });
 
 router.get('/receivedRequests', auth, function(req, res, next) {
-    var nResults = req.body.nResults ||10;
+    var nResults = req.body.nResults || 10;
     var offset = req.body.offset || 0;
     req.currentUser.getFriendRequestUsers(nResults, offset).then(function(usersWithRequest) {
         res.json({
@@ -50,6 +50,18 @@ router.get('/receivedRequests', auth, function(req, res, next) {
         });
     }).catch(function(err) {
        //TODO: Error handling
+        console.log(err);
+        next(err, req, res);
+    });
+});
+
+router.get('/countPendingRequests', auth, function(req, res, next) {
+    req.currentUser.getNumberOfFriendRequestUsers().then(function(count) {
+        res.json({
+            count: count
+        });
+    }).catch(function(err) {
+        //TODO: Error handling
         console.log(err);
         next(err, req, res);
     });

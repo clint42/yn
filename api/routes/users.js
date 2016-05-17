@@ -205,8 +205,6 @@ router.post('/find', auth, function(req, res, next) {
     var numbersOrEmails = JSON.parse(req.body.findArray);
     if (numbersOrEmails) {
         req.currentUser.findUsers(numbersOrEmails).then(function(users) {
-            console.log(users);
-            console.log("LENGTH", users.length);
             res.json({
                 friends: users,
                 count: users.length

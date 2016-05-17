@@ -25,6 +25,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewWillAppear(animated: Bool) {
         loadData()
+        getCountPendingRequests()
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,11 +33,32 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK: - UITableViewDataSource
     private func loadData() {
         tableView.delegate = self
         tableView.dataSource = self
         fetchFriends()
+    }
+    
+    //MARK: - UITableViewDataSource
+    private func getCountPendingRequests() {
+        do {
+            try FriendsApiController.sharedInstance.getNumberOfPendingRequests({ (count: Int?, err: ApiError?) in
+                if (err == nil && count != nil) {
+                    if count! > 0 {
+                        self.tabBarController!.tabBar.items![1].badgeValue = String(count!)
+                    } else {
+                        self.tabBarController!.tabBar.items![1].badgeValue = nil
+                    }
+                }
+                else {
+                    print("error: \(err)")
+                }
+            })
+        } catch let error as ApiError {
+            print("error: \(error)")
+        } catch {
+            print("Unexpected error")
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
