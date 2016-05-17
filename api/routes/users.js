@@ -201,7 +201,7 @@ router.get('/search', function(req, res, next) {
 });
 
 router.post('/find', function(req, res, next) {
-    var numbersOrEmails = req.body.findArray;
+    var numbersOrEmails = JSON.parse(req.body.findArray);
     if (numbersOrEmails) {
         models.User.findAll({
             where: {
@@ -219,8 +219,9 @@ router.post('/find', function(req, res, next) {
                 ]
             }
         }).then(function(users) {
+            //console.log(users);
             res.send({
-                users: users,
+                friends: users,
                 count: users.length
             });
         }).catch(function(err) {

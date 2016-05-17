@@ -68,7 +68,12 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
         searchText = _searchText
         
         //TODO: Perform new search request
-        searchUsers(searchText!)
+        if (searchText != "") {
+            searchUsers(searchText!)
+        } else {
+            self.users.removeAll()
+            self.getFriendsFromPhone()
+        }
         
     }
     
@@ -98,7 +103,7 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
         let confirmClosure: ((UIAlertAction!) -> Void)! = { action in
             self.searchBar.text = ""
             self.users.removeAll()
-            self.tableView.reloadData()
+            self.getFriendsFromPhone()
         }
         let alert = UIAlertController(title: "Add request", message: "Your request has been sent to " + identifier, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: confirmClosure))
@@ -109,14 +114,12 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
         let store = CNContactStore()
         store.requestAccessForEntityType(.Contacts) { granted, error in
             guard granted else {
-                print("erroooooooor")
                 return
             }
             
-            // get the contacts
-            
+            // Fetching fullname, phone numbers and email addresses from phone contacts
             var contacts = [CNContact]()
-            let request = CNContactFetchRequest(keysToFetch: [CNContactIdentifierKey, CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName), CNContactPhoneNumbersKey])
+            let request = CNContactFetchRequest(keysToFetch: [CNContactIdentifierKey, CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName), CNContactPhoneNumbersKey, CNContactEmailAddressesKey])
             do {
                 try store.enumerateContactsWithFetchRequest(request) { contact, stop in
                     contacts.append(contact)
@@ -125,18 +128,39 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
                 print(error)
             }
             
-            // do something with the contacts array (e.g. print the names)
+            var numbersOrEmails = [String]();
             
-            let formatter = CNContactFormatter()
-            formatter.style = .FullName
+            // Browsing contacts to store phone numbers and email addresses in an array 
+            // which will be sent to the API to get users informations if they are using YN
             for contact in contacts {
                 if (contact.isKeyAvailable(CNContactPhoneNumbersKey)) {
                     for phoneNumber:CNLabeledValue in contact.phoneNumbers {
                         let a = phoneNumber.value as! CNPhoneNumber
-                        print("\(formatter.stringFromContact(contact)) : +\(a.valueForKey("countryCode") as! String) \(a.valueForKey("digits") as! String)")
+                        numbersOrEmails.append(a.valueForKey("digits") as! String)
                     }
                 }
-                //print(formatter.stringFromContact(contact))
+                if (contact.isKeyAvailable(CNContactEmailAddressesKey)) {
+                    for emailAddress: CNLabeledValue in contact.emailAddresses {
+                        numbersOrEmails.append(emailAddress.value as! String)
+                    }
+                }
+            }
+            do {
+                try FriendsApiController.sharedInstance.findFriends(numbersOrEmails) { (friends: [User]?, err: ApiError?) in
+                    if (err == nil && friends != nil) {
+                        self.users.removeAll()
+                        self.users = friends!
+                        self.tableView.reloadData()
+                    }
+                    else {
+                        print("err: \(err)")
+                    }
+                }
+                
+            } catch let error as ApiError {
+                print("error: \(error)")
+            } catch {
+                print("Unexpected error")
             }
         }
     }
