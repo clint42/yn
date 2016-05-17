@@ -42,7 +42,6 @@ class ApiHandler {
                 ]).responseJSON { (response) in
                     if response.result.isSuccess {
                         if let token = response.result.value!["token"] as? String {
-                        
                             if let userId = response.result.value!["userId"] as? Int {
                                 self.userToken = token
                                 self.userId = userId
@@ -50,8 +49,8 @@ class ApiHandler {
                                 return
                             }
                         }
-                        completion(false)
                     }
+                completion(false)
             }
         } catch let error as ApiError {
             print("Error: \(error)")

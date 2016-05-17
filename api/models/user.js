@@ -7,7 +7,6 @@ var bcrypt = require('bcrypt-nodejs');
 var uuid = require('node-uuid');
 
 module.exports = function(sequelize, DataTypes) {
-
     var user = sequelize.define('User', {
         id: {
             type: DataTypes.INTEGER,
