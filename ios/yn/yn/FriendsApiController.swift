@@ -71,4 +71,49 @@ class FriendsApiController {
         }
     }
     
+    func deleteFriend(friendUsername: String, completion: (res: Bool?, err: ApiError?) -> Void) throws -> Request {
+        let params = [
+            "identifier": friendUsername
+        ]
+        do {
+            return try apiHandler.request(.POST, URLString: ApiUrls.getUrl("deleteFriend"), parameters: params, completion: { (result, err) in
+                if err == nil {
+                    completion(res: result!["success"] as? Bool, err: nil)
+                }
+                else {
+                    completion(res: nil, err: err);
+                }
+            })
+        }
+    }
+    
+    func findFriends(numbersOrEmails: [String], completion: (friends: [User]?, err: ApiError?) -> Void) throws -> Request {
+        do {
+            let data = try NSJSONSerialization.dataWithJSONObject(numbersOrEmails, options: [])
+            let params = [
+                "findArray": NSString(data: data, encoding: NSASCIIStringEncoding) as! String
+            ]
+            return try apiHandler.request(.POST, URLString: ApiUrls.getUrl("findFriends"), parameters: params, completion: { (result, err) in
+                var friends = [User]()
+                if err == nil && result!["friends"] != nil && result!["friends"] is Array<Dictionary<String, AnyObject>> {
+                    for user in result!["friends"] as! Array<Dictionary<String, AnyObject>> {
+                        do {
+                            try friends.append(User(json: user))
+                        } catch let error as ApiError {
+                            print("error: \(error)")
+                        } catch {
+                            print("Unexpected error")
+                        }
+                    }
+                    completion(friends: friends, err: nil)
+                }
+                else if err != nil {
+                    completion(friends: nil, err: ApiError.ResponseInvalidData)
+                }
+                else {
+                    completion(friends: nil, err: err)
+                }
+            })
+        }
+    }
 }

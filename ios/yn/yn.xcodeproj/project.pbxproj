@@ -40,6 +40,7 @@
 		0D8EADB31CDBF1EF00A4DAED /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADB21CDBF1EF00A4DAED /* AddFriendViewController.swift */; };
 		0D8EADB51CDD3F3000A4DAED /* UsersApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADB41CDD3F3000A4DAED /* UsersApiController.swift */; };
 		219EE88753B35D34D88A8646 /* Pods_yn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6D8597E64AAAE0D10DCC61E /* Pods_yn.framework */; };
+		E3B07E231CE959690064FAD8 /* countriesCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3B07E221CE959690064FAD8 /* countriesCode.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		6555A07611012DCEE3DF650E /* Pods-yn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yn.release.xcconfig"; path = "Pods/Target Support Files/Pods-yn/Pods-yn.release.xcconfig"; sourceTree = "<group>"; };
 		9C6B85502A8AB8B0D77D403D /* Pods-yn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-yn/Pods-yn.debug.xcconfig"; sourceTree = "<group>"; };
 		B6D8597E64AAAE0D10DCC61E /* Pods_yn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3B07E221CE959690064FAD8 /* countriesCode.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = countriesCode.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 		0D13AF931CD2C91C00D7D51F /* yn */ = {
 			isa = PBXGroup;
 			children = (
+				E3B07E211CE959530064FAD8 /* Resources */,
 				0D8EADAD1CDAE56100A4DAED /* Api */,
 				0D13B00B1CD845CF00D7D51F /* Models */,
 				0D13AFEE1CD578E900D7D51F /* Auth */,
@@ -263,6 +266,14 @@
 				B6D8597E64AAAE0D10DCC61E /* Pods_yn.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E3B07E211CE959530064FAD8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E3B07E221CE959690064FAD8 /* countriesCode.plist */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		FB95FC788E3286BA451ABC85 /* Pods */ = {
@@ -386,6 +397,7 @@
 				0D13AF9F1CD2C91D00D7D51F /* LaunchScreen.storyboard in Resources */,
 				0D13AF9C1CD2C91D00D7D51F /* Assets.xcassets in Resources */,
 				0D13AFD51CD2E1C300D7D51F /* Ask.storyboard in Resources */,
+				E3B07E231CE959690064FAD8 /* countriesCode.plist in Resources */,
 				0D13AFFA1CD5922400D7D51F /* Sansation_Light.ttf in Resources */,
 				0D13AFEC1CD5618D00D7D51F /* AuthStoryboard.storyboard in Resources */,
 				0D13AFE81CD55B7700D7D51F /* Questions.storyboard in Resources */,
