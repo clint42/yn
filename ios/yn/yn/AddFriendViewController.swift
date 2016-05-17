@@ -41,6 +41,18 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: - UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if users.count > 0 {
+            tableView.backgroundView = nil
+            tableView.separatorStyle = .SingleLine
+        } else {
+            let noDataLabel: UILabel = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
+            noDataLabel.text = "No friends using YN in your contacts"
+            noDataLabel.textColor = UIColor.lightGrayColor()
+            noDataLabel.textAlignment = NSTextAlignment.Center
+            noDataLabel.font = UIFont(name: "Sansation", size: 30)
+            tableView.backgroundView = noDataLabel
+            tableView.separatorStyle = .None
+        }
         return users.count
     }
     
@@ -150,6 +162,7 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
                     if (err == nil && friends != nil) {
                         self.users.removeAll()
                         self.users = friends!
+                        self.users.sortInPlace({ $0.username < $1.username })
                         self.tableView.reloadData()
                     }
                     else {

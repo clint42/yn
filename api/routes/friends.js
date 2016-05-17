@@ -50,6 +50,7 @@ router.get('/receivedRequests', auth, function(req, res, next) {
         });
     }).catch(function(err) {
        //TODO: Error handling
+        console.log(err);
         next(err, req, res);
     });
 });
@@ -99,6 +100,26 @@ router.post('/delete', auth, function(req, res, next) {
                //TODO: Error handling
                next(err, req, res);
            })
+        }).catch(function(err) {
+            //TODO: Error handling
+            next(err, req, res);
+        });
+    }
+});
+
+router.post('/answer', auth, function(req, res, next) {
+    var identifier = req.body.identifier,
+        accept = req.body.accept;
+    console.log("ACCEPT IN ROUTE: ", accept);
+    if (identifier !== undefined && accept !== undefined) {
+        models.User.getUser(identifier).then(function(user) {
+            req.currentUser.answerRequest(user, accept).then(function() {
+                res.status(201);
+                res.json({success: true});
+            }).catch(function(err) {
+                //TODO: Error handling
+                next(err, req, res);
+            })
         }).catch(function(err) {
             //TODO: Error handling
             next(err, req, res);
