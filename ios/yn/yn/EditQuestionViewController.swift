@@ -133,7 +133,9 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate {
             print("imageData is not nil")
             let apiHandler = ApiHandler.sharedInstance
             do {
-                try apiHandler.uploadMultiPartJpegImage(.POST, URLString: ApiUrls.getUrl("askQuestion"), parameters: nil, images: ["image": imageData!]) { (request, error) in
+                let image = ["image": imageData!]
+                let params = ["title": titleTextField.text!, "question": questionTextView.text!]
+                try apiHandler.uploadMultiPartJpegImage(.POST, URLString: ApiUrls.getUrl("askQuestion"), parameters: params, images: image) { (request, error) in
                     if error != nil {
                         request?.responseJSON(completionHandler: { (response: Response<AnyObject, NSError>) in
                             if response.result.isSuccess {

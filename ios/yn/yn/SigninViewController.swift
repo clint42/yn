@@ -16,6 +16,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signinButton: UIButton!
     @IBOutlet weak var signupButton: UIButton!
+    @IBOutlet weak var signinWithFacebookButton: UIButton!
 
     @IBOutlet weak var verticalSpaceTopLogo: NSLayoutConstraint!
     @IBOutlet weak var verticalSpaceLogoSigninView: NSLayoutConstraint!
@@ -39,7 +40,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         addTapGestureRecognizer()
         
         //TODO: Remove, DEV ONLY
-        tmpAutoLog()
+        //tmpAutoLog()
         
         // Do any additional setup after loading the view.
     }
@@ -66,6 +67,8 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         signinFormViewContainer.layer.masksToBounds = true
         signinFormViewContainer.layer.borderWidth = 1
         signinFormViewContainer.layer.borderColor = UIColor.purpleYn().CGColor
+        
+        signinWithFacebookButton.layer.cornerRadius = 8
         
         signupButton.layer.cornerRadius = 8
         signupButton.layer.borderWidth = 1
@@ -162,6 +165,10 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func signupButtonTapped(sender: UIButton) {
         performSegueWithIdentifier("signupSegue", sender: self)
+    }
+    
+    @IBAction func signinWithFacebookButton(sender: UIButton) {
+        
     }
     
     

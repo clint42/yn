@@ -29,7 +29,9 @@ module.exports = function(sequelize, DataTypes) {
         }
     }, {
         classMethods: {
-            
+            associate: function(models) {
+                models.Question.belongsTo(models.User, {onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+            }
         }
     });
     return question;
