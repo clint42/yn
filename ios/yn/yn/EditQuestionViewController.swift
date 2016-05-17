@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class EditQuestionViewController: UIViewController, UITextViewDelegate {
 
@@ -128,6 +129,33 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - @IBActions
     @IBAction func sendButtonTapped(sender: UIButton) {
+        if imageData != nil {
+            print("imageData is not nil")
+            let apiHandler = ApiHandler.sharedInstance
+            do {
+                try apiHandler.uploadMultiPartJpegImage(.POST, URLString: ApiUrls.getUrl("askQuestion"), parameters: nil, images: ["image": imageData!]) { (request, error) in
+                    if error != nil {
+                        request?.responseJSON(completionHandler: { (response: Response<AnyObject, NSError>) in
+                            if response.result.isSuccess {
+                                print("Response result success")
+                                print(response.result.value)
+                            }
+                            else {
+                                print("Response isSuccess is false")
+                            }
+                        })
+                    }
+                    else {
+                        print("Error response: \(error)")
+                    }
+                }
+            } catch let error as ApiError {
+                //TODO: Error Handling
+                print("Error exceptions: \(error)")
+            } catch {
+                print("An unexpected error occured")
+            }
+        }
     }
     
     
