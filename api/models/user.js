@@ -98,11 +98,11 @@ module.exports = function(sequelize, DataTypes) {
                 var query = "SELECT *, Users.id AS id, Friends.id as friendshipId FROM " + sequelize.models.User.tableName +
                             " INNER JOIN " + sequelize.models.Friend.tableName + " ON Friends.UserId=Users.id OR Friends.FriendId=Users.id " +
                             "WHERE (Friends.UserId="+this.id+" OR Friends.FriendId="+this.id+") AND Users.id!="+this.id+" AND Friends.status='ACCEPTED' ";
-                if (pagination) {
-                    query += " LIMIT " + offset + "," + nbPerPage;
-                }
                 if (orderBy) {
                     query += " ORDER BY " + orderBy + " " + orderRule
+                }
+                if (pagination) {
+                    query += " LIMIT " + offset + "," + nbPerPage;
                 }
                 return new Promise(function(resolve, reject) {
                    sequelize.query(query, {type: sequelize.QueryTypes.SELECT, model: sequelize.models.User}).then(function(users) {
@@ -143,6 +143,22 @@ module.exports = function(sequelize, DataTypes) {
                        reject(err);
                    })
                 });
+            },
+            deleteFriend: function(userToDelete) {
+                return new Promise((resolve, reject) => {
+                    sequelize.models.Friend.destroy({
+                        where: {
+                            UserId: this.id,
+                            FriendId: userToDelete.id,
+                            status: 'ACCEPTED'
+                        }
+                    }).then((success) => {
+                        resolve(success);
+                    }).catch((err) => {
+                        reject(err);
+                    })
+                });
+
             }
         },
         hooks: {
