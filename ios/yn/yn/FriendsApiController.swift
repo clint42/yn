@@ -71,4 +71,19 @@ class FriendsApiController {
         }
     }
     
+    func deleteFriend(friendUsername: String, completion: (res: Bool?, err: ApiError?) -> Void) throws -> Request {
+        let params = [
+            "identifier": friendUsername
+        ]
+        do {
+            return try apiHandler.request(.POST, URLString: ApiUrls.getUrl("deleteFriend"), parameters: params, completion: { (result, err) in
+                if err == nil {
+                    completion(res: result!["success"] as? Bool, err: nil)
+                }
+                else {
+                    completion(res: nil, err: err);
+                }
+            })
+        }
+    }
 }

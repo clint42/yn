@@ -10,6 +10,7 @@ import UIKit
 
 class FriendsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
 
     let apiHandler = ApiHandler.sharedInstance
     
@@ -20,7 +21,9 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController!.tabBar.items![0].badgeValue = "2"
-        
+        tableView.delegate = self
+        tableView.dataSource = self
+        fetchFriends()
         // Do any additional setup after loading the view.
     }
 
@@ -38,6 +41,32 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
         return friendsSections.count
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let alertController: UIAlertController
+        if (!(friends[indexPath.section][indexPath.row].firstname ?? "").isEmpty && !(friends[indexPath.section][indexPath.row].lastname ?? "").isEmpty) {
+            alertController = UIAlertController(title: friends[indexPath.section][indexPath.row].username, message: "\(friends[indexPath.section][indexPath.row].firstname) \(friends[indexPath.section][indexPath.row].lastname)", preferredStyle: .Alert)
+        } else {
+            alertController = UIAlertController(title: friends[indexPath.section][indexPath.row].username, message: "", preferredStyle: .Alert)
+        }
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .Default) { (action:UIAlertAction!) in
+            self.deleteFriend(self.friends[indexPath.section][indexPath.row].username, indexPath: indexPath)
+        }
+        alertController.addAction(deleteAction)
+        
+        let BlockAction = UIAlertAction(title: "Block", style: .Default) { (action:UIAlertAction!) in
+            self.deleteFriend(self.friends[indexPath.section][indexPath.row].username, indexPath: indexPath)
+        }
+        alertController.addAction(BlockAction)
+
+        let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
+        }
+        alertController.addAction(CancelAction)
+
+
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+        
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("friendCell") as! FriendTableViewCell
         cell.usernameLabel.text = friends[indexPath.section][indexPath.row].username
@@ -50,6 +79,24 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
             try FriendsApiController.sharedInstance.getFriends(nResults: 20, offset: friends.count, orderBy: "username", orderRule: "ASC", completion: { (users: [User]?, err: ApiError?) in
                 if (err == nil && users != nil) {
                     self.addFriendsToSectionRowArrays(users!)
+                    self.tableView.reloadData()
+                }
+                else {
+                    print("error: \(err)")
+                }
+            })
+        } catch let error as ApiError {
+            print("error: \(error)")
+        } catch {
+            print("Unexpected error")
+        }
+    }
+    
+    private func deleteFriend(friendUsername: String, indexPath: NSIndexPath) {
+        do {
+            try FriendsApiController.sharedInstance.deleteFriend(friendUsername, completion: { (res: Bool?, err: ApiError?) in
+                if (err == nil && res == true) {
+                    self.friends[indexPath.section].removeAtIndex(indexPath.row)
                     self.tableView.reloadData()
                 }
                 else {
