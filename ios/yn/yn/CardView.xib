@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="QuestionCard" customModule="yn">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jDB-l3-FxI">
+                    <rect key="frame" x="0.0" y="0.0" width="450" height="450"/>
+                    <color key="backgroundColor" red="0.5" green="0.044606563799999999" blue="0.093159788790000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="jDB-l3-FxI" secondAttribute="height" multiplier="1:1" id="hWj-bj-gtm"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NRJ-6c-Ncq">
+                    <rect key="frame" x="0.0" y="503" width="600" height="97"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BqR-VX-9R6">
+                    <rect key="frame" x="0.0" y="446" width="600" height="49"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49" id="AMj-n6-oDm"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="AMj-n6-oDm"/>
+                        </mask>
+                    </variation>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="BqR-VX-9R6" secondAttribute="trailing" constant="5" id="1Am-ek-8eb"/>
+                <constraint firstAttribute="trailing" secondItem="jDB-l3-FxI" secondAttribute="trailing" constant="5" id="9bR-FW-UXN"/>
+                <constraint firstItem="BqR-VX-9R6" firstAttribute="top" secondItem="jDB-l3-FxI" secondAttribute="bottom" constant="5" id="C5f-zb-XKV"/>
+                <constraint firstAttribute="trailing" secondItem="BqR-VX-9R6" secondAttribute="trailing" id="DNu-za-q4M"/>
+                <constraint firstAttribute="trailing" secondItem="NRJ-6c-Ncq" secondAttribute="trailing" constant="5" id="Hsp-ME-cuf"/>
+                <constraint firstItem="NRJ-6c-Ncq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="HyJ-xD-gGs"/>
+                <constraint firstItem="jDB-l3-FxI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="50" id="MgR-No-KTR"/>
+                <constraint firstItem="BqR-VX-9R6" firstAttribute="top" secondItem="jDB-l3-FxI" secondAttribute="bottom" constant="6" id="QFJ-2P-GcF"/>
+                <constraint firstAttribute="trailing" secondItem="BqR-VX-9R6" secondAttribute="trailing" id="R2F-Tq-Np1"/>
+                <constraint firstItem="BqR-VX-9R6" firstAttribute="top" secondItem="jDB-l3-FxI" secondAttribute="bottom" id="c0h-W4-KpL"/>
+                <constraint firstItem="NRJ-6c-Ncq" firstAttribute="top" secondItem="BqR-VX-9R6" secondAttribute="bottom" constant="5" id="ecX-hJ-DdN"/>
+                <constraint firstItem="jDB-l3-FxI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="enr-BR-7Ov"/>
+                <constraint firstItem="BqR-VX-9R6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="jkH-43-oVc"/>
+                <constraint firstItem="jDB-l3-FxI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="l9g-U1-u9q"/>
+                <constraint firstItem="NRJ-6c-Ncq" firstAttribute="top" secondItem="BqR-VX-9R6" secondAttribute="bottom" constant="8" id="mgY-TW-nQq"/>
+                <constraint firstAttribute="bottom" secondItem="NRJ-6c-Ncq" secondAttribute="bottom" id="pNt-gj-z4N"/>
+                <constraint firstItem="BqR-VX-9R6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="tQL-S2-CaG"/>
+                <constraint firstItem="BqR-VX-9R6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="w28-5r-kNY"/>
+                <constraint firstItem="jDB-l3-FxI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="xWA-s7-a37"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="MgR-No-KTR"/>
+                    <exclude reference="DNu-za-q4M"/>
+                    <exclude reference="QFJ-2P-GcF"/>
+                    <exclude reference="R2F-Tq-Np1"/>
+                    <exclude reference="c0h-W4-KpL"/>
+                    <exclude reference="jkH-43-oVc"/>
+                    <exclude reference="w28-5r-kNY"/>
+                    <exclude reference="mgY-TW-nQq"/>
+                    <exclude reference="pNt-gj-z4N"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="image" destination="jDB-l3-FxI" id="jWb-PJ-Kgf"/>
+                <outlet property="question" destination="NRJ-6c-Ncq" id="wOZ-37-GUN"/>
+                <outlet property="title" destination="BqR-VX-9R6" id="0fM-36-Z6I"/>
+            </connections>
+        </view>
+    </objects>
+</document>
