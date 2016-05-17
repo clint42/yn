@@ -41,6 +41,7 @@
 		0D8EADB11CDAE60E00A4DAED /* ApiUrls.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D8EADB01CDAE60E00A4DAED /* ApiUrls.plist */; };
 		0D8EADB31CDBF1EF00A4DAED /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADB21CDBF1EF00A4DAED /* AddFriendViewController.swift */; };
 		0D8EADB51CDD3F3000A4DAED /* UsersApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADB41CDD3F3000A4DAED /* UsersApiController.swift */; };
+		0DB736AF1CEAE439001C5B86 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB736AE1CEAE439001C5B86 /* FBSDKCoreKit.framework */; };
 		219EE88753B35D34D88A8646 /* Pods_yn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6D8597E64AAAE0D10DCC61E /* Pods_yn.framework */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +104,7 @@
 		0D8EADB01CDAE60E00A4DAED /* ApiUrls.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiUrls.plist; sourceTree = "<group>"; };
 		0D8EADB21CDBF1EF00A4DAED /* AddFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		0D8EADB41CDD3F3000A4DAED /* UsersApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersApiController.swift; sourceTree = "<group>"; };
+		0DB736AE1CEAE439001C5B86 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		6555A07611012DCEE3DF650E /* Pods-yn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yn.release.xcconfig"; path = "Pods/Target Support Files/Pods-yn/Pods-yn.release.xcconfig"; sourceTree = "<group>"; };
 		9C6B85502A8AB8B0D77D403D /* Pods-yn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-yn/Pods-yn.debug.xcconfig"; sourceTree = "<group>"; };
 		B6D8597E64AAAE0D10DCC61E /* Pods_yn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +116,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				219EE88753B35D34D88A8646 /* Pods_yn.framework in Frameworks */,
+				0DB736AF1CEAE439001C5B86 /* FBSDKCoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +268,7 @@
 		42A931E7791806229422BC9F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0DB736AE1CEAE439001C5B86 /* FBSDKCoreKit.framework */,
 				0D13B0011CD7FF6F00D7D51F /* Alamofire.framework */,
 				B6D8597E64AAAE0D10DCC61E /* Pods_yn.framework */,
 			);
@@ -638,6 +642,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = yn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -654,6 +662,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = yn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
