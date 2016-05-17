@@ -111,7 +111,7 @@ module.exports = function(sequelize, DataTypes) {
                    });
                 });
             },
-            getFriendRequestUsers: function() {
+            getFriendRequestUsers: function(nbPerPage, offset) {
                 var pagination = nbPerPage && offset;
                 var query = "SELECT *, Users.id AS id, Friends.id as friendshipId FROM " + sequelize.models.User.tableName +
                             " INNER JOIN " + sequelize.models.Friend.tableName + " ON Friends.FriendId=Users.id" +

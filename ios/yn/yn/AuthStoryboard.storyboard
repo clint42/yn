@@ -21,6 +21,7 @@
             <string>Sansation</string>
             <string>Sansation</string>
             <string>Sansation</string>
+            <string>Sansation</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -127,20 +128,37 @@
                                                     <constraint firstAttribute="width" secondItem="vcg-UA-TP7" secondAttribute="height" multiplier="1:1" id="klm-UN-JiD"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ik-9d-51N">
+                                                <rect key="frame" x="8" y="371" width="584" height="45"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="Y24-aV-PjG"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="16"/>
+                                                <state key="normal" title="Sign in with Facebook...">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="signinWithFacebookButton:" destination="WIO-rX-26I" eventType="touchUpInside" id="h62-b2-FRO"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.1764705882352941" green="0.40784313725490196" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="BdC-KV-8ln" firstAttribute="top" relation="greaterThanOrEqual" secondItem="C2y-CL-G6z" secondAttribute="bottom" constant="32" id="5JQ-Hc-yf9"/>
                                             <constraint firstItem="vcg-UA-TP7" firstAttribute="centerX" secondItem="AQo-ok-Pf2" secondAttribute="centerX" id="8fd-MT-hW8"/>
                                             <constraint firstItem="BdC-KV-8ln" firstAttribute="leading" secondItem="AQo-ok-Pf2" secondAttribute="leading" constant="8" id="9XU-5y-HVH"/>
+                                            <constraint firstItem="1Ik-9d-51N" firstAttribute="leading" secondItem="AQo-ok-Pf2" secondAttribute="leading" constant="8" id="ACt-6G-8s8"/>
                                             <constraint firstItem="vcg-UA-TP7" firstAttribute="top" secondItem="AQo-ok-Pf2" secondAttribute="top" constant="72" id="DMD-Mq-JkK"/>
                                             <constraint firstItem="C2y-CL-G6z" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vcg-UA-TP7" secondAttribute="bottom" constant="30" id="KfD-mG-zcE"/>
                                             <constraint firstAttribute="trailing" secondItem="BdC-KV-8ln" secondAttribute="trailing" constant="8" id="M2t-hs-tVh"/>
                                             <constraint firstAttribute="trailing" secondItem="C2y-CL-G6z" secondAttribute="trailing" constant="8" id="PYE-g6-M58"/>
+                                            <constraint firstAttribute="trailing" secondItem="1Ik-9d-51N" secondAttribute="trailing" constant="8" id="W5F-D7-fWw"/>
                                             <constraint firstItem="C2y-CL-G6z" firstAttribute="centerY" secondItem="AQo-ok-Pf2" secondAttribute="centerY" id="dkh-Fm-JqI"/>
                                             <constraint firstItem="vcg-UA-TP7" firstAttribute="top" secondItem="AQo-ok-Pf2" secondAttribute="top" constant="52" id="glT-K0-xGi"/>
                                             <constraint firstAttribute="bottom" secondItem="BdC-KV-8ln" secondAttribute="bottom" priority="750" constant="32" id="hVZ-hD-A9a"/>
                                             <constraint firstItem="C2y-CL-G6z" firstAttribute="centerY" secondItem="AQo-ok-Pf2" secondAttribute="centerY" id="oSV-IX-4T3"/>
+                                            <constraint firstItem="1Ik-9d-51N" firstAttribute="top" secondItem="C2y-CL-G6z" secondAttribute="bottom" constant="16" id="spF-kB-LOh"/>
                                             <constraint firstItem="C2y-CL-G6z" firstAttribute="centerY" secondItem="AQo-ok-Pf2" secondAttribute="centerY" priority="750" constant="-12" id="twc-dv-Uma"/>
                                             <constraint firstItem="C2y-CL-G6z" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vcg-UA-TP7" secondAttribute="bottom" constant="32" id="zMg-vP-wWh"/>
                                             <constraint firstItem="C2y-CL-G6z" firstAttribute="leading" secondItem="AQo-ok-Pf2" secondAttribute="leading" constant="8" id="zx8-vl-lI4"/>
@@ -210,6 +228,7 @@
                         <outlet property="scrollView" destination="gl9-ma-Q8T" id="egc-SS-Cgd"/>
                         <outlet property="signinButton" destination="GfE-0R-MVz" id="k8l-6F-MQR"/>
                         <outlet property="signinFormViewContainer" destination="C2y-CL-G6z" id="av0-3J-uVI"/>
+                        <outlet property="signinWithFacebookButton" destination="1Ik-9d-51N" id="60Q-U6-SZw"/>
                         <outlet property="signupButton" destination="BdC-KV-8ln" id="vVP-pG-BwM"/>
                         <outlet property="verticalSpaceLogoSigninView" destination="zMg-vP-wWh" id="exW-ju-oTC"/>
                         <outlet property="verticalSpaceTopLogo" destination="U0O-hU-fxO" id="v4h-8E-yBo"/>
@@ -369,14 +388,6 @@
                                                             </mask>
                                                         </variation>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tNd-Nj-CR4">
-                                                        <rect key="frame" x="8" y="0.0" width="568" height="45"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="45" id="CoI-p8-OA3"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="15"/>
-                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
-                                                    </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aEn-g9-Oee">
                                                         <rect key="frame" x="0.0" y="321" width="584" height="45"/>
                                                         <color key="backgroundColor" red="0.53333333333333333" green="0.28627450980392155" blue="0.61176470588235299" alpha="1" colorSpace="calibratedRGB"/>
@@ -425,6 +436,14 @@
                                                                 <exclude reference="mtB-I0-1sb"/>
                                                             </mask>
                                                         </variation>
+                                                    </textField>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tNd-Nj-CR4">
+                                                        <rect key="frame" x="8" y="0.0" width="568" height="45"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="CoI-p8-OA3"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="15"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

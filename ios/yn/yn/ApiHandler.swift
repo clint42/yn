@@ -36,6 +36,7 @@ class ApiHandler {
         self.identifier = identifier
         self.password = password
         do {
+            try print("ApiUrl: \(ApiUrls.getUrl("signin"))")
             try Alamofire.request(.POST, ApiUrls.getUrl("signin"), parameters: [
                 "identifier": identifier,
                 "password": password
@@ -49,6 +50,9 @@ class ApiHandler {
                                 return
                             }
                         }
+                    }
+                    else {
+                        print(response.response?.statusCode)
                     }
                 completion(false)
             }
@@ -75,6 +79,42 @@ class ApiHandler {
                     }
                 }
             }
+    }
+    
+    func uploadMultiPartJpegImage(method: Alamofire.Method, URLString: URLStringConvertible, parameters: [String: String]?, images: [String: NSData]?, requestHandler: (request: Request?, error: ErrorType?) -> Void) throws {
+        do {
+            return try Alamofire.upload(method, URLString, headers: getAuthHeaders(), multipartFormData: { (multiFormData: MultipartFormData) in
+                print("multipartFormData")
+                if parameters != nil {
+                    for (key, param) in parameters! {
+                        if let paramData = param.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+                            multiFormData.appendBodyPart(data: paramData, name: key)
+                        }
+                        else {
+                            print("An error occured while encoding param to NSDATA using NSUTF8StringEncoding")
+                        }
+                    }
+                }
+                if images != nil {
+                    var index = 0
+                    for (key, imageData) in images! {
+                        print("name: \(key)")
+                        multiFormData.appendBodyPart(data: imageData, name: key, fileName: "image\(index)", mimeType: "image/jpeg")
+                        index += 1
+                    }
+                }
+                }, encodingMemoryThreshold: Manager.MultipartFormDataEncodingMemoryThreshold, encodingCompletion: { (encodingResult: Manager.MultipartFormDataEncodingResult) in
+                    switch encodingResult {
+                    case .Success(let request, _, _):
+                        requestHandler(request: request, error: nil)
+                        break
+                    case .Failure(let error):
+                        requestHandler(request: nil, error: error)
+                        break
+                    }
+            })
+        }
+        
     }
     
     //TODO: Re-implement this request method (does not work) as the one above ^
