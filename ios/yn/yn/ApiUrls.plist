@@ -2,13 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-<<<<<<< HEAD
 	<key>findFriends</key>
 	<string>/users/find</string>
-=======
 	<key>deleteFriend</key>
 	<string>/friends/delete</string>
->>>>>>> 1f5e6c0e75daee65605d6db6560188294caaf5e3
 	<key>signin</key>
 	<string>/users/signin</string>
 	<key>signup</key>

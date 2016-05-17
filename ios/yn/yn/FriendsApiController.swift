@@ -71,7 +71,22 @@ class FriendsApiController {
         }
     }
     
-<<<<<<< HEAD
+    func deleteFriend(friendUsername: String, completion: (res: Bool?, err: ApiError?) -> Void) throws -> Request {
+        let params = [
+            "identifier": friendUsername
+        ]
+        do {
+            return try apiHandler.request(.POST, URLString: ApiUrls.getUrl("deleteFriend"), parameters: params, completion: { (result, err) in
+                if err == nil {
+                    completion(res: result!["success"] as? Bool, err: nil)
+                }
+                else {
+                    completion(res: nil, err: err);
+                }
+            })
+        }
+    }
+    
     func findFriends(numbersOrEmails: [String], completion: (friends: [User]?, err: ApiError?) -> Void) throws -> Request {
         do {
             let data = try NSJSONSerialization.dataWithJSONObject(numbersOrEmails, options: [])
@@ -97,19 +112,6 @@ class FriendsApiController {
                 }
                 else {
                     completion(friends: nil, err: err)
-=======
-    func deleteFriend(friendUsername: String, completion: (res: Bool?, err: ApiError?) -> Void) throws -> Request {
-        let params = [
-            "identifier": friendUsername
-        ]
-        do {
-            return try apiHandler.request(.POST, URLString: ApiUrls.getUrl("deleteFriend"), parameters: params, completion: { (result, err) in
-                if err == nil {
-                    completion(res: result!["success"] as? Bool, err: nil)
-                }
-                else {
-                    completion(res: nil, err: err);
->>>>>>> 1f5e6c0e75daee65605d6db6560188294caaf5e3
                 }
             })
         }
