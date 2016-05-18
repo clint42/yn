@@ -45,6 +45,10 @@
 		0D8EADB11CDAE60E00A4DAED /* ApiUrls.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D8EADB01CDAE60E00A4DAED /* ApiUrls.plist */; };
 		0D8EADB31CDBF1EF00A4DAED /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADB21CDBF1EF00A4DAED /* AddFriendViewController.swift */; };
 		0D8EADB51CDD3F3000A4DAED /* UsersApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADB41CDD3F3000A4DAED /* UsersApiController.swift */; };
+		0DB736AF1CEAE439001C5B86 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB736AE1CEAE439001C5B86 /* FBSDKCoreKit.framework */; };
+		0DDC5AB51CEBD00900EBA597 /* NSDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB41CEBD00900EBA597 /* NSDataExtension.swift */; };
+		0DDC5AB81CEBEB1300EBA597 /* Answers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */; };
+		0DDC5ABA1CEBEBC400EBA597 /* MasterAnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */; };
 		2EC554C93C6B6832BA249C62 /* libPods-ynTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACD3DA9CC393A2CC07676D5 /* libPods-ynTests.a */; };
 		4F8F02ECDA837FC1C8A324FB /* libPods-ynUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D707435FA9072CC1AE9C76 /* libPods-ynUITests.a */; };
 		AEA15CB91CEAE05A009FE536 /* BackgroundKolodaAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15CB81CEAE05A009FE536 /* BackgroundKolodaAnimator.swift */; };
@@ -53,11 +57,8 @@
 		AEA15CC61CEAF2B4009FE536 /* OverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA15CC41CEAF2B4009FE536 /* OverlayView.xib */; };
 		AEA15CC81CEAF8A7009FE536 /* QuestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15CC71CEAF8A7009FE536 /* QuestionCard.swift */; };
 		AEA15CCA1CEAFB97009FE536 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA15CC91CEAFB97009FE536 /* CardView.xib */; };
-		D55961D1E06B07A0715A89F1 /* Pods_yn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 393003083260291A362A8302 /* Pods_yn.framework */; };
-		0DB736AF1CEAE439001C5B86 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB736AE1CEAE439001C5B86 /* FBSDKCoreKit.framework */; };
-		0DDC5AB51CEBD00900EBA597 /* NSDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB41CEBD00900EBA597 /* NSDataExtension.swift */; };
-		0DDC5AB81CEBEB1300EBA597 /* Answers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */; };
-		0DDC5ABA1CEBEBC400EBA597 /* MasterAnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */; };
+		AEF85E1E1CEC5D42003F39E5 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF85E1D1CEC5D42003F39E5 /* Question.swift */; };
+		AEF85E201CEC5D5F003F39E5 /* QuestionsApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF85E1F1CEC5D5F003F39E5 /* QuestionsApiController.swift */; };
 		E328E0961CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */; };
 		E3B07E231CE959690064FAD8 /* countriesCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3B07E221CE959690064FAD8 /* countriesCode.plist */; };
 /* End PBXBuildFile section */
@@ -126,6 +127,10 @@
 		0D8EADB01CDAE60E00A4DAED /* ApiUrls.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiUrls.plist; sourceTree = "<group>"; };
 		0D8EADB21CDBF1EF00A4DAED /* AddFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		0D8EADB41CDD3F3000A4DAED /* UsersApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersApiController.swift; sourceTree = "<group>"; };
+		0DB736AE1CEAE439001C5B86 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		0DDC5AB41CEBD00900EBA597 /* NSDataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtension.swift; sourceTree = "<group>"; };
+		0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Answers.storyboard; sourceTree = "<group>"; };
+		0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterAnswersViewController.swift; sourceTree = "<group>"; };
 		266E9170185883DBC7F0E649 /* Pods-yn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yn.release.xcconfig"; path = "Pods/Target Support Files/Pods-yn/Pods-yn.release.xcconfig"; sourceTree = "<group>"; };
 		393003083260291A362A8302 /* Pods_yn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACD3DA9CC393A2CC07676D5 /* libPods-ynTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ynTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,10 +142,8 @@
 		AEA15CC51CEAF2B4009FE536 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OverlayView.xib; sourceTree = "<group>"; };
 		AEA15CC71CEAF8A7009FE536 /* QuestionCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionCard.swift; sourceTree = "<group>"; };
 		AEA15CC91CEAFB97009FE536 /* CardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
-		0DB736AE1CEAE439001C5B86 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		0DDC5AB41CEBD00900EBA597 /* NSDataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtension.swift; sourceTree = "<group>"; };
-		0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Answers.storyboard; sourceTree = "<group>"; };
-		0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterAnswersViewController.swift; sourceTree = "<group>"; };
+		AEF85E1D1CEC5D42003F39E5 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		AEF85E1F1CEC5D5F003F39E5 /* QuestionsApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsApiController.swift; sourceTree = "<group>"; };
 		E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsRequestsViewController.swift; sourceTree = "<group>"; };
 		E3B07E221CE959690064FAD8 /* countriesCode.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = countriesCode.plist; sourceTree = "<group>"; };
 		EEFFA5B8721943B4C4592A13 /* Pods-ynUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ynUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ynUITests/Pods-ynUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -153,7 +156,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				219EE88753B35D34D88A8646 /* Pods_yn.framework in Frameworks */,
 				0DB736AF1CEAE439001C5B86 /* FBSDKCoreKit.framework in Frameworks */,
 				0D24606E1CEAEA49000BCEB4 /* FBSDKLoginKit.framework in Frameworks */,
 			);
@@ -300,6 +302,7 @@
 		0D13B00B1CD845CF00D7D51F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				AEF85E1D1CEC5D42003F39E5 /* Question.swift */,
 				0D13B00C1CD845DE00D7D51F /* User.swift */,
 			);
 			name = Models;
@@ -322,9 +325,19 @@
 				0D13B0091CD8007000D7D51F /* ApiHandler.swift */,
 				0D8EADAE1CDAE56F00A4DAED /* ApiError.swift */,
 				0D8EADA61CDAE34800A4DAED /* FriendsApiController.swift */,
+				AEF85E1F1CEC5D5F003F39E5 /* QuestionsApiController.swift */,
 				0D8EADB41CDD3F3000A4DAED /* UsersApiController.swift */,
 			);
 			name = Api;
+			sourceTree = "<group>";
+		};
+		0DDC5AB61CEBEB0100EBA597 /* Answers */ = {
+			isa = PBXGroup;
+			children = (
+				0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */,
+				0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */,
+			);
+			name = Answers;
 			sourceTree = "<group>";
 		};
 		1ADEB5381F0C4CCC492225E4 /* Pods */ = {
@@ -338,15 +351,6 @@
 				F9B12E9DE9B4172E0653E86E /* Pods-ynUITests.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		0DDC5AB61CEBEB0100EBA597 /* Answers */ = {
-			isa = PBXGroup;
-			children = (
-				0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */,
-				0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */,
-			);
-			name = Answers;
 			sourceTree = "<group>";
 		};
 		42A931E7791806229422BC9F /* Frameworks */ = {
@@ -654,6 +658,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E328E0961CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift in Sources */,
+				AEF85E1E1CEC5D42003F39E5 /* Question.swift in Sources */,
 				0D13AFD81CD5446300D7D51F /* SendQuestionViewController.swift in Sources */,
 				0D8EADAF1CDAE56F00A4DAED /* ApiError.swift in Sources */,
 				0D13AFEA1CD55BA900D7D51F /* QuestionsListViewController.swift in Sources */,
@@ -671,6 +676,7 @@
 				0D8EADAC1CDAE42A00A4DAED /* ApiUrls.swift in Sources */,
 				AEA15CBD1CEAE522009FE536 /* CustomKolodaView.swift in Sources */,
 				AEA15CB91CEAE05A009FE536 /* BackgroundKolodaAnimator.swift in Sources */,
+				AEF85E201CEC5D5F003F39E5 /* QuestionsApiController.swift in Sources */,
 				0D13B0001CD5A1C600D7D51F /* SignupViewController.swift in Sources */,
 				AEA15CC11CEAEA17009FE536 /* ExampleOverlayView.swift in Sources */,
 				AEA15CC81CEAF8A7009FE536 /* QuestionCard.swift in Sources */,
