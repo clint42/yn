@@ -201,7 +201,8 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
             try FriendsApiController.sharedInstance.deleteFriend(friendUsername, completion: { (res: Bool?, err: ApiError?) in
                 if (err == nil && res == true) {
                     self.friends[indexPath.section].removeAtIndex(indexPath.row)
-                    self.tableView.reloadData()
+                    self.fetchFriends()
+
                 }
                 else {
                     print("error: \(err)")

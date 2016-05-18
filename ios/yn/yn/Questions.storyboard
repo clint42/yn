@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="N1O-X1-z9x">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="N1O-X1-z9x">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Questions List View Controller-->
@@ -12,24 +13,69 @@
                         <viewControllerLayoutGuide type="top" id="GXQ-f0-xR9"/>
                         <viewControllerLayoutGuide type="bottom" id="o8L-YU-KwZ"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="WRv-Fm-KZ4">
+                    <view key="view" contentMode="scaleToFill" id="6S1-xY-LVh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QUESTIONS - List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lU4-xg-ebe">
-                                <rect key="frame" x="231" y="289" width="139" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AjT-Hh-SrG">
+                                <rect key="frame" x="100" y="408" width="120" height="32"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oui-Wd-PFP">
+                                        <rect key="frame" x="88" y="0.0" width="32" height="32"/>
+                                        <state key="normal" image="btn_like_normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" image="btn_like_pressed"/>
+                                        <connections>
+                                            <action selector="rightButtonTapped:" destination="oJ2-vQ-C4h" eventType="touchUpInside" id="6Cn-wd-Pbm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="boM-R1-Q9p">
+                                        <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                        <state key="normal" image="btn_skip_normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" image="btn_skip_pressed"/>
+                                        <connections>
+                                            <action selector="leftButtonTapped:" destination="oJ2-vQ-C4h" eventType="touchUpInside" id="AAW-2v-xou"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="B2S-yA-YUf"/>
+                                    <constraint firstAttribute="width" constant="120" id="Znn-rX-PUv"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gbP-wM-gvp" customClass="KolodaView" customModule="Koloda">
+                                <rect key="frame" x="18" y="64" width="284" height="320"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gbP-wM-gvp" secondAttribute="height" multiplier="71:90" id="m5z-mc-sGf"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.82767226592853294" green="0.84194493251312519" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="lU4-xg-ebe" firstAttribute="centerY" secondItem="WRv-Fm-KZ4" secondAttribute="centerY" id="4Cl-mS-ccN"/>
-                            <constraint firstItem="lU4-xg-ebe" firstAttribute="centerX" secondItem="WRv-Fm-KZ4" secondAttribute="centerX" id="IYw-En-oQk"/>
+                            <constraint firstAttribute="trailing" secondItem="gbP-wM-gvp" secondAttribute="trailing" id="Fit-PQ-EiB"/>
+                            <constraint firstItem="gbP-wM-gvp" firstAttribute="leading" secondItem="6S1-xY-LVh" secondAttribute="leading" id="Jmh-UE-PeL"/>
+                            <constraint firstItem="gbP-wM-gvp" firstAttribute="top" secondItem="GXQ-f0-xR9" secondAttribute="bottom" constant="64" id="hdp-da-7eo"/>
+                            <constraint firstAttribute="centerX" secondItem="AjT-Hh-SrG" secondAttribute="centerX" id="nrv-EE-NVu"/>
+                            <constraint firstItem="AjT-Hh-SrG" firstAttribute="top" secondItem="gbP-wM-gvp" secondAttribute="bottom" constant="75" id="q7t-aH-qMv"/>
+                            <constraint firstItem="AjT-Hh-SrG" firstAttribute="top" secondItem="gbP-wM-gvp" secondAttribute="bottom" constant="64" id="ynn-Tw-eS0"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ynn-Tw-eS0"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="TwB-K2-QY0"/>
+                    <connections>
+                        <outlet property="View" destination="AjT-Hh-SrG" id="AC7-uL-O0Z"/>
+                        <outlet property="kolodaView" destination="gbP-wM-gvp" id="o2w-bi-IPI"/>
+                        <outlet property="questionView" destination="6S1-xY-LVh" id="xi1-B7-cmx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q0m-YB-f2A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -56,4 +102,10 @@
             <point key="canvasLocation" x="356" y="141"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="btn_like_normal" width="32" height="32"/>
+        <image name="btn_like_pressed" width="32" height="32"/>
+        <image name="btn_skip_normal" width="32" height="32"/>
+        <image name="btn_skip_pressed" width="32" height="32"/>
+    </resources>
 </document>

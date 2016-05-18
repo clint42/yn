@@ -48,4 +48,36 @@ router.post('/', [auth, uploadImage], function(req, res, next) {
     }
 });
 
+router.get('/asked', auth, function(req, res, next) {
+    var nResults = req.query.nResults || 10;
+    var offset = req.query.offset || 0;
+    var orderBy = req.query.orderBy || undefined;
+    var orderRule = req.query.orderRule || "ASC";
+    var wrongValue = false;
+    switch (orderBy) {
+        case "updatedAt":
+            orderBy = "updatedAt";
+            break;
+        case "createdAt":
+            orderBy = "createdAt";
+        case "title":
+            orderBy = "title";
+        default:
+            wrongValue = true
+    }
+    if ((orderRule == "DESC" || orderRule == "ASC") && !wrongValue) {
+        req.currentUser.getQuestionsAsked(nResults, offset, orderBy, orderRule).then(function(questions) {
+            res.json({questions: questions});
+        }).catch(function(err) {
+            //TODO: Error handling
+            next(err, req, res);
+        });
+    }
+    else {
+        res.status(422);
+        res.json({error: "Invalid parameter value"});
+    }
+
+});
+
 module.exports = router;

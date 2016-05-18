@@ -232,7 +232,7 @@ module.exports = function(sequelize, DataTypes) {
                             "WHERE (Users.email IN(" + mylist + ") OR Users.phone IN (" + mylist + ")) ";
                         if (notIn != "")
                             query += "AND Users.id NOT IN(" + notIn + ") ";
-                        query += "GROUP BY Users.username";
+                        query += "GROUP BY Users.id";
                         sequelize.query(query, {
                             type: sequelize.QueryTypes.SELECT,
                             model: sequelize.models.User
@@ -242,6 +242,26 @@ module.exports = function(sequelize, DataTypes) {
                             reject(err);
                         });
                     }).catch(function (err) {
+                        reject(err);
+                    });
+                });
+            },
+            getQuestionsAsked: function(nbPerPage, offset, orderBy, orderRule) {
+                var pagination = nbPerPage && offset;
+                var query = "SELECT " + sequelize.models.Question.tableName + ".* FROM " + sequelize.models.Question.tableName +
+                            " INNER JOIN " + sequelize.models.UserAsked.tableName + " ON " + sequelize.models.Question.tableName + ".id = " +
+                            sequelize.models.UserAsked.tableName + ".QuestionId WHERE " + sequelize.models.UserAsked.tableName + ".UserId = " + this.id +
+                            " AND " + sequelize.models.UserAsked.tableName + ".status = 'OPEN'";
+                if (orderBy) {
+                    query += " ORDER BY " + orderBy + " " + orderRule
+                }
+                if (pagination) {
+                    query += " LIMIT " + offset + "," + nbPerPage;
+                }
+                return new Promise(function(resolve, reject) {
+                    sequelize.query(query, {type: sequelize.QueryTypes.SELECT, model: sequelize.models.Question}).then(function(questions) {
+                        resolve(questions);
+                    }).catch(function(err) {
                         reject(err);
                     });
                 });
