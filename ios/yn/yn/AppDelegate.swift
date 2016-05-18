@@ -14,9 +14,11 @@ import FBSDKLoginKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let remoteNotificationHandler = RemoteNotificationHandler.sharedInstance
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        //TODO: Remove, DEV ONLY !
+        //application.unregisterForRemoteNotifications()
         
         let storyboard = UIStoryboard(name: "AuthStoryboard", bundle: nil)
         let navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
@@ -25,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         let _ = FBSDKLoginButton()
+        
         // Add any custom logic here.
         return true
     }
@@ -59,6 +62,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         let handled = FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
         return handled
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        print("didRegisterForRemoveNotification. DeviceToken: \(deviceToken)")
+        do {
+            try remoteNotificationHandler.registerDevice(deviceToken.hexString)
+        } catch let error as RemoteNotificationError {
+            print("Error while registering device: \(error)")
+        } catch let error {
+            print("An unexpected error occured: \(error)")
+        }
+        
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("Failed to register for remote notification. Error: \(error)")
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        print("Notification received")
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        print("Notification received. fetchCompletionHandler")
     }
 }
 
