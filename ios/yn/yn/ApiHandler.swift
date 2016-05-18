@@ -33,6 +33,19 @@ class ApiHandler {
         }
     }
     
+    private func remoteNotificationRegistration() {
+        if !UIApplication.sharedApplication().isRegisteredForRemoteNotifications() || true {
+            let notificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
+            let pushNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
+            UIApplication.sharedApplication().registerUserNotificationSettings(pushNotificationSettings)
+            UIApplication.sharedApplication().registerForRemoteNotifications()
+        }
+    }
+    
+    func isAuthenticated() -> Bool {
+        return userToken != nil && userId != nil
+    }
+    
     func authenticate(identifier identifier: String, password: String, completion: (Bool) -> Void) {
         self.identifier = identifier
         self.password = password
@@ -46,6 +59,7 @@ class ApiHandler {
                             if let userId = response.result.value!["userId"] as? Int {
                                 self.userToken = token
                                 self.userId = userId
+                                self.remoteNotificationRegistration()
                                 completion(true)
                                 return
                             }
@@ -77,6 +91,7 @@ class ApiHandler {
                                     if let userId = values["userId"] as? Int {
                                         self.userToken = token
                                         self.userId = userId
+                                        self.remoteNotificationRegistration()
                                         completion(success: true, error: nil)
                                         return
                                     }

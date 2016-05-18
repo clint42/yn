@@ -28,6 +28,8 @@
 	<string>/friends/my</string>
 	<key>askQuestion</key>
 	<string>/questions</string>
+	<key>registerDeviceForPushNotif</key>
+	<string>/notifications/register-device</string>
 	<key>host</key>
 	<string>http://127.0.0.1:3000</string>
 </dict>
