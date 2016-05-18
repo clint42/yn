@@ -18,6 +18,7 @@ protocol ResultCellProtocol: class {
 class AddFriendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, ResultCellProtocol {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBarTopConstraint: NSLayoutConstraint!
     
     let apiHandler = ApiHandler.sharedInstance
     var searchRequest: Request?
@@ -27,11 +28,12 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        searchBar.delegate = self
-        getFriendsFromPhone()
+        searchBarTopConstraint.constant = self.navigationController!.navigationBar.frame.height
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        loadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -39,8 +41,29 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
         // Dispose of any resources that can be recreated.
     }
     
+    func loadData() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        searchBar.delegate = self
+        getFriendsFromPhone()
+    }
+    
     // MARK: - UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if users.count > 0 {
+            tableView.backgroundView = nil
+            tableView.separatorStyle = .SingleLine
+        } else {
+            let noDataLabel: UILabel = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
+            noDataLabel.text = "No friends using YN\nin your contacts"
+            noDataLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+            noDataLabel.numberOfLines = 2
+            noDataLabel.textColor = UIColor.lightGrayColor()
+            noDataLabel.textAlignment = NSTextAlignment.Center
+            noDataLabel.font = UIFont(name: "Sansation", size: 30)
+            tableView.backgroundView = noDataLabel
+            tableView.separatorStyle = .None
+        }
         return users.count
     }
     
@@ -150,6 +173,7 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
                     if (err == nil && friends != nil) {
                         self.users.removeAll()
                         self.users = friends!
+                        self.users.sortInPlace({ $0.username < $1.username })
                         self.tableView.reloadData()
                     }
                     else {

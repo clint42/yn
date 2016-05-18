@@ -33,6 +33,12 @@
 		0D13B0001CD5A1C600D7D51F /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13AFFF1CD5A1C600D7D51F /* SignupViewController.swift */; };
 		0D13B00A1CD8007000D7D51F /* ApiHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13B0091CD8007000D7D51F /* ApiHandler.swift */; };
 		0D13B00D1CD845DE00D7D51F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13B00C1CD845DE00D7D51F /* User.swift */; };
+		0D24606E1CEAEA49000BCEB4 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D24606D1CEAEA49000BCEB4 /* FBSDKLoginKit.framework */; };
+		0D2460731CEB103A000BCEB4 /* SignupWithFacebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2460721CEB1039000BCEB4 /* SignupWithFacebookViewController.swift */; };
+		0D2460761CEBCA08000BCEB4 /* RemoteNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2460751CEBCA08000BCEB4 /* RemoteNotificationHandler.swift */; };
+		0D2460781CEBCA76000BCEB4 /* RemoteNotificationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2460771CEBCA76000BCEB4 /* RemoteNotificationError.swift */; };
+		0D4E24A71CE53B0E0035B42D /* CameraError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4E24A61CE53B0E0035B42D /* CameraError.swift */; };
+		0D4E24A91CE56D650035B42D /* EditQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4E24A81CE56D650035B42D /* EditQuestionViewController.swift */; };
 		0D8EADA71CDAE34800A4DAED /* FriendsApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADA61CDAE34800A4DAED /* FriendsApiController.swift */; };
 		0D8EADAC1CDAE42A00A4DAED /* ApiUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADAB1CDAE42A00A4DAED /* ApiUrls.swift */; };
 		0D8EADAF1CDAE56F00A4DAED /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADAE1CDAE56F00A4DAED /* ApiError.swift */; };
@@ -48,6 +54,11 @@
 		AEA15CC81CEAF8A7009FE536 /* QuestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15CC71CEAF8A7009FE536 /* QuestionCard.swift */; };
 		AEA15CCA1CEAFB97009FE536 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA15CC91CEAFB97009FE536 /* CardView.xib */; };
 		D55961D1E06B07A0715A89F1 /* Pods_yn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 393003083260291A362A8302 /* Pods_yn.framework */; };
+		0DB736AF1CEAE439001C5B86 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB736AE1CEAE439001C5B86 /* FBSDKCoreKit.framework */; };
+		0DDC5AB51CEBD00900EBA597 /* NSDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB41CEBD00900EBA597 /* NSDataExtension.swift */; };
+		0DDC5AB81CEBEB1300EBA597 /* Answers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */; };
+		0DDC5ABA1CEBEBC400EBA597 /* MasterAnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */; };
+		E328E0961CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */; };
 		E3B07E231CE959690064FAD8 /* countriesCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3B07E221CE959690064FAD8 /* countriesCode.plist */; };
 /* End PBXBuildFile section */
 
@@ -101,8 +112,14 @@
 		0D13AFFB1CD5941700D7D51F /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		0D13AFFF1CD5A1C600D7D51F /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		0D13B0011CD7FF6F00D7D51F /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../Library/Developer/Xcode/DerivedData/yn-gyyyktjxsilbfugxwxrnrnqxnluo/Build/Products/Debug-iphonesimulator/Alamofire.framework"; sourceTree = "<group>"; };
-		0D13B0091CD8007000D7D51F /* ApiHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiHandler.swift; sourceTree = "<group>"; };
+		0D13B0091CD8007000D7D51F /* ApiHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiHandler.swift; path = yn/ApiHandler.swift; sourceTree = SOURCE_ROOT; };
 		0D13B00C1CD845DE00D7D51F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0D24606D1CEAEA49000BCEB4 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		0D2460721CEB1039000BCEB4 /* SignupWithFacebookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupWithFacebookViewController.swift; sourceTree = "<group>"; };
+		0D2460751CEBCA08000BCEB4 /* RemoteNotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteNotificationHandler.swift; sourceTree = "<group>"; };
+		0D2460771CEBCA76000BCEB4 /* RemoteNotificationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteNotificationError.swift; sourceTree = "<group>"; };
+		0D4E24A61CE53B0E0035B42D /* CameraError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraError.swift; sourceTree = "<group>"; };
+		0D4E24A81CE56D650035B42D /* EditQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditQuestionViewController.swift; sourceTree = "<group>"; };
 		0D8EADA61CDAE34800A4DAED /* FriendsApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsApiController.swift; sourceTree = "<group>"; };
 		0D8EADAB1CDAE42A00A4DAED /* ApiUrls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiUrls.swift; sourceTree = "<group>"; };
 		0D8EADAE1CDAE56F00A4DAED /* ApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
@@ -120,6 +137,11 @@
 		AEA15CC51CEAF2B4009FE536 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OverlayView.xib; sourceTree = "<group>"; };
 		AEA15CC71CEAF8A7009FE536 /* QuestionCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionCard.swift; sourceTree = "<group>"; };
 		AEA15CC91CEAFB97009FE536 /* CardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
+		0DB736AE1CEAE439001C5B86 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		0DDC5AB41CEBD00900EBA597 /* NSDataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtension.swift; sourceTree = "<group>"; };
+		0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Answers.storyboard; sourceTree = "<group>"; };
+		0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterAnswersViewController.swift; sourceTree = "<group>"; };
+		E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsRequestsViewController.swift; sourceTree = "<group>"; };
 		E3B07E221CE959690064FAD8 /* countriesCode.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = countriesCode.plist; sourceTree = "<group>"; };
 		EEFFA5B8721943B4C4592A13 /* Pods-ynUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ynUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ynUITests/Pods-ynUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F0B894EB6676C1D1315840D7 /* Pods-yn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-yn/Pods-yn.debug.xcconfig"; sourceTree = "<group>"; };
@@ -131,7 +153,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D55961D1E06B07A0715A89F1 /* Pods_yn.framework in Frameworks */,
+				219EE88753B35D34D88A8646 /* Pods_yn.framework in Frameworks */,
+				0DB736AF1CEAE439001C5B86 /* FBSDKCoreKit.framework in Frameworks */,
+				0D24606E1CEAEA49000BCEB4 /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +203,8 @@
 		0D13AF931CD2C91C00D7D51F /* yn */ = {
 			isa = PBXGroup;
 			children = (
+				0DDC5AB61CEBEB0100EBA597 /* Answers */,
+				0D2460741CEBC9F2000BCEB4 /* RemoteNotification */,
 				E3B07E211CE959530064FAD8 /* Resources */,
 				0D8EADAD1CDAE56100A4DAED /* Api */,
 				0D13B00B1CD845CF00D7D51F /* Models */,
@@ -199,6 +225,7 @@
 				0D13AFF61CD591F100D7D51F /* Sansation_Light.ttf */,
 				0D13AFF71CD591F100D7D51F /* Sansation_Regular.ttf */,
 				0D13AFFB1CD5941700D7D51F /* UIColorExtension.swift */,
+				0DDC5AB41CEBD00900EBA597 /* NSDataExtension.swift */,
 			);
 			path = yn;
 			sourceTree = "<group>";
@@ -227,6 +254,8 @@
 				0D13AFD41CD2E1C300D7D51F /* Ask.storyboard */,
 				0D13AFC41CD2D27800D7D51F /* CreateQuestionViewController.swift */,
 				0D13AFD71CD5446300D7D51F /* SendQuestionViewController.swift */,
+				0D4E24A61CE53B0E0035B42D /* CameraError.swift */,
+				0D4E24A81CE56D650035B42D /* EditQuestionViewController.swift */,
 			);
 			name = Ask;
 			sourceTree = "<group>";
@@ -237,6 +266,7 @@
 				0D13AFE21CD557E900D7D51F /* Friends.storyboard */,
 				0D13AFE41CD5587700D7D51F /* FriendsListViewController.swift */,
 				0D8EADB21CDBF1EF00A4DAED /* AddFriendViewController.swift */,
+				E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -262,6 +292,7 @@
 				0D13AFEB1CD5618D00D7D51F /* AuthStoryboard.storyboard */,
 				0D13AFEF1CD578FB00D7D51F /* SigninViewController.swift */,
 				0D13AFFF1CD5A1C600D7D51F /* SignupViewController.swift */,
+				0D2460721CEB1039000BCEB4 /* SignupWithFacebookViewController.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -272,6 +303,15 @@
 				0D13B00C1CD845DE00D7D51F /* User.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		0D2460741CEBC9F2000BCEB4 /* RemoteNotification */ = {
+			isa = PBXGroup;
+			children = (
+				0D2460751CEBCA08000BCEB4 /* RemoteNotificationHandler.swift */,
+				0D2460771CEBCA76000BCEB4 /* RemoteNotificationError.swift */,
+			);
+			name = RemoteNotification;
 			sourceTree = "<group>";
 		};
 		0D8EADAD1CDAE56100A4DAED /* Api */ = {
@@ -300,9 +340,20 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		0DDC5AB61CEBEB0100EBA597 /* Answers */ = {
+			isa = PBXGroup;
+			children = (
+				0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */,
+				0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */,
+			);
+			name = Answers;
+			sourceTree = "<group>";
+		};
 		42A931E7791806229422BC9F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0D24606D1CEAEA49000BCEB4 /* FBSDKLoginKit.framework */,
+				0DB736AE1CEAE439001C5B86 /* FBSDKCoreKit.framework */,
 				0D13B0011CD7FF6F00D7D51F /* Alamofire.framework */,
 				393003083260291A362A8302 /* Pods_yn.framework */,
 				3ACD3DA9CC393A2CC07676D5 /* libPods-ynTests.a */,
@@ -396,6 +447,14 @@
 					0D13AF901CD2C91C00D7D51F = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = V995F38PPR;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					0D13AFA41CD2C91D00D7D51F = {
 						CreatedOnToolsVersion = 7.3;
@@ -435,6 +494,7 @@
 				0D13AFE31CD557E900D7D51F /* Friends.storyboard in Resources */,
 				0D13AF9F1CD2C91D00D7D51F /* LaunchScreen.storyboard in Resources */,
 				0D13AF9C1CD2C91D00D7D51F /* Assets.xcassets in Resources */,
+				0DDC5AB81CEBEB1300EBA597 /* Answers.storyboard in Resources */,
 				0D13AFD51CD2E1C300D7D51F /* Ask.storyboard in Resources */,
 				E3B07E231CE959690064FAD8 /* countriesCode.plist in Resources */,
 				0D13AFFA1CD5922400D7D51F /* Sansation_Light.ttf in Resources */,
@@ -593,13 +653,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E328E0961CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift in Sources */,
 				0D13AFD81CD5446300D7D51F /* SendQuestionViewController.swift in Sources */,
 				0D8EADAF1CDAE56F00A4DAED /* ApiError.swift in Sources */,
 				0D13AFEA1CD55BA900D7D51F /* QuestionsListViewController.swift in Sources */,
 				0D8EADA71CDAE34800A4DAED /* FriendsApiController.swift in Sources */,
+				0D2460731CEB103A000BCEB4 /* SignupWithFacebookViewController.swift in Sources */,
+				0D2460781CEBCA76000BCEB4 /* RemoteNotificationError.swift in Sources */,
+				0DDC5AB51CEBD00900EBA597 /* NSDataExtension.swift in Sources */,
 				0D13AFE51CD5587700D7D51F /* FriendsListViewController.swift in Sources */,
 				0D13AFC61CD2D27800D7D51F /* CreateQuestionViewController.swift in Sources */,
 				0D13AFDA1CD5453700D7D51F /* CustomSegue.swift in Sources */,
+				0D2460761CEBCA08000BCEB4 /* RemoteNotificationHandler.swift in Sources */,
+				0DDC5ABA1CEBEBC400EBA597 /* MasterAnswersViewController.swift in Sources */,
 				0D13AFDE1CD549D600D7D51F /* TransitionAnimator.swift in Sources */,
 				0D13B00D1CD845DE00D7D51F /* User.swift in Sources */,
 				0D8EADAC1CDAE42A00A4DAED /* ApiUrls.swift in Sources */,
@@ -608,6 +674,7 @@
 				0D13B0001CD5A1C600D7D51F /* SignupViewController.swift in Sources */,
 				AEA15CC11CEAEA17009FE536 /* ExampleOverlayView.swift in Sources */,
 				AEA15CC81CEAF8A7009FE536 /* QuestionCard.swift in Sources */,
+				0D4E24A71CE53B0E0035B42D /* CameraError.swift in Sources */,
 				0D8EADB51CDD3F3000A4DAED /* UsersApiController.swift in Sources */,
 				0D13AFF01CD578FB00D7D51F /* SigninViewController.swift in Sources */,
 				0D8EADB31CDBF1EF00A4DAED /* AddFriendViewController.swift in Sources */,
@@ -616,6 +683,7 @@
 				0D13AF971CD2C91D00D7D51F /* MasterViewController.swift in Sources */,
 				0D13B00A1CD8007000D7D51F /* ApiHandler.swift in Sources */,
 				0D13AF951CD2C91D00D7D51F /* AppDelegate.swift in Sources */,
+				0D4E24A91CE56D650035B42D /* EditQuestionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -770,10 +838,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = yn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aurelien.prieur.yn;
+				PRODUCT_BUNDLE_IDENTIFIER = me.zerobeta.yn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -786,10 +858,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = yn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aurelien.prieur.yn;
+				PRODUCT_BUNDLE_IDENTIFIER = me.zerobeta.yn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

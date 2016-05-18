@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qAQ-vA-BBu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qAQ-vA-BBu">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Sansation_Regular.ttf">
+            <string>Sansation</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Master View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MasterViewController" customModule="yn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="MasterViewController" customModule="yn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -17,27 +23,61 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lk8-uP-glM">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tbb-Ks-ymh">
+                                <rect key="frame" x="0.0" y="20" width="600" height="45"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOH-4P-SqT">
+                                        <rect key="frame" x="252.5" y="7" width="95" height="30"/>
+                                        <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="15"/>
+                                        <state key="normal" title="My Questions">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="answersButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OYb-1E-xne"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.17647059261798859" green="0.40784314274787903" blue="0.66666668653488159" alpha="0.20304581925675674" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="5rw-QH-fFj"/>
+                                    <constraint firstItem="oOH-4P-SqT" firstAttribute="top" secondItem="Tbb-Ks-ymh" secondAttribute="top" constant="7" id="FqN-KB-R4s"/>
+                                    <constraint firstAttribute="bottom" secondItem="oOH-4P-SqT" secondAttribute="bottom" constant="8" id="P48-3j-yyJ"/>
+                                    <constraint firstItem="oOH-4P-SqT" firstAttribute="centerX" secondItem="Tbb-Ks-ymh" secondAttribute="centerX" id="cst-Zc-9xh"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="lk8-uP-glM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="CUx-jD-tDV"/>
+                            <constraint firstItem="Tbb-Ks-ymh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="FeD-dN-1D3"/>
                             <constraint firstAttribute="trailing" secondItem="lk8-uP-glM" secondAttribute="trailing" id="THy-XB-yN0"/>
+                            <constraint firstItem="lk8-uP-glM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="UY5-co-RfA"/>
                             <constraint firstItem="lk8-uP-glM" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Wde-ix-HAS"/>
+                            <constraint firstItem="Tbb-Ks-ymh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="X27-gD-eBf"/>
+                            <constraint firstItem="Tbb-Ks-ymh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="afg-Mm-cIi"/>
                             <constraint firstItem="lk8-uP-glM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="f7L-xl-4Yl"/>
+                            <constraint firstAttribute="trailing" secondItem="Tbb-Ks-ymh" secondAttribute="trailing" id="iLt-FU-PJW"/>
                             <constraint firstItem="lk8-uP-glM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="lEn-QO-O8g"/>
                             <constraint firstItem="lk8-uP-glM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="zQ0-2P-rNd"/>
+                            <constraint firstItem="lk8-uP-glM" firstAttribute="top" secondItem="Tbb-Ks-ymh" secondAttribute="bottom" id="zcy-ED-LWW"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="UY5-co-RfA"/>
+                                <exclude reference="lEn-QO-O8g"/>
                                 <exclude reference="zQ0-2P-rNd"/>
+                                <exclude reference="zcy-ED-LWW"/>
+                                <exclude reference="X27-gD-eBf"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="hfw-lY-DTk"/>
                     <connections>
+                        <outlet property="answersButton" destination="Tbb-Ks-ymh" id="QKX-Bc-K8c"/>
                         <outlet property="scrollView" destination="lk8-uP-glM" id="YMx-ht-Hf7"/>
                     </connections>
                 </viewController>
@@ -55,6 +95,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="oc4-vw-rRO">
+                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="6iO-83-lY1"/>
                     </connections>

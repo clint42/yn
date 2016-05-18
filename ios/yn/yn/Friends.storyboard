@@ -8,6 +8,7 @@
         <mutableArray key="Sansation_Regular.ttf">
             <string>Sansation</string>
             <string>Sansation</string>
+            <string>Sansation</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -24,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1XX-5S-LOO">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendCell" id="BSe-uN-CQA" customClass="FriendTableViewCell" customModule="yn" customModuleProvider="target">
@@ -34,11 +35,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXM-9Q-5F2">
-                                                    <rect key="frame" x="8" y="13.5" width="584" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXM-9Q-5F2">
+                                                    <rect key="frame" x="8" y="13" width="584" height="16"/>
                                                     <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="8" y="11" width="384" height="20"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -75,7 +79,7 @@
         <!--Friends Request-->
         <scene sceneID="16Q-2I-IgL">
             <objects>
-                <viewController id="ebJ-Pf-3ag" sceneMemberID="viewController">
+                <viewController id="ebJ-Pf-3ag" customClass="FriendsRequestsViewController" customModule="yn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ArI-Zu-gh4"/>
                         <viewControllerLayoutGuide type="bottom" id="egS-Ru-9VS"/>
@@ -83,13 +87,64 @@
                     <view key="view" contentMode="scaleToFill" id="nOq-qN-5mk">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="H2e-tm-HJJ">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendsRequestsCell" id="Eq9-33-m6m" customClass="FriendsRequestsTableViewCell" customModule="yn" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eq9-33-m6m" id="osU-9x-2wl">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9aQ-vH-emR">
+                                                    <rect key="frame" x="8" y="13.5" width="584" height="16"/>
+                                                    <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="8" y="11.5" width="384" height="20"/>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9aQ-vH-emR" firstAttribute="trailing" secondItem="osU-9x-2wl" secondAttribute="trailingMargin" id="Dyr-pq-q8D"/>
+                                                <constraint firstItem="9aQ-vH-emR" firstAttribute="leading" secondItem="osU-9x-2wl" secondAttribute="leadingMargin" id="Yes-40-Lt1"/>
+                                                <constraint firstItem="9aQ-vH-emR" firstAttribute="centerY" secondItem="osU-9x-2wl" secondAttribute="centerY" id="ysk-PR-L34"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="usernameLabel" destination="9aQ-vH-emR" id="JX1-Sv-fGo"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="64" width="400" height="687"/>
+                                </variation>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="H2e-tm-HJJ"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="H2e-tm-HJJ"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Friends Request" image="addFriendButton" id="LQZ-0g-JPY"/>
+                    <connections>
+                        <outlet property="tableView" destination="H2e-tm-HJJ" id="tHk-if-gHA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hu0-p1-d4H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="217" y="1862"/>
+            <point key="canvasLocation" x="217.5" y="1885.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LLV-Js-0YU">
@@ -112,7 +167,7 @@
         <!--Friends-->
         <scene sceneID="Lg9-v7-0l4">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="j3c-6w-05J" sceneMemberID="viewController">
+                <tabBarController id="j3c-6w-05J" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Friends" id="o9I-dy-D1v">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="vtP-nm-T21">
@@ -161,13 +216,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5C-fe-O00">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5C-fe-O00">
                                                     <rect key="frame" x="8" y="11" width="485" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="8" y="11" width="286" height="21"/>
+                                                    </variation>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kg-9b-hzy">
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kg-9b-hzy">
                                                     <rect key="frame" x="501" y="6" width="91" height="31"/>
                                                     <color key="backgroundColor" red="0.17647059261798859" green="0.40784314274787903" blue="0.66666668653488159" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="15"/>
@@ -175,6 +233,9 @@
                                                     <state key="normal" title="Add Friend">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="302" y="4.5" width="90" height="34"/>
+                                                    </variation>
                                                     <connections>
                                                         <action selector="addFriendButtonTapped:" destination="t31-BZ-mtg" eventType="touchUpInside" id="08d-xu-H07"/>
                                                     </connections>
@@ -205,6 +266,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="dmQ-IC-nCc" firstAttribute="top" secondItem="WWc-vh-CAD" secondAttribute="bottom" id="IIB-AW-mX0"/>
+                            <constraint firstItem="4CU-kn-cUh" firstAttribute="top" secondItem="3I3-tU-ehO" secondAttribute="bottom" id="P7e-nj-BeO"/>
                             <constraint firstItem="WWc-vh-CAD" firstAttribute="leading" secondItem="Qa1-Lr-QNf" secondAttribute="leading" id="PbD-Mz-JkS"/>
                             <constraint firstAttribute="trailing" secondItem="WWc-vh-CAD" secondAttribute="trailing" id="aOd-TV-UN9"/>
                             <constraint firstItem="WWc-vh-CAD" firstAttribute="top" secondItem="4CU-kn-cUh" secondAttribute="bottom" id="fIg-Ln-z8k"/>
@@ -212,9 +274,15 @@
                             <constraint firstItem="4CU-kn-cUh" firstAttribute="top" secondItem="3I3-tU-ehO" secondAttribute="bottom" id="oFC-LY-tyh"/>
                             <constraint firstItem="4CU-kn-cUh" firstAttribute="leading" secondItem="Qa1-Lr-QNf" secondAttribute="leading" id="woZ-FN-y9E"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="oFC-LY-tyh"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="searchBar" destination="4CU-kn-cUh" id="nOU-uE-XSe"/>
+                        <outlet property="searchBarTopConstraint" destination="P7e-nj-BeO" id="Wre-sm-uoh"/>
                         <outlet property="tableView" destination="WWc-vh-CAD" id="EvZ-y0-au8"/>
                     </connections>
                 </viewController>

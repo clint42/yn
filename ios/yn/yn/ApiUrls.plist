@@ -2,21 +2,35 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>countPendingRequests</key>
+	<string>/friends/countPendingRequests</string>
+	<key>answerRequest</key>
+	<string>/friends/answer</string>
+	<key>requestsReceived</key>
+	<string>/friends/receivedRequests</string>
 	<key>findFriends</key>
 	<string>/users/find</string>
 	<key>deleteFriend</key>
 	<string>/friends/delete</string>
 	<key>signin</key>
 	<string>/users/signin</string>
+	<key>fbSignin</key>
+	<string>/users/fb-signin</string>
 	<key>signup</key>
 	<string>/users/signup</string>
+	<key>fbSignup</key>
+	<string>/users/fb-signup</string>
 	<key>searchUsers</key>
 	<string>/users/search</string>
 	<key>addFriend</key>
 	<string>/friends/add</string>
 	<key>myFriends</key>
 	<string>/friends/my</string>
+	<key>askQuestion</key>
+	<string>/questions</string>
+	<key>registerDeviceForPushNotif</key>
+	<string>/notifications/register-device</string>
 	<key>host</key>
-	<string>http://localhost:3000</string>
+	<string>http://127.0.0.1:3000</string>
 </dict>
 </plist>

@@ -10,6 +10,8 @@ var models = require('./models');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var friends = require('./routes/friends');
+var questions = require('./routes/questions');
+var notifications = require('./routes/notifications');
 
 var app = express();
 
@@ -28,6 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/friends', friends);
+app.use('/questions', questions);
+app.use('/notifications', notifications);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
