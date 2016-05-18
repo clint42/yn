@@ -31,6 +31,6 @@
 	<key>registerDeviceForPushNotif</key>
 	<string>/notifications/register-device</string>
 	<key>host</key>
-	<string>http://192.168.0.11:3000</string>
+	<string>http://127.0.0.1:3000</string>
 </dict>
 </plist>
