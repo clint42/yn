@@ -18,6 +18,7 @@ protocol ResultCellProtocol: class {
 class AddFriendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, ResultCellProtocol {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBarTopConstraint: NSLayoutConstraint!
     
     let apiHandler = ApiHandler.sharedInstance
     var searchRequest: Request?
@@ -27,6 +28,7 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBarTopConstraint.constant = self.navigationController!.navigationBar.frame.height
         // Do any additional setup after loading the view.
     }
     

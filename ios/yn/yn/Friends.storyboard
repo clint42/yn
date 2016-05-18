@@ -167,7 +167,7 @@
         <!--Friends-->
         <scene sceneID="Lg9-v7-0l4">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="j3c-6w-05J" sceneMemberID="viewController">
+                <tabBarController id="j3c-6w-05J" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Friends" id="o9I-dy-D1v">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="vtP-nm-T21">
@@ -266,6 +266,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="dmQ-IC-nCc" firstAttribute="top" secondItem="WWc-vh-CAD" secondAttribute="bottom" id="IIB-AW-mX0"/>
+                            <constraint firstItem="4CU-kn-cUh" firstAttribute="top" secondItem="3I3-tU-ehO" secondAttribute="bottom" id="P7e-nj-BeO"/>
                             <constraint firstItem="WWc-vh-CAD" firstAttribute="leading" secondItem="Qa1-Lr-QNf" secondAttribute="leading" id="PbD-Mz-JkS"/>
                             <constraint firstAttribute="trailing" secondItem="WWc-vh-CAD" secondAttribute="trailing" id="aOd-TV-UN9"/>
                             <constraint firstItem="WWc-vh-CAD" firstAttribute="top" secondItem="4CU-kn-cUh" secondAttribute="bottom" id="fIg-Ln-z8k"/>
@@ -273,9 +274,15 @@
                             <constraint firstItem="4CU-kn-cUh" firstAttribute="top" secondItem="3I3-tU-ehO" secondAttribute="bottom" id="oFC-LY-tyh"/>
                             <constraint firstItem="4CU-kn-cUh" firstAttribute="leading" secondItem="Qa1-Lr-QNf" secondAttribute="leading" id="woZ-FN-y9E"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="oFC-LY-tyh"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="searchBar" destination="4CU-kn-cUh" id="nOU-uE-XSe"/>
+                        <outlet property="searchBarTopConstraint" destination="P7e-nj-BeO" id="Wre-sm-uoh"/>
                         <outlet property="tableView" destination="WWc-vh-CAD" id="EvZ-y0-au8"/>
                     </connections>
                 </viewController>
