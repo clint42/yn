@@ -35,6 +35,7 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 models.User.belongsToMany(models.User, {as: 'Friends', through: models.Friend, onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+                models.User.hasMany(models.Device);
             },
             getUser: function(identifier) {
                 var self = this;
@@ -207,13 +208,16 @@ module.exports = function(sequelize, DataTypes) {
                 });
             },
             findUsers: function(numbersOrEmails) {
-                var queryId = "SELECT Users.id " +
-                    "FROM Users " +
-                    "INNER JOIN Friends ON (Users.id = Friends.UserId OR Users.id = Friends.FriendId) " +
-                    "WHERE ((Friends.UserId != " + this.id + " AND Friends.FriendId = " + this.id + ") " +
-                    "OR (Friends.FriendId != " + this.id + " AND Friends.UserId = " + this.id + ")) " +
-                    "AND Users.id != " + this.id + "";
+                var self = this;
                 return new Promise(function(resolve, reject) {
+                    if (numbersOrEmails.empty)
+                        return resolve({});
+                    var queryId = "SELECT Users.id " +
+                        "FROM Users " +
+                        "INNER JOIN Friends ON (Users.id = Friends.UserId OR Users.id = Friends.FriendId) " +
+                        "WHERE ((Friends.UserId != " + self.id + " AND Friends.FriendId = " + self.id + ") " +
+                        "OR (Friends.FriendId != " + self.id + " AND Friends.UserId = " + self.id + ")) " +
+                        "AND Users.id != " + self.id + "";
                     sequelize.query(queryId, {type: sequelize.QueryTypes.SELECT, model: sequelize.models.User}).then(function(idFriends) {
                         var notIn = "";
                         for (var count = 0; count < idFriends.length; count++) {
@@ -225,9 +229,10 @@ module.exports = function(sequelize, DataTypes) {
                         var query = "SELECT Users.* " +
                             "FROM Users " +
                             "LEFT JOIN Friends ON (Friends.UserId = Users.id OR Friends.FriendId = Users.id) " +
-                            "WHERE (Users.email IN(" + mylist + ") OR `Users`.`phone` IN (" + mylist + ")) " +
-                            "AND Users.id NOT IN(" + notIn + ") " +
-                            "GROUP BY Users.username";
+                            "WHERE (Users.email IN(" + mylist + ") OR Users.phone IN (" + mylist + ")) ";
+                        if (notIn != "")
+                            query += "AND Users.id NOT IN(" + notIn + ") ";
+                        query += "GROUP BY Users.id";
                         sequelize.query(query, {
                             type: sequelize.QueryTypes.SELECT,
                             model: sequelize.models.User

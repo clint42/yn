@@ -30,6 +30,8 @@
 	<string>/questions</string>
 	<key>getQuestionsAsked</key>
 	<string>/questions/asked</string>
+	<key>registerDeviceForPushNotif</key>
+	<string>/notifications/register-device</string>
 	<key>host</key>
 	<string>http://127.0.0.1:3000</string>
 </dict>

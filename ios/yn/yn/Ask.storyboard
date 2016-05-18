@@ -254,6 +254,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="mfy-Jx-HT9">
+                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <outlet property="delegate" destination="R0K-ud-EZb" id="flP-ya-pgN"/>
                         <segue destination="cfS-bT-JJO" kind="relationship" relationship="rootViewController" id="fmJ-n4-WzA"/>

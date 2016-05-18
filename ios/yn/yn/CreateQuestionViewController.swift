@@ -30,6 +30,7 @@ class CreateQuestionViewController: UIViewController {
         previewBackCamera()
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -125,8 +126,8 @@ class CreateQuestionViewController: UIViewController {
             cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
             cameraPreviewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
             cameraPreviewLayer!.frame = view.layer.frame
-            cameraPreviewLayer!.frame.origin.y = UIApplication.sharedApplication().statusBarFrame.height
-            cameraPreviewLayer!.frame.size.height = view.layer.frame.height - UIApplication.sharedApplication().statusBarFrame.height
+            cameraPreviewLayer!.frame.origin.y = 0
+            cameraPreviewLayer!.frame.size.height = view.layer.frame.height
             view.layer.insertSublayer(cameraPreviewLayer!, below: controlsView.layer)
             captureSession!.addOutput(captureOutput)
             captureSession!.startRunning()

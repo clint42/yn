@@ -855,11 +855,11 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="4eK-lt-ttf"/>
                                                 <exclude reference="0au-qY-bq7"/>
+                                                <exclude reference="4eK-lt-ttf"/>
                                                 <exclude reference="97u-8j-jhq"/>
-                                                <exclude reference="hp3-mc-5Fn"/>
                                                 <exclude reference="MWR-nF-yU9"/>
+                                                <exclude reference="hp3-mc-5Fn"/>
                                             </mask>
                                         </variation>
                                     </view>

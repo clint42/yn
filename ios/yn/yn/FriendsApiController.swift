@@ -132,7 +132,6 @@ class FriendsApiController {
             ]
             return try apiHandler.request(.POST, URLString: ApiUrls.getUrl("findFriends"), parameters: params, completion: { (result, err) in
                 var friends = [User]()
-                print(result!["friends"])
                 if err == nil && result!["friends"] != nil && result!["friends"] is Array<Dictionary<String, AnyObject>> {
                     for user in result!["friends"] as! Array<Dictionary<String, AnyObject>> {
                         do {
