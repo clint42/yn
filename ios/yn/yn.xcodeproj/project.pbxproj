@@ -47,6 +47,8 @@
 		0D8EADB51CDD3F3000A4DAED /* UsersApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADB41CDD3F3000A4DAED /* UsersApiController.swift */; };
 		0DB736AF1CEAE439001C5B86 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB736AE1CEAE439001C5B86 /* FBSDKCoreKit.framework */; };
 		0DDC5AB51CEBD00900EBA597 /* NSDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB41CEBD00900EBA597 /* NSDataExtension.swift */; };
+		0DDC5AB81CEBEB1300EBA597 /* Answers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */; };
+		0DDC5ABA1CEBEBC400EBA597 /* MasterAnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */; };
 		219EE88753B35D34D88A8646 /* Pods_yn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6D8597E64AAAE0D10DCC61E /* Pods_yn.framework */; };
 		E328E0961CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */; };
 		E3B07E231CE959690064FAD8 /* countriesCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3B07E221CE959690064FAD8 /* countriesCode.plist */; };
@@ -117,6 +119,8 @@
 		0D8EADB41CDD3F3000A4DAED /* UsersApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersApiController.swift; sourceTree = "<group>"; };
 		0DB736AE1CEAE439001C5B86 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		0DDC5AB41CEBD00900EBA597 /* NSDataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtension.swift; sourceTree = "<group>"; };
+		0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Answers.storyboard; sourceTree = "<group>"; };
+		0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterAnswersViewController.swift; sourceTree = "<group>"; };
 		6555A07611012DCEE3DF650E /* Pods-yn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yn.release.xcconfig"; path = "Pods/Target Support Files/Pods-yn/Pods-yn.release.xcconfig"; sourceTree = "<group>"; };
 		9C6B85502A8AB8B0D77D403D /* Pods-yn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-yn/Pods-yn.debug.xcconfig"; sourceTree = "<group>"; };
 		B6D8597E64AAAE0D10DCC61E /* Pods_yn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,6 +181,7 @@
 		0D13AF931CD2C91C00D7D51F /* yn */ = {
 			isa = PBXGroup;
 			children = (
+				0DDC5AB61CEBEB0100EBA597 /* Answers */,
 				0D2460741CEBC9F2000BCEB4 /* RemoteNotification */,
 				E3B07E211CE959530064FAD8 /* Resources */,
 				0D8EADAD1CDAE56100A4DAED /* Api */,
@@ -292,6 +297,15 @@
 				0D8EADB41CDD3F3000A4DAED /* UsersApiController.swift */,
 			);
 			name = Api;
+			sourceTree = "<group>";
+		};
+		0DDC5AB61CEBEB0100EBA597 /* Answers */ = {
+			isa = PBXGroup;
+			children = (
+				0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */,
+				0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */,
+			);
+			name = Answers;
 			sourceTree = "<group>";
 		};
 		42A931E7791806229422BC9F /* Frameworks */ = {
@@ -441,6 +455,7 @@
 				0D13AFE31CD557E900D7D51F /* Friends.storyboard in Resources */,
 				0D13AF9F1CD2C91D00D7D51F /* LaunchScreen.storyboard in Resources */,
 				0D13AF9C1CD2C91D00D7D51F /* Assets.xcassets in Resources */,
+				0DDC5AB81CEBEB1300EBA597 /* Answers.storyboard in Resources */,
 				0D13AFD51CD2E1C300D7D51F /* Ask.storyboard in Resources */,
 				E3B07E231CE959690064FAD8 /* countriesCode.plist in Resources */,
 				0D13AFFA1CD5922400D7D51F /* Sansation_Light.ttf in Resources */,
@@ -534,6 +549,7 @@
 				0D13AFC61CD2D27800D7D51F /* CreateQuestionViewController.swift in Sources */,
 				0D13AFDA1CD5453700D7D51F /* CustomSegue.swift in Sources */,
 				0D2460761CEBCA08000BCEB4 /* RemoteNotificationHandler.swift in Sources */,
+				0DDC5ABA1CEBEBC400EBA597 /* MasterAnswersViewController.swift in Sources */,
 				0D13AFDE1CD549D600D7D51F /* TransitionAnimator.swift in Sources */,
 				0D13B00D1CD845DE00D7D51F /* User.swift in Sources */,
 				0D8EADAC1CDAE42A00A4DAED /* ApiUrls.swift in Sources */,

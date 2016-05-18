@@ -189,7 +189,11 @@ class SigninViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = mainStoryboard.instantiateInitialViewController()
         dispatch_async(dispatch_get_main_queue(), {
-            self.presentViewController(vc!, animated: true, completion: nil)
+            self.modalPresentationStyle = UIModalPresentationStyle.None
+            self.presentViewController(vc!, animated: true, completion: {
+                self.removeFromParentViewController()
+            })
+            //self.presentViewController(vc!, animated: true, completion: nil)
         })
     }
     
