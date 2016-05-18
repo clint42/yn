@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="koo-6s-17o">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="koo-6s-17o">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Sansation_Regular.ttf">
+            <string>Sansation</string>
+            <string>Sansation</string>
+            <string>Sansation</string>
             <string>Sansation</string>
             <string>Sansation</string>
             <string>Sansation</string>
@@ -15,7 +20,7 @@
         <!--Friends-->
         <scene sceneID="iQ4-9b-a6X">
             <objects>
-                <viewController id="kXL-kY-qk7" customClass="FriendsListViewController" customModule="yn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="friendsListViewController" id="kXL-kY-qk7" customClass="FriendsListViewController" customModule="yn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Jct-Jo-xO6"/>
                         <viewControllerLayoutGuide type="bottom" id="8Zd-vx-I3i"/>
@@ -35,7 +40,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXM-9Q-5F2">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXM-9Q-5F2">
                                                     <rect key="frame" x="8" y="13" width="584" height="16"/>
                                                     <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -55,21 +60,100 @@
                                             <outlet property="usernameLabel" destination="TXM-9Q-5F2" id="rXl-Pr-vCa"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pickerFriendCell" id="RLm-SX-Raj" customClass="FriendPickerTableViewCell" customModule="yn" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="136" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RLm-SX-Raj" id="Bzx-Eg-tYd">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cm6-AK-Fky">
+                                                    <rect key="frame" x="46" y="13.5" width="546" height="16"/>
+                                                    <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KRf-W6-zEd">
+                                                    <rect key="frame" x="8" y="7" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="KRf-W6-zEd" secondAttribute="height" multiplier="1:1" id="0Pa-wh-G26"/>
+                                                        <constraint firstAttribute="height" constant="30" id="5Bz-IF-Yeg"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="checkboxUncheckBtn"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="KRf-W6-zEd" firstAttribute="leading" secondItem="Bzx-Eg-tYd" secondAttribute="leadingMargin" id="1Jl-Hq-0vM"/>
+                                                <constraint firstItem="KRf-W6-zEd" firstAttribute="centerY" secondItem="Bzx-Eg-tYd" secondAttribute="centerY" id="3dC-Wi-Go0"/>
+                                                <constraint firstItem="cm6-AK-Fky" firstAttribute="trailing" secondItem="Bzx-Eg-tYd" secondAttribute="trailingMargin" id="NNq-d6-WnQ"/>
+                                                <constraint firstItem="cm6-AK-Fky" firstAttribute="centerY" secondItem="Bzx-Eg-tYd" secondAttribute="centerY" id="il1-nh-6k3"/>
+                                                <constraint firstItem="cm6-AK-Fky" firstAttribute="leading" secondItem="KRf-W6-zEd" secondAttribute="trailing" constant="8" id="vgz-qw-fGj"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="checkboxButton" destination="KRf-W6-zEd" id="3xZ-vu-76A"/>
+                                            <outlet property="usernameLabel" destination="cm6-AK-Fky" id="D7j-JP-G9B"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bPI-Ye-CrT">
+                                <rect key="frame" x="0.0" y="506" width="600" height="45"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EbV-BJ-Zei">
+                                        <rect key="frame" x="300" y="0.0" width="300" height="45"/>
+                                        <color key="backgroundColor" red="0.53333336114883423" green="0.28627452254295349" blue="0.61176472902297974" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="16"/>
+                                        <state key="normal" title="Send">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="validatePickerButtonTapped:" destination="kXL-kY-qk7" eventType="touchUpInside" id="huX-Ik-J0o"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fpA-8h-fDl">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="45"/>
+                                        <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="16"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelPickerButtonTapped:" destination="kXL-kY-qk7" eventType="touchUpInside" id="8wg-KD-a1z"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="EbV-BJ-Zei" firstAttribute="width" secondItem="bPI-Ye-CrT" secondAttribute="width" multiplier="0.5" id="9nT-Cp-Ho8"/>
+                                    <constraint firstAttribute="trailing" secondItem="EbV-BJ-Zei" secondAttribute="trailing" id="I9Q-ld-AiK"/>
+                                    <constraint firstAttribute="bottom" secondItem="fpA-8h-fDl" secondAttribute="bottom" id="WMq-uQ-o0Q"/>
+                                    <constraint firstItem="fpA-8h-fDl" firstAttribute="width" secondItem="EbV-BJ-Zei" secondAttribute="width" id="WXq-TN-jwS"/>
+                                    <constraint firstItem="fpA-8h-fDl" firstAttribute="top" secondItem="bPI-Ye-CrT" secondAttribute="top" id="Xin-m7-NuG"/>
+                                    <constraint firstItem="fpA-8h-fDl" firstAttribute="leading" secondItem="bPI-Ye-CrT" secondAttribute="leading" id="ZYn-Ce-BdV"/>
+                                    <constraint firstAttribute="height" constant="45" id="a11-Yn-0w1"/>
+                                    <constraint firstAttribute="bottom" secondItem="EbV-BJ-Zei" secondAttribute="bottom" id="bal-Im-Zpu"/>
+                                    <constraint firstItem="EbV-BJ-Zei" firstAttribute="top" secondItem="bPI-Ye-CrT" secondAttribute="top" id="jG9-xS-FTe"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="8Zd-vx-I3i" firstAttribute="top" secondItem="1XX-5S-LOO" secondAttribute="bottom" id="2hF-2U-aTW"/>
+                            <constraint firstItem="8Zd-vx-I3i" firstAttribute="top" secondItem="bPI-Ye-CrT" secondAttribute="bottom" id="7sv-l2-EpT"/>
+                            <constraint firstAttribute="trailing" secondItem="bPI-Ye-CrT" secondAttribute="trailing" id="HTG-xV-2kv"/>
                             <constraint firstItem="1XX-5S-LOO" firstAttribute="leading" secondItem="vMw-R2-jBE" secondAttribute="leading" id="M4T-xU-SqF"/>
                             <constraint firstItem="1XX-5S-LOO" firstAttribute="top" secondItem="Jct-Jo-xO6" secondAttribute="bottom" id="OAQ-QL-ypc"/>
                             <constraint firstAttribute="trailing" secondItem="1XX-5S-LOO" secondAttribute="trailing" id="dik-X6-DNW"/>
+                            <constraint firstItem="bPI-Ye-CrT" firstAttribute="leading" secondItem="vMw-R2-jBE" secondAttribute="leading" id="hbK-Mq-BR9"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Friends" image="friendsButton" id="WqD-VF-ocW"/>
                     <navigationItem key="navigationItem" id="8S7-HN-XcL"/>
                     <connections>
+                        <outlet property="cancelPickerButton" destination="fpA-8h-fDl" id="nR3-Jb-9Gy"/>
+                        <outlet property="pickerControlsBtnView" destination="bPI-Ye-CrT" id="GfW-UF-MP3"/>
                         <outlet property="tableView" destination="1XX-5S-LOO" id="3cV-Nk-WbB"/>
                         <outlet property="topConstraint" destination="OAQ-QL-ypc" id="vRi-fi-cOC"/>
+                        <outlet property="validatePickerButton" destination="EbV-BJ-Zei" id="be4-Qz-5L5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8nG-Jj-SV6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -216,7 +300,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5C-fe-O00">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5C-fe-O00">
                                                     <rect key="frame" x="8" y="11" width="485" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -225,7 +309,7 @@
                                                         <rect key="frame" x="8" y="11" width="286" height="21"/>
                                                     </variation>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kg-9b-hzy">
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kg-9b-hzy">
                                                     <rect key="frame" x="501" y="6" width="91" height="31"/>
                                                     <color key="backgroundColor" red="0.17647059261798859" green="0.40784314274787903" blue="0.66666668653488159" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="15"/>
@@ -293,6 +377,7 @@
     </scenes>
     <resources>
         <image name="addFriendButton" width="25" height="25"/>
+        <image name="checkboxUncheckBtn" width="550" height="550"/>
         <image name="friendsButton" width="25" height="25"/>
     </resources>
 </document>

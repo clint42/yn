@@ -49,6 +49,7 @@
 		0DDC5AB51CEBD00900EBA597 /* NSDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB41CEBD00900EBA597 /* NSDataExtension.swift */; };
 		0DDC5AB81CEBEB1300EBA597 /* Answers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */; };
 		0DDC5ABA1CEBEBC400EBA597 /* MasterAnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */; };
+		0DDC5ABC1CEC151000EBA597 /* FriendsListViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDC5ABB1CEC151000EBA597 /* FriendsListViewControllerDelegate.swift */; };
 		219EE88753B35D34D88A8646 /* Pods_yn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6D8597E64AAAE0D10DCC61E /* Pods_yn.framework */; };
 		E328E0961CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */; };
 		E3B07E231CE959690064FAD8 /* countriesCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3B07E221CE959690064FAD8 /* countriesCode.plist */; };
@@ -121,6 +122,7 @@
 		0DDC5AB41CEBD00900EBA597 /* NSDataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtension.swift; sourceTree = "<group>"; };
 		0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Answers.storyboard; sourceTree = "<group>"; };
 		0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterAnswersViewController.swift; sourceTree = "<group>"; };
+		0DDC5ABB1CEC151000EBA597 /* FriendsListViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListViewControllerDelegate.swift; sourceTree = "<group>"; };
 		6555A07611012DCEE3DF650E /* Pods-yn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yn.release.xcconfig"; path = "Pods/Target Support Files/Pods-yn/Pods-yn.release.xcconfig"; sourceTree = "<group>"; };
 		9C6B85502A8AB8B0D77D403D /* Pods-yn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-yn/Pods-yn.debug.xcconfig"; sourceTree = "<group>"; };
 		B6D8597E64AAAE0D10DCC61E /* Pods_yn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -245,6 +247,7 @@
 				0D13AFE41CD5587700D7D51F /* FriendsListViewController.swift */,
 				0D8EADB21CDBF1EF00A4DAED /* AddFriendViewController.swift */,
 				E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */,
+				0DDC5ABB1CEC151000EBA597 /* FriendsListViewControllerDelegate.swift */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				0D8EADA71CDAE34800A4DAED /* FriendsApiController.swift in Sources */,
 				0D2460731CEB103A000BCEB4 /* SignupWithFacebookViewController.swift in Sources */,
 				0D2460781CEBCA76000BCEB4 /* RemoteNotificationError.swift in Sources */,
+				0DDC5ABC1CEC151000EBA597 /* FriendsListViewControllerDelegate.swift in Sources */,
 				0DDC5AB51CEBD00900EBA597 /* NSDataExtension.swift in Sources */,
 				0D13AFE51CD5587700D7D51F /* FriendsListViewController.swift in Sources */,
 				0D13AFC61CD2D27800D7D51F /* CreateQuestionViewController.swift in Sources */,

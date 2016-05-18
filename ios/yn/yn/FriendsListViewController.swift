@@ -8,9 +8,17 @@
 
 import UIKit
 
+enum FriendsListViewControllerPresentationOption {
+    case Default
+    case Picker
+}
+
 class FriendsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var pickerControlsBtnView: UIView!
+    @IBOutlet weak var validatePickerButton: UIButton!
+    @IBOutlet weak var cancelPickerButton: UIButton!
 
     let apiHandler = ApiHandler.sharedInstance
     
@@ -18,8 +26,29 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     var friendsSections = [String]()
     var friends = [[User]]()
     
+    var delegate: FriendsListViewControllerDelegate?
+    var presentationOption: FriendsListViewControllerPresentationOption = FriendsListViewControllerPresentationOption.Default {
+        willSet {
+            if newValue == .Picker {
+                pickerControlsBtnView?.hidden = false
+            }
+            else {
+                pickerControlsBtnView?.hidden = true
+            }
+        }
+    }
+    
+    var selectedFriends = Dictionary<NSIndexPath, User>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        if presentationOption == .Picker {
+            pickerControlsBtnView?.hidden = false
+        }
+        else {
+            pickerControlsBtnView?.hidden = true
+        }
+        applyStyle()
         // Do any additional setup after loading the view.
     }
     
@@ -39,15 +68,20 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
         fetchFriends()
     }
     
+    private func applyStyle() {
+        cancelPickerButton.layer.borderColor = UIColor.redColor().CGColor
+        cancelPickerButton.layer.borderWidth = 1
+    }
+    
     //MARK: - UITableViewDataSource
     private func getCountPendingRequests() {
         do {
             try FriendsApiController.sharedInstance.getNumberOfPendingRequests({ (count: Int?, err: ApiError?) in
                 if (err == nil && count != nil) {
                     if count! > 0 {
-                        self.tabBarController!.tabBar.items![1].badgeValue = String(count!)
+                        self.tabBarController?.tabBar.items![1].badgeValue = String(count!)
                     } else {
-                        self.tabBarController!.tabBar.items![1].badgeValue = nil
+                        self.tabBarController?.tabBar.items![1].badgeValue = nil
                     }
                 }
                 else {
@@ -82,35 +116,54 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let alertController: UIAlertController
-        if (!(friends[indexPath.section][indexPath.row].firstname ?? "").isEmpty && !(friends[indexPath.section][indexPath.row].lastname ?? "").isEmpty) {
-            alertController = UIAlertController(title: friends[indexPath.section][indexPath.row].username, message: "\(friends[indexPath.section][indexPath.row].firstname) \(friends[indexPath.section][indexPath.row].lastname)", preferredStyle: .Alert)
-        } else {
-            alertController = UIAlertController(title: friends[indexPath.section][indexPath.row].username, message: "", preferredStyle: .Alert)
+        if presentationOption == .Default {
+            let alertController: UIAlertController
+            if (!(friends[indexPath.section][indexPath.row].firstname ?? "").isEmpty && !(friends[indexPath.section][indexPath.row].lastname ?? "").isEmpty) {
+                alertController = UIAlertController(title: friends[indexPath.section][indexPath.row].username, message: "\(friends[indexPath.section][indexPath.row].firstname) \(friends[indexPath.section][indexPath.row].lastname)", preferredStyle: .Alert)
+            } else {
+                alertController = UIAlertController(title: friends[indexPath.section][indexPath.row].username, message: "", preferredStyle: .Alert)
+            }
+            
+            let deleteAction = UIAlertAction(title: "Delete", style: .Default) { (action:UIAlertAction!) in
+                self.deleteFriend(self.friends[indexPath.section][indexPath.row].username, indexPath: indexPath)
+            }
+            alertController.addAction(deleteAction)
+            
+            let BlockAction = UIAlertAction(title: "Block", style: .Default) { (action:UIAlertAction!) in
+                self.deleteFriend(self.friends[indexPath.section][indexPath.row].username, indexPath: indexPath)
+            }
+            alertController.addAction(BlockAction)
+            
+            let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
+            }
+            alertController.addAction(CancelAction)
+            
+            
+            presentViewController(alertController, animated: true, completion: nil)
         }
-        
-        let deleteAction = UIAlertAction(title: "Delete", style: .Default) { (action:UIAlertAction!) in
-            self.deleteFriend(self.friends[indexPath.section][indexPath.row].username, indexPath: indexPath)
+        else {
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! FriendPickerTableViewCell
+            let checked = cell.checkbox()
+            if checked {
+                selectedFriends[indexPath] = friends[indexPath.section][indexPath.row]
+            }
+            else {
+                selectedFriends.removeValueForKey(indexPath)
+            }
         }
-        alertController.addAction(deleteAction)
-        
-        let BlockAction = UIAlertAction(title: "Block", style: .Default) { (action:UIAlertAction!) in
-            self.deleteFriend(self.friends[indexPath.section][indexPath.row].username, indexPath: indexPath)
-        }
-        alertController.addAction(BlockAction)
-
-        let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
-        }
-        alertController.addAction(CancelAction)
-
-
-        presentViewController(alertController, animated: true, completion: nil)
     }
         
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("friendCell") as! FriendTableViewCell
-        cell.usernameLabel.text = friends[indexPath.section][indexPath.row].username
-        return cell
+        if presentationOption == .Default {
+            let cell = tableView.dequeueReusableCellWithIdentifier("friendCell") as! FriendTableViewCell
+            cell.usernameLabel.text = friends[indexPath.section][indexPath.row].username
+            return cell
+        }
+        else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("pickerFriendCell") as! FriendPickerTableViewCell
+            cell.usernameLabel.text = friends[indexPath.section][indexPath.row].username
+            return cell
+        }
     }
 
     //MARK: - Data processing methods
@@ -179,6 +232,20 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
     }
+    
+    // MARK: - @IBActions
+    @IBAction func validatePickerButtonTapped(sender: UIButton) {
+        var friends = [User]()
+        for (_, friend) in selectedFriends {
+            friends.append(friend)
+        }
+        delegate?.friendsList(didSelectFriends: friends)
+    }
+    
+    @IBAction func cancelPickerButtonTapped(sender: UIButton) {
+        delegate?.cancel()
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -193,4 +260,27 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
 
 class FriendTableViewCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
+}
+
+class FriendPickerTableViewCell: UITableViewCell {
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var checkboxButton: UIButton!
+
+    var checked = false
+    func configure() {
+        checkboxButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+    }
+    
+    func checkbox() -> Bool {
+        if checked {
+            checkboxButton.setImage(UIImage(named: "checkboxUncheckBtn"), forState: UIControlState.Normal)
+            checked = false
+            return false
+        }
+        else {
+            checkboxButton.setImage(UIImage(named: "checkboxCheckBtn"), forState: UIControlState.Normal)
+            checked = true
+            return true
+        }
+    }
 }

@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class EditQuestionViewController: UIViewController, UITextViewDelegate {
+class EditQuestionViewController: UIViewController, UITextViewDelegate, FriendsListViewControllerDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -17,6 +17,7 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var questionTextView: UITextView!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet weak var sendButtonBottomConstraint: NSLayoutConstraint!
     
@@ -33,8 +34,11 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    var friendsPickerVC: FriendsListViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.frame.size.height -= UIApplication.sharedApplication().statusBarFrame.height
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillShow), name:UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillHide), name:UIKeyboardWillHideNotification, object: nil)
         if imageData != nil {
@@ -97,12 +101,18 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate {
         view.endEditing(true)
     }
     
+
+    
     private func applyStyle() {
         setQuestionTextViewPlaceholder()
         
         titleTextField.borderStyle = UITextBorderStyle.None
         
         sendButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        
+        cancelButton.layer.borderWidth = 1
+        cancelButton.layer.borderColor = UIColor.redColor().CGColor
+        //self.sendButtonBottomConstraint.constant = UIApplication.sharedApplication().statusBarFrame.height
     }
     
     private func setQuestionTextViewPlaceholder() {
@@ -129,12 +139,36 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - @IBActions
     @IBAction func sendButtonTapped(sender: UIButton) {
-        if imageData != nil {
-            print("imageData is not nil")
+        let friendsStoryboard = UIStoryboard(name: "Friends", bundle: nil)
+        friendsPickerVC = friendsStoryboard.instantiateViewControllerWithIdentifier("friendsListViewController") as? FriendsListViewController
+        
+        friendsPickerVC!.delegate = self
+        friendsPickerVC!.presentationOption = FriendsListViewControllerPresentationOption.Picker
+        friendsPickerVC!.view.frame.size.height -= UIApplication.sharedApplication().statusBarFrame.height
+        //navigationController!.modalPresentationStyle = UIModalPresentationStyle.CurrentContext
+        self.navigationController!.pushViewController(friendsPickerVC!, animated: true)
+        
+    }
+    
+    @IBAction func cancelButtonTapped(sender: UIButton) {
+        print("Cancel buttontapped")
+        self.navigationController!.popViewControllerAnimated(true)
+    }
+    
+    // MARK: - FriendsListViewControllerDelegate
+    func friendsList(didSelectFriends friends: [User]?) {
+        self.navigationController!.popViewControllerAnimated(true)
+        if imageData != nil && friends != nil {
             let apiHandler = ApiHandler.sharedInstance
             do {
+                var friendsId = [Int]()
+                for friend in friends! {
+                    friendsId.append(friend.id)
+                }
+                let friendsData = try NSJSONSerialization.dataWithJSONObject(friendsId, options: NSJSONWritingOptions.PrettyPrinted)
+                let friendsJsonString = NSString(data: friendsData, encoding: NSUTF8StringEncoding)
                 let image = ["image": imageData!]
-                let params = ["title": titleTextField.text!, "question": questionTextView.text!]
+                let params = ["title": titleTextField.text!, "question": questionTextView.text!, "friends": String(friendsJsonString)]
                 try apiHandler.uploadMultiPartJpegImage(.POST, URLString: ApiUrls.getUrl("askQuestion"), parameters: params, images: image) { (request, error) in
                     if error != nil {
                         request?.responseJSON(completionHandler: { (response: Response<AnyObject, NSError>) in
@@ -158,8 +192,13 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate {
                 print("An unexpected error occured")
             }
         }
+        //friendsPickerVC?.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
+    func cancel() {
+        self.navigationController!.popViewControllerAnimated(true)
+    }
     
     /*
     // MARK: - Navigation
