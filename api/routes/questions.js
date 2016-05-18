@@ -16,6 +16,7 @@ var uploadImage = upload.fields([{
 router.post('/', [auth, uploadImage], function(req, res, next) {
     var title = req.body.title;
     var questionText = req.body.question;
+    var friendsJson = req.body.friends;
     if (title && questionText) {
         var question = {
             title: title,
