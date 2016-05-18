@@ -72,7 +72,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="TwB-K2-QY0"/>
                     <connections>
+                        <outlet property="View" destination="AjT-Hh-SrG" id="AC7-uL-O0Z"/>
                         <outlet property="kolodaView" destination="gbP-wM-gvp" id="o2w-bi-IPI"/>
+                        <outlet property="questionView" destination="6S1-xY-LVh" id="xi1-B7-cmx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q0m-YB-f2A" userLabel="First Responder" sceneMemberID="firstResponder"/>

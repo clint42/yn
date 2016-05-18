@@ -30,7 +30,8 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function(models) {
-                models.Question.belongsTo(models.User, {onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+                models.Question.belongsTo(models.User, {as: 'OwnerId', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+                models.Question.belongsToMany(models.User, {as: 'UsersAsked', through: models.UserAsked, onUpdate: 'CASCADE'});
             }
         }
     });

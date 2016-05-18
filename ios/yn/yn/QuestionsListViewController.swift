@@ -9,10 +9,11 @@
 import UIKit
 import Koloda
 
-private var numberOfCards: UInt = 5
+private var numberOfCards: UInt = 0
 
 class QuestionsListViewController: UIViewController {
 
+    @IBOutlet var questionView: UIView!
     @IBOutlet weak var kolodaView: KolodaView!
     
     private var dataSource: Array<UIImage> = {
@@ -20,19 +21,52 @@ class QuestionsListViewController: UIViewController {
         for index in 0..<numberOfCards {
             array.append(UIImage(named: "Card_like_\(index + 1)")!)
         }
-        
         return array
     }()
+    var questions = [Question]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        kolodaView.dataSource = self
-        kolodaView.delegate = self
-
-        self.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
-
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        loadData()
+    }
+    
+    private func loadData() {
+        kolodaView.delegate = self
+        kolodaView.dataSource = self
+        self.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
+        fetchQuestions()
+    }
+    
+    private func fetchQuestions() {
+        do {
+            try QuestionsApiController.sharedInstance.getQuestionsAsked(nResults: 20, offset: 0, orderBy: "updatedAt", orderRule: "ASC", completion: { (questions: [Question]?, err: ApiError?) in
+                if (err == nil && questions != nil) {
+                    numberOfCards = UInt(questions!.count)
+                    self.questions = questions!
+                    self.dataSource = {
+                        var array: Array<UIImage> = []
+                        for index in 0..<numberOfCards {
+                            array.append(UIImage(named: "Card_like_\(index + 1)")!)
+                        }
+                        return array
+                    }()
+                    self.kolodaView.reloadData()
+                }
+                else {
+                    print("error: \(err)")
+                }
+            })
+        } catch let error as ApiError {
+            print("error: \(error)")
+        } catch {
+            print("Unexpected error")
+        }
     }
 
     @IBAction func leftButtonTapped(sender: AnyObject) {
@@ -49,11 +83,12 @@ class QuestionsListViewController: UIViewController {
     }
     
     func koloda(koloda: KolodaView, didSwipeCardAtIndex index: UInt, inDirection direction: SwipeResultDirection) {
+        print(index)
         if (direction == SwipeResultDirection.Left) {
-            print("left")
+//            print("left")
         }
         else if (direction == SwipeResultDirection.Right) {
-            print("right")
+//            print("right")
         }
         
     }
@@ -75,9 +110,17 @@ class QuestionsListViewController: UIViewController {
 extension QuestionsListViewController: KolodaViewDelegate {
     
     func kolodaDidRunOutOfCards(koloda: KolodaView) {
-        dataSource.insert(UIImage(named: "Card_like_6")!, atIndex: kolodaView.currentCardIndex - 1)
-        let position = kolodaView.currentCardIndex
-        kolodaView.insertCardAtIndexRange(position...position, animated: true)
+//        print(kolodaView.currentCardIndex - 1)
+//        dataSource.insert(UIImage(named: "Card_like_6")!, atIndex: kolodaView.currentCardIndex - 1)
+//        let position = kolodaView.currentCardIndex
+//        kolodaView.insertCardAtIndexRange(position...position, animated: true)
+        
+        let noDataLabel: UILabel = UILabel(frame: CGRectMake(0, 0, questionView.bounds.size.width, questionView.bounds.size.height))
+        noDataLabel.text = "No questions"
+        noDataLabel.textColor = UIColor.lightGrayColor()
+        noDataLabel.textAlignment = NSTextAlignment.Center
+        noDataLabel.font = UIFont(name: "Sansation", size: 30)
+        questionView.addSubview(noDataLabel)
     }
 }
 
@@ -85,17 +128,18 @@ extension QuestionsListViewController: KolodaViewDelegate {
 extension QuestionsListViewController: KolodaViewDataSource {
     
     func kolodaNumberOfCards(koloda:KolodaView) -> UInt {
-        return UInt(dataSource.count)
+        return UInt(questions.count)
     }
     
     func koloda(koloda: KolodaView, viewForCardAtIndex index: UInt) -> UIView {
         let card: QuestionCard = QuestionCard.instanceFromNib() as! QuestionCard
-        
-//        card.setCardTitle("tutu")
-//        card.setCardQuestion("tutu")
-        card.setCardImage(dataSource[Int(index)])
+        if (index < UInt(questions.count)) {
+            card.setCardTitle(self.questions[Int(index)].title)
+            card.setCardQuestion(self.questions[Int(index)].description!)
+//            card.setCardImageFromUrl(self.questions[Int(index)].imageUrl!)
+            card.setCardImageFromImage(self.dataSource[Int(index)])
+        }
         return card
-//        return UIImageView(image: dataSource[Int(index)])
     }
     
     func koloda(koloda: KolodaView, viewForCardOverlayAtIndex index: UInt) -> OverlayView? {
