@@ -232,7 +232,7 @@ module.exports = function(sequelize, DataTypes) {
                             "WHERE (Users.email IN(" + mylist + ") OR Users.phone IN (" + mylist + ")) ";
                         if (notIn != "")
                             query += "AND Users.id NOT IN(" + notIn + ") ";
-                        query += "GROUP BY Users.username";
+                        query += "GROUP BY Users.id";
                         sequelize.query(query, {
                             type: sequelize.QueryTypes.SELECT,
                             model: sequelize.models.User
