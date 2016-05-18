@@ -52,6 +52,7 @@
 		219EE88753B35D34D88A8646 /* Pods_yn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6D8597E64AAAE0D10DCC61E /* Pods_yn.framework */; };
 		E328E0961CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */; };
 		E3B07E231CE959690064FAD8 /* countriesCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3B07E221CE959690064FAD8 /* countriesCode.plist */; };
+		E3DD83551CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DD83541CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +127,7 @@
 		B6D8597E64AAAE0D10DCC61E /* Pods_yn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsRequestsViewController.swift; sourceTree = "<group>"; };
 		E3B07E221CE959690064FAD8 /* countriesCode.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = countriesCode.plist; sourceTree = "<group>"; };
+		E3DD83541CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswersQuestionsListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,6 +306,7 @@
 			children = (
 				0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */,
 				0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */,
+				E3DD83541CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift */,
 			);
 			name = Answers;
 			sourceTree = "<group>";
@@ -541,6 +544,7 @@
 				0D13AFD81CD5446300D7D51F /* SendQuestionViewController.swift in Sources */,
 				0D8EADAF1CDAE56F00A4DAED /* ApiError.swift in Sources */,
 				0D13AFEA1CD55BA900D7D51F /* QuestionsListViewController.swift in Sources */,
+				E3DD83551CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift in Sources */,
 				0D8EADA71CDAE34800A4DAED /* FriendsApiController.swift in Sources */,
 				0D2460731CEB103A000BCEB4 /* SignupWithFacebookViewController.swift in Sources */,
 				0D2460781CEBCA76000BCEB4 /* RemoteNotificationError.swift in Sources */,
