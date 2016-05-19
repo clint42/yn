@@ -20,6 +20,7 @@ class FriendsRequestsViewController: UIViewController, UITableViewDelegate, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.fetchPendingRequests), name: InternalNotificationForRemote.friendRequest.rawValue, object: nil)
         // Do any additional setup after loading the view.
     }
     
@@ -120,14 +121,16 @@ class FriendsRequestsViewController: UIViewController, UITableViewDelegate, UITa
         friends.removeAll()
     }
     
-    private func fetchPendingRequests() {
+    @objc private func fetchPendingRequests() {
         resetRequestsList()
         do {
             try FriendsApiController.sharedInstance.getFriendsRequests(nResults: 20, offset: 0, orderBy: "username", orderRule: "ASC", completion: { (users: [User]?, err: ApiError?) in
                 if (err == nil && users != nil) {
                     self.addFriendsToSectionRowArrays(users!)
-                    self.tableView.reloadData()
-                    self.setTabBarBadgeValue()
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.reloadData()
+                        self.setTabBarBadgeValue()
+                    }
                 }
                 else {
                     print("error: \(err)")

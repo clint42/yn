@@ -8,6 +8,7 @@ var path = require('path');
 var router = require('express').Router();
 var models = require(path.resolve('models'));
 var auth = require(path.resolve('middlewares/authentication'));
+var friendsService = require(path.resolve('services/friends'));
 
 router.get('/my', auth, function(req, res, next) {
     var nResults = req.query.nResults || 10;
@@ -85,11 +86,17 @@ router.post('/add', auth, function(req, res, next) {
     var identifier = req.body.identifier;
     if (identifier) {
         //Retrieve user to add as friend
+        //TODO: Put these two query inside a transaction
         models.User.getUser(identifier).then(function(userToAdd) {
             //Associate friend
             req.currentUser.addFriend(userToAdd, {requestStatus: 'PENDING'}).then(function(associated) {
-                res.status(201);
-                res.json({success: true});
+                userToAdd.getDevices().then(function(devices) {
+                    friendsService.notifyRequest(devices, req.currentUser);
+                }).catch(function(err) {
+                    //TODO: Error handling
+                    res.status(500);
+                    res.json({error: "Error while retrieving user devices"});
+                });
             }).catch(function(err) {
                 //TODO: Error handling
                 next(err, req, res);

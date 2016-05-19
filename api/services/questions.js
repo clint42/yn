@@ -14,7 +14,6 @@ module.exports = (function() {
         for (var i = 0; i < users.length; ++i) {
             var devices = users[i].Devices;
             for (var j = 0; j < devices.length; ++j) {
-                console.log("Send notification");
                 var questionTextPayload = (question.question) ? question.question.substring(0, 50) : "";
                 notificationsService.sendNotification(devices[j], {title: question.title, body: questionTextPayload}, {type: "newQuestion", questionId: question.id});
             }

@@ -51,6 +51,9 @@ class RemoteNotificationHandler {
                 case .NewQuestion:
                     handleNewQuestion(notification)
                     break
+                case .FriendRequest:
+                    handleFriendRequest(notification)
+                    break
                 default:
                     break
                 }
@@ -59,13 +62,14 @@ class RemoteNotificationHandler {
     }
     
     private func handleNewQuestion(notification: [String: AnyObject]) {
-        print("handleNewQuestion")
-        print("notification.questionId: \(notification["questionId"])")
         if let questionId = notification["questionId"] as? Int {
-            //if let questionId = Int(questionIdStr) {
-                print("Send internal notification")
-                NSNotificationCenter.defaultCenter().postNotificationName(InternalNotificationForRemote.newQuestion.rawValue, object: nil, userInfo: ["questionId": questionId])
-            //}
+            NSNotificationCenter.defaultCenter().postNotificationName(InternalNotificationForRemote.newQuestion.rawValue, object: nil, userInfo: ["questionId": questionId])
+        }
+    }
+    
+    private func handleFriendRequest(notification: [String: AnyObject]) {
+        if let userId = notification["userId"] as? Int {
+            NSNotificationCenter.defaultCenter().postNotificationName(InternalNotificationForRemote.friendRequest.rawValue, object: nil, userInfo: ["userId": userId])
         }
     }
 }
