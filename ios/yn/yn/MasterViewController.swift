@@ -23,8 +23,10 @@ class MasterViewController: UIViewController, MasterViewControllerDelegate, UISc
     var friendsNavigationController: UINavigationController!
     var questionsNavigationController: UINavigationController!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.edgesForExtendedLayout = UIRectEdge.None
         scrollView.delegate = self
         let friendsStoryboard = UIStoryboard(name: "Friends", bundle: nil)
         friendsNavigationController = friendsStoryboard.instantiateInitialViewController() as! UINavigationController
@@ -44,6 +46,7 @@ class MasterViewController: UIViewController, MasterViewControllerDelegate, UISc
         askFrame.size.height = view.frame.size.height - UIApplication.sharedApplication().statusBarFrame.height
         askNavigationController!.view.frame = askFrame
         (askNavigationController.delegate as! SectionNavigationControllerDelegate).masterViewControllerDelegate = self
+        
         
         let questionsStoryboard = UIStoryboard(name: "Questions", bundle: nil)
         questionsNavigationController = questionsStoryboard.instantiateInitialViewController() as! UINavigationController
@@ -92,17 +95,28 @@ class MasterViewController: UIViewController, MasterViewControllerDelegate, UISc
     
     func disableMainNavigation() {
         scrollView.scrollEnabled = false
+        answersButton.hidden = true
     }
     
     func enableMainNavigation() {
         scrollView.scrollEnabled = true
+        if getPage() == 1 {
+            answersButton.hidden = false
+        }
+        else {
+            answersButton.hidden = true
+        }
+    }
+    
+    private func getPage() -> Int {
+        let pageWidth = scrollView.frame.size.width
+        let fractionalPage = scrollView.contentOffset.x / pageWidth
+        return lround(Double(fractionalPage))
     }
     
     //MARK: - UIScrollViewDelegate
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        let pageWidth = scrollView.frame.size.width
-        let fractionalPage = scrollView.contentOffset.x / pageWidth
-        let page = lround(Double(fractionalPage))
+        let page = getPage()
         if (previousPage != page) {
             previousPage = page
             if (page == 1) {

@@ -30,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="45"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOH-4P-SqT">
-                                        <rect key="frame" x="252.5" y="7" width="95" height="30"/>
+                                        <rect key="frame" x="253" y="7" width="95" height="30"/>
                                         <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="15"/>
                                         <state key="normal" title="My Questions">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -75,6 +75,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="hfw-lY-DTk"/>
                     <connections>
                         <outlet property="answersButton" destination="Tbb-Ks-ymh" id="QKX-Bc-K8c"/>
@@ -89,6 +90,7 @@
         <scene sceneID="BhE-9Y-obx">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="qAQ-vA-BBu" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pTz-in-qj1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
