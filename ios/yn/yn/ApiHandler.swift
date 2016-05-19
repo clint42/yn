@@ -161,7 +161,6 @@ class ApiHandler {
     func uploadMultiPartJpegImage(method: Alamofire.Method, URLString: URLStringConvertible, parameters: [String: String]?, images: [String: NSData]?, requestHandler: (request: Request?, error: ErrorType?) -> Void) throws {
         do {
             return try Alamofire.upload(method, URLString, headers: getAuthHeaders(), multipartFormData: { (multiFormData: MultipartFormData) in
-                print("multipartFormData")
                 if parameters != nil {
                     for (key, param) in parameters! {
                         if let paramData = param.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
@@ -175,7 +174,6 @@ class ApiHandler {
                 if images != nil {
                     var index = 0
                     for (key, imageData) in images! {
-                        print("name: \(key)")
                         multiFormData.appendBodyPart(data: imageData, name: key, fileName: "image\(index)", mimeType: "image/jpeg")
                         index += 1
                     }
@@ -204,6 +202,7 @@ class ApiHandler {
     }
     
     func logout() {
+        //TODO: Unregister device (push notification)
         userToken = nil
         password = nil
     }

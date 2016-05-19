@@ -36,6 +36,7 @@ module.exports = function(sequelize, DataTypes) {
             associate: function(models) {
                 models.User.belongsToMany(models.User, {as: 'Friends', through: models.Friend, onDelete: 'CASCADE', onUpdate: 'CASCADE'})
                 models.User.hasMany(models.Device);
+                models.User.belongsToMany(models.Question, {as: 'QuestionsAsked', through: models.UserAsked, onUpdate: 'CASCADE'});
             },
             getUser: function(identifier) {
                 var self = this;

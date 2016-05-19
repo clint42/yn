@@ -215,6 +215,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z4e-Wl-2fi">
                                 <rect key="frame" x="0.0" y="555" width="300" height="45"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="dvq-dN-aVe"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="g7Y-4z-64O"/>
@@ -258,6 +259,7 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="cancelButton" destination="Z4e-Wl-2fi" id="ynU-xb-h2J"/>
+                        <outlet property="cancelButtonBottomContraint" destination="iTL-3K-GTH" id="Ejg-vO-KBI"/>
                         <outlet property="contentView" destination="LwR-yp-mG6" id="xt1-Cp-NbH"/>
                         <outlet property="imageView" destination="sBS-DQ-Nm8" id="F6N-8f-mkC"/>
                         <outlet property="questionTextView" destination="NtO-iN-Wsl" id="8HZ-tW-JBL"/>

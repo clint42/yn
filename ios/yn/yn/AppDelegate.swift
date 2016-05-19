@@ -28,6 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         let _ = FBSDKLoginButton()
         
+        if launchOptions != nil {
+            if let notification = launchOptions![UIApplicationLaunchOptionsRemoteNotificationKey] {
+                print("Notification: \(notification)")
+            }
+        }
+        
+        
         // Add any custom logic here.
         return true
     }

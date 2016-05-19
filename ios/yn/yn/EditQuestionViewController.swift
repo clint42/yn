@@ -20,6 +20,7 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate, FriendsL
     @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet weak var sendButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var cancelButtonBottomContraint: NSLayoutConstraint!
     
     var originContentInset: UIEdgeInsets!
     
@@ -66,6 +67,7 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate, FriendsL
             keyboardFrame = self.view.convertRect(keyboardFrame, fromView: nil)
             
             self.sendButtonBottomConstraint.constant = self.sendButtonBottomConstraint.constant + keyboardFrame.size.height
+            self.cancelButtonBottomContraint.constant = self.cancelButtonBottomContraint.constant + keyboardFrame.size.height
             UIView.animateWithDuration(1) {
                 self.view.layoutIfNeeded()
             }
@@ -82,6 +84,7 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate, FriendsL
         scrollView.contentInset = originContentInset
         
         self.sendButtonBottomConstraint.constant = 0
+        self.cancelButtonBottomContraint.constant = 0
         UIView.animateWithDuration(1) {
             self.view.layoutIfNeeded()
         }
@@ -153,6 +156,13 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate, FriendsL
     @IBAction func cancelButtonTapped(sender: UIButton) {
         print("Cancel buttontapped")
         self.navigationController!.popViewControllerAnimated(true)
+
+    }
+    
+    private func displayAlertError() {
+        let alertView = UIAlertController(title: "An error occurred", message: "Your question has not been send", preferredStyle: UIAlertControllerStyle.Alert)
+        alertView.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alertView, animated: true, completion: nil)
     }
     
     // MARK: - FriendsListViewControllerDelegate
@@ -166,30 +176,36 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate, FriendsL
                     friendsId.append(friend.id)
                 }
                 let friendsData = try NSJSONSerialization.dataWithJSONObject(friendsId, options: NSJSONWritingOptions.PrettyPrinted)
-                let friendsJsonString = NSString(data: friendsData, encoding: NSUTF8StringEncoding)
+                let friendsJsonString = NSString(data: friendsData, encoding: NSUTF8StringEncoding)!
                 let image = ["image": imageData!]
                 let params = ["title": titleTextField.text!, "question": questionTextView.text!, "friends": String(friendsJsonString)]
                 try apiHandler.uploadMultiPartJpegImage(.POST, URLString: ApiUrls.getUrl("askQuestion"), parameters: params, images: image) { (request, error) in
-                    if error != nil {
+                    if error == nil {
                         request?.responseJSON(completionHandler: { (response: Response<AnyObject, NSError>) in
                             if response.result.isSuccess {
-                                print("Response result success")
-                                print(response.result.value)
+                                if let result = response.result.value as? Dictionary<String, AnyObject> {
+                                    if result["success"] as? Bool == true {
+                                        self.navigationController?.popToRootViewControllerAnimated(true)
+                                        return
+                                    }
+                                }
                             }
-                            else {
-                                print("Response isSuccess is false")
-                            }
+                            print("Wrong data received, assuming question is not sent")
+                            self.displayAlertError()
                         })
                     }
                     else {
                         print("Error response: \(error)")
+                        self.displayAlertError()
                     }
                 }
             } catch let error as ApiError {
                 //TODO: Error Handling
                 print("Error exceptions: \(error)")
+                displayAlertError()
             } catch {
                 print("An unexpected error occured")
+                displayAlertError()
             }
         }
         //friendsPickerVC?.dismissViewControllerAnimated(true, completion: nil)
