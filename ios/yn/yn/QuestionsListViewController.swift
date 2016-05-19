@@ -40,15 +40,12 @@ class QuestionsListViewController: UIViewController {
     
     //MARK: - Notification handlers
     @objc private func loadNewQuestion(notification: NSNotification) {
-        print("loadNewQuestion")
         do {
             let questionId = notification.userInfo!["questionId"] as! Int
-            print("questionId: \(questionId)")
             try questionsApiController.getQuestion(questionId, completion: { (question, err) in
                 if err == nil {
-                    print("Insert question \(question)")
                     self.questions.insert(question!, atIndex: 0)
-                    self.kolodaView.reloadData()
+                    self.kolodaView.resetCurrentCardIndex()
                 }
                 else {
                     //TODO: Error handling
@@ -75,13 +72,6 @@ class QuestionsListViewController: UIViewController {
                 if (err == nil && questions != nil) {
                     numberOfCards = UInt(questions!.count)
                     self.questions = questions!
-                    self.dataSource = {
-                        var array: Array<UIImage> = []
-                        for index in 0..<numberOfCards {
-                            array.append(UIImage(named: "Card_like_\(index + 1)")!)
-                        }
-                        return array
-                    }()
                     if (numberOfCards > 0) {
                         self.buttonView.hidden = false
                     }
@@ -123,6 +113,10 @@ class QuestionsListViewController: UIViewController {
             try QuestionsApiController.sharedInstance.answerToQuestion(questions[Int(index)].id, answer: answer, completion: { (success: Bool?, err: ApiError?) in
                 if (err == nil && success == true) {
                     print(success)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.questions.removeAtIndex(Int(index))
+                        self.kolodaView.resetCurrentCardIndex()
+                    }
                 }
                 else {
                     print("error: \(err)")
@@ -154,6 +148,10 @@ extension QuestionsListViewController: KolodaViewDelegate {
     func kolodaDidRunOutOfCards(koloda: KolodaView) {
         self.buttonView.hidden = true
     }
+    
+    func kolodaShouldApplyAppearAnimation(koloda: KolodaView) -> Bool {
+        return false
+    }
 }
 
 //MARK: KolodaViewDataSource
@@ -176,8 +174,6 @@ extension QuestionsListViewController: KolodaViewDataSource {
             }
             do {
                 if question.imageUrl != nil {
-                    let imgUrl = try ApiUrls.getUrl("images") + "/" + question.imageUrl!
-                    print("IMAGE URL: \(imgUrl)")
                     try card.setCardImageFromUrl(ApiUrls.getUrl("images") + "/" + question.imageUrl!)
                 }
                 else {
