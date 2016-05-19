@@ -29,9 +29,38 @@ module.exports = function(sequelize, DataTypes) {
         }
     }, {
         classMethods: {
-            associate: function(models) {
-                models.Question.belongsToMany(models.User, {as: {singular: 'UserAsked', plural: 'UsersAsked'}, through: models.UserAsked, onUpdate: 'CASCADE'});
+            associate: function (models) {
+                models.Question.belongsToMany(models.User, {
+                    as: {singular: 'UserAsked', plural: 'UsersAsked'},
+                    through: models.UserAsked,
+                    onUpdate: 'CASCADE'
+                });
                 models.Question.belongsTo(models.User, {as: 'Owner', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+            }
+        },
+        instanceMethods: {
+            getAnswers: function() {
+                var query = "SELECT * FROM UserAskeds WHERE QuestionId = " + this.id;
+                return new Promise(function(resolve, reject) {
+                    sequelize.query(query, {type: sequelize.QueryTypes.SELECT, model: sequelize.models.UserAsked}).then(function(answers) {
+                        resolve(answers);
+                    }).catch(function(err) {
+                        reject(err);
+                    });
+                });
+            },
+            getAnswersUsers: function() {
+                var query = "SELECT Users.*, UserAskeds.answer " +
+                    "FROM Users " +
+                    "INNER JOIN UserAskeds ON (UserAskeds.UserId = Users.id) " +
+                    "WHERE UserAskeds.QuestionId = " + this.id + " AND UserAskeds.answer != 'NONE'";
+                return new Promise(function(resolve, reject) {
+                    sequelize.query(query, {type: sequelize.QueryTypes.SELECT, model: sequelize.models.UserAsked}).then(function(users) {
+                        resolve(users);
+                    }).catch(function(err) {
+                        reject(err);
+                    });
+                });
             }
         }
     });

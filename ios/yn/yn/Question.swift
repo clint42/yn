@@ -14,12 +14,14 @@ class Question {
     var title: String
     var description: String?
     var imageUrl: String?
+    var ownerId: Int
     
-    init(id: Int, title: String, description: String? = nil, image: String? = nil) {
+    init(id: Int, title: String, description: String? = nil, image: String? = nil, ownerId: Int) {
         self.id = id
         self.title = title
         self.description = description
         self.imageUrl = image
+        self.ownerId = ownerId
     }
     
     convenience init(json: Dictionary<String, AnyObject>) throws {
@@ -31,6 +33,6 @@ class Question {
             else {
                 throw ApiError.ResponseInvalidData
         }
-        self.init(id: id, title: title, description: json["question"] as? String, image: json["imageUrl"] as? String);
+        self.init(id: id, title: title, description: json["question"] as? String, image: json["imageUrl"] as? String, ownerId: json["OwnerId"] as! Int);
     }
 }

@@ -106,7 +106,68 @@ router.get('/asked', auth, function(req, res, next) {
         res.status(422);
         res.json({error: "Invalid parameter value"});
     }
+});
 
+router.get('/all', auth, function(req, res, next) {
+    var nResults = req.query.nResults || 10;
+    var offset = req.query.offset || 0;
+    var orderBy = req.query.orderBy || undefined;
+    var orderRule = req.query.orderRule || "ASC";
+
+    if ((orderRule == "DESC" || orderRule == "ASC")) {
+        req.currentUser.getAllQuestions(nResults, offset, orderBy, orderRule).then(function(questions) {
+            res.json({
+                questions: questions,
+                userId: req.currentUser.id
+            });
+        }).catch(function(err) {
+            //TODO: Error handling
+            next(err, req, res);
+        });
+    }
+    else {
+        res.status(422);
+        res.json({error: "Invalid parameter value"});
+    }
+});
+
+router.get('/details/:id((\\d+))', auth, function(req, res, next) {
+    var qId = req.params.id;
+    models.Question.findOne({
+        where: {
+            id: qId
+        }
+    }).then((question) => {
+        question.getAnswers().then((answers) => {
+            res.json({
+                question: question,
+                answers: answers
+            });
+        }).catch((error) => {
+            next(error, req, res);
+        });
+    }).catch((error) => {
+        next(error, req, res);
+    });
+});
+
+router.get('/answers/:id((\\d+))', auth, function(req, res, next) {
+    var qId = req.params.id;
+    models.Question.findOne({
+        where: {
+            id: qId
+        }
+    }).then((question) => {
+        question.getAnswersUsers().then((users) => {
+            res.json({
+                users: users
+            });
+        }).catch((error) => {
+            next(error, req, res);
+        });
+    }).catch((error) => {
+        next(error, req, res);
+    });
 });
 
 router.get('/:questionId', [auth], function(req, res, next) {
