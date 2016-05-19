@@ -17,7 +17,10 @@ class RemoteNotificationHandler {
         return Static.instance
     }
     
+    private var deviceToken: String?
+    
     func registerDevice(deviceToken: String) throws {
+        self.deviceToken = deviceToken
         let apiHandler = ApiHandler.sharedInstance
         if apiHandler.isAuthenticated() {
             do {
@@ -40,6 +43,28 @@ class RemoteNotificationHandler {
         }
         else {
             throw RemoteNotificationError.RequireUserAuthentication
+        }
+    }
+    
+    func unregisterDevice() {
+        let apiHandler = ApiHandler.sharedInstance
+        if apiHandler.isAuthenticated() && deviceToken != nil {
+            do {
+                try apiHandler.request(.DELETE, URLString: ApiUrls.getUrl("unregisterDeviceForPushNotif"), parameters: [
+                    "deviceToken": self.deviceToken!
+                ], completion: { (result, err) in
+                    if result != nil && err == nil {
+                        print("unregisterDevice success")
+                    }
+                    else {
+                        print("unregisterDevice failure: \(err)")
+                    }
+                })
+            } catch let error as ApiError {
+                print("Error: \(error)");
+            } catch {
+                print("An unexpected error has occured")
+            }
         }
     }
     
