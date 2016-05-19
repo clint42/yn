@@ -111,7 +111,7 @@ class CreateQuestionViewController: UIViewController, UIImagePickerControllerDel
         do {
             captureSession?.stopRunning()
             captureSession = AVCaptureSession()
-            captureSession!.sessionPreset = AVCaptureSessionPresetPhoto
+            captureSession!.sessionPreset = AVCaptureSessionPresetMedium
             try cameraDevice.lockForConfiguration()
             if cameraDevice.isFocusModeSupported(.ContinuousAutoFocus) {
                 cameraDevice.focusMode = .ContinuousAutoFocus
