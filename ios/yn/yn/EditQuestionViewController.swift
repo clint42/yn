@@ -177,7 +177,10 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate, FriendsL
                 }
                 let friendsData = try NSJSONSerialization.dataWithJSONObject(friendsId, options: NSJSONWritingOptions.PrettyPrinted)
                 let friendsJsonString = NSString(data: friendsData, encoding: NSUTF8StringEncoding)!
-                let params = ["title": titleTextField.text!, "question": questionTextView.text!, "friends": String(friendsJsonString)]
+                var params = ["title": titleTextField.text!, "friends": String(friendsJsonString)]
+                if questionTextViewIsEdited {
+                    params["question"] = questionTextView.text!
+                }
                 if imageData != nil {
                     let image = ["image": imageData!]
                     try apiHandler.uploadMultiPartJpegImage(.POST, URLString: ApiUrls.getUrl("askQuestion"), parameters: params, images: image) { (request, error) in
