@@ -15,6 +15,8 @@ enum ApiError: ErrorType {
     case NotFound
     case MissingParameters
     case ResponseInvalidData
+    case Unauthorized
+    case ServerError
     case FBUserNotFound
     case Unexpected
 }
@@ -36,6 +38,10 @@ extension ApiError: CustomStringConvertible {
             return "Unexpected error"
         case .ResponseInvalidData:
             return "Response received contains invalid data"
+        case .Unauthorized:
+            return "Unauthorized to access the resource"
+        case .ServerError:
+            return "Internal server error"
         case .FBUserNotFound:
             return "Facebook user not found"
         }

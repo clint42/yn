@@ -42,4 +42,27 @@ class RemoteNotificationHandler {
             throw RemoteNotificationError.RequireUserAuthentication
         }
     }
+    
+    func handleRemoteNotification(notification: [String: AnyObject], appState: UIApplicationState) {
+        if let typeString = notification["type"] as? String {
+            if let type = RemoteNotificationType(rawValue: typeString) {
+                switch type {
+                case .NewQuestion:
+                    handleNewQuestion(notification)
+                    break
+                default:
+                    break
+                }
+                print(type)
+            }
+        }
+    }
+    
+    private func handleNewQuestion(notification: [String: AnyObject]) {
+        if let questionIdStr = notification["questionId"] as? String {
+            if let questionId = Int(questionIdStr) {
+                NSNotificationCenter.defaultCenter().postNotificationName(InternalNotificationForRemote.newQuestion.rawValue, object: nil, userInfo: ["questionId": questionId])
+            }
+        }
+    }
 }

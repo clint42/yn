@@ -32,8 +32,12 @@
 	<string>/questions/answerTo</string>
 	<key>getQuestionsAsked</key>
 	<string>/questions/asked</string>
+	<key>getQuestion</key>
+	<string>/questions</string>
 	<key>registerDeviceForPushNotif</key>
 	<string>/notifications/register-device</string>
+	<key>images</key>
+	<string>/images</string>
 	<key>host</key>
 	<string>http://192.168.0.21:3000</string>
 </dict>

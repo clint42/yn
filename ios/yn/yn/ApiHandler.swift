@@ -122,20 +122,28 @@ class ApiHandler {
         }
     }
     
+    private func completeWithError(statusCode: Int, completion: (result: Dictionary<String, AnyObject>?, err: ApiError?) -> Void) {
+        switch statusCode {
+        case 404:
+            completion(result: nil, err: ApiError.NotFound)
+        case 422:
+            completion(result: nil, err: ApiError.MissingParameters)
+        case 403:
+            completion(result: nil, err: ApiError.Unauthorized)
+        case 500:
+            completion(result: nil, err: ApiError.ServerError)
+        default:
+            completion(result: nil, err: ApiError.Unexpected)
+        }
+    }
+    
     func request(method: Alamofire.Method, URLString: URLStringConvertible, parameters: [String: AnyObject]?, completion: (result: Dictionary<String, AnyObject>?, err: ApiError?) -> Void) throws -> Request {
             return try Alamofire.request(method, URLString, parameters: parameters, encoding: ParameterEncoding.URL, headers: getAuthHeaders()).validate().responseJSON { (response) in
                 if response.result.isSuccess {
                     completion(result: response.result.value as? Dictionary<String, AnyObject>, err: nil)
                 }
                 else if let response = response.response {
-                    switch response.statusCode {
-                    case 404:
-                        completion(result: nil, err: ApiError.NotFound)
-                    case 422:
-                        completion(result: nil, err: ApiError.MissingParameters)
-                    default:
-                        completion(result: nil, err: ApiError.Unexpected)
-                    }
+                    self.completeWithError(response.statusCode, completion: completion)
                 }
             }
     }
@@ -146,14 +154,7 @@ class ApiHandler {
                 completion(result: response.result.value as? Dictionary<String, AnyObject>, err: nil)
             }
             else if let response = response.response {
-                switch response.statusCode {
-                case 404:
-                    completion(result: nil, err: ApiError.NotFound)
-                case 422:
-                    completion(result: nil, err: ApiError.MissingParameters)
-                default:
-                    completion(result: nil, err: ApiError.Unexpected)
-                }
+                self.completeWithError(response.statusCode, completion: completion)
             }
         }
     }

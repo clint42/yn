@@ -17,6 +17,8 @@ class QuestionsListViewController: UIViewController {
     @IBOutlet weak var buttonView: UIView!
     @IBOutlet weak var kolodaView: KolodaView!
     
+    private let questionsApiController = QuestionsApiController.sharedInstance
+    
     private var dataSource: Array<UIImage> = {
         var array: Array<UIImage> = []
         for index in 0..<numberOfCards {
@@ -25,15 +27,37 @@ class QuestionsListViewController: UIViewController {
         return array
     }()
     var questions = [Question]()
-
     
     override func viewDidLoad() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.loadNewQuestion), name: InternalNotificationForRemote.newQuestion.rawValue, object: nil)
         super.viewDidLoad()
         self.buttonView.hidden = true
     }
     
     override func viewWillAppear(animated: Bool) {
         loadData()
+    }
+    
+    //MARK: - Notification handlers
+    @objc private func loadNewQuestion(notification: NSNotification) {
+        do {
+            let questionId = notification.userInfo!["questionId"] as! Int
+            try questionsApiController.getQuestion(questionId, completion: { (question, err) in
+                if err == nil {
+                    print("Insert question \(question)")
+                    self.questions.insert(question!, atIndex: 0)
+                    self.kolodaView.reloadData()
+                }
+                else {
+                    //TODO: Error handling
+                    print("An error occurred: \(err)")
+                }
+            })
+        } catch let error as ApiError {
+            print("An error occured: \(error)")
+        } catch {
+            print("An unexpected error occurred")
+        }
     }
     
     private func loadData() {
@@ -45,7 +69,7 @@ class QuestionsListViewController: UIViewController {
     
     private func fetchQuestions() {
         do {
-            try QuestionsApiController.sharedInstance.getQuestionsAsked(nResults: 20, offset: 0, orderBy: "updatedAt", orderRule: "ASC", completion: { (questions: [Question]?, err: ApiError?) in
+            try questionsApiController.getQuestionsAsked(nResults: 20, offset: 0, orderBy: "createdAt", orderRule: "DESC", completion: { (questions: [Question]?, err: ApiError?) in
                 if (err == nil && questions != nil) {
                     numberOfCards = UInt(questions!.count)
                     self.questions = questions!
@@ -139,11 +163,30 @@ extension QuestionsListViewController: KolodaViewDataSource {
     
     func koloda(koloda: KolodaView, viewForCardAtIndex index: UInt) -> UIView {
         let card: QuestionCard = QuestionCard.instanceFromNib() as! QuestionCard
+        let question = self.questions[Int(index)]
         if (index < UInt(questions.count)) {
-            card.setCardTitle(self.questions[Int(index)].title)
-            card.setCardQuestion(self.questions[Int(index)].description!)
-//            card.setCardImageFromUrl(self.questions[Int(index)].imageUrl!)
-            card.setCardImageFromImage(self.dataSource[Int(index)])
+            card.setCardTitle(question.title)
+            if question.description != nil {
+                card.setCardQuestion(question.description!)
+            }
+            else {
+                card.setCardQuestion("")
+            }
+            do {
+                if question.imageUrl != nil {
+                    let imgUrl = try ApiUrls.getUrl("images") + "/" + question.imageUrl!
+                    print("IMAGE URL: \(imgUrl)")
+                    try card.setCardImageFromUrl(ApiUrls.getUrl("images") + "/" + question.imageUrl!)
+                }
+                else {
+                    card.setCardImageFromImage(UIImage(named: "yn_logo")!)
+                }
+                
+            } catch let error as ApiError {
+                print("An error occurred: \(error)")
+            } catch {
+                print("An unexpected error occurred")
+            }
         }
         return card
     }

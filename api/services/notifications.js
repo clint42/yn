@@ -36,7 +36,6 @@ module.exports = (function() {
             device.save({transaction: null});
         }
         notif.badge = device.badgeValue;
-        console.log("Not here");
         notif.alert = alertTitle;
         notif.payload = payload;
         apnConnection.pushNotification(notif, apnDevice);

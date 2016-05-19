@@ -15,6 +15,7 @@ var uploadImage = upload.fields([{
 var questionsService = require(path.resolve('services/questions'));
 
 router.post('/', [auth, uploadImage], function(req, res, next) {
+    console.log("OK");
     var title = req.body.title;
     var questionText = req.body.question;
     var friendsJson = req.body.friends;
@@ -23,8 +24,8 @@ router.post('/', [auth, uploadImage], function(req, res, next) {
                 title: title,
                 question: questionText
             };
-            if (req.files['images']) {
-                questionData.imageUrl = req.files['image'].destination + req.files['images'].filename;
+            if (req.files && req.files['image']) {
+                questionData.imageUrl = req.files['image'][0].filename;
             }
 
             var findFriendsOrClause = new Array();
@@ -64,9 +65,6 @@ router.post('/', [auth, uploadImage], function(req, res, next) {
                 res.status(500);
                 res.json({error: 'Transaction error: ' + err});
             });
-
-
-
     }
     else {
         res.status(422);
@@ -80,17 +78,21 @@ router.get('/asked', auth, function(req, res, next) {
     var orderBy = req.query.orderBy || undefined;
     var orderRule = req.query.orderRule || "ASC";
     var wrongValue = false;
+    nResults = parseInt(nResults);
+    offset = parseInt(offset);
     switch (orderBy) {
         case "updatedAt":
             orderBy = "updatedAt";
             break;
         case "createdAt":
             orderBy = "createdAt";
+            break;
         case "title":
             orderBy = "title";
+            break;
         default:
             wrongValue = true
-    }
+    };
     if ((orderRule == "DESC" || orderRule == "ASC") && !wrongValue) {
         req.currentUser.getQuestionsAsked(nResults, offset, orderBy, orderRule).then(function(questions) {
             res.json({questions: questions});
@@ -104,6 +106,42 @@ router.get('/asked', auth, function(req, res, next) {
         res.json({error: "Invalid parameter value"});
     }
 
+});
+
+router.get('/:questionId', [auth], function(req, res, next) {
+    var questionId = req.params.questionId;
+    if (questionId) {
+        var questionToReturn = false;
+        models.sequelize.transaction(function(t) {
+            return models.Question.findOne({
+                where: {
+                    id: questionId
+                }
+            }).then(function(question) {
+                return question.hasUserAsked(req.currentUser).then(function(result) {
+                    if (result) {
+                        questionToReturn = question;
+                    }
+                })
+            })
+        }).then(function(result) {
+            if (questionToReturn) {
+                res.json({question: questionToReturn});
+            }
+            else {
+                res.status(403);
+                res.json({error: "Unauthorized to see this question"});
+            }
+        }).catch(function(err) {
+            console.log("An error occurred while retrieving question: " + err);
+            res.status(500);
+            res.json({error: "An error occurred while retrieving question: " + err});
+        });
+    }
+    else {
+        res.status(422);
+        res.json({error: "Missing parameters"});
+    }
 });
 
 router.post('/answerTo', auth, function(req, res, next) {

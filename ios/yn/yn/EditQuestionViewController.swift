@@ -168,45 +168,63 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate, FriendsL
     // MARK: - FriendsListViewControllerDelegate
     func friendsList(didSelectFriends friends: [User]?) {
         self.navigationController!.popViewControllerAnimated(true)
-        if imageData != nil && friends != nil {
+        do {
             let apiHandler = ApiHandler.sharedInstance
-            do {
+            if friends != nil {
                 var friendsId = [Int]()
                 for friend in friends! {
                     friendsId.append(friend.id)
                 }
                 let friendsData = try NSJSONSerialization.dataWithJSONObject(friendsId, options: NSJSONWritingOptions.PrettyPrinted)
                 let friendsJsonString = NSString(data: friendsData, encoding: NSUTF8StringEncoding)!
-                let image = ["image": imageData!]
                 let params = ["title": titleTextField.text!, "question": questionTextView.text!, "friends": String(friendsJsonString)]
-                try apiHandler.uploadMultiPartJpegImage(.POST, URLString: ApiUrls.getUrl("askQuestion"), parameters: params, images: image) { (request, error) in
-                    if error == nil {
-                        request?.responseJSON(completionHandler: { (response: Response<AnyObject, NSError>) in
-                            if response.result.isSuccess {
-                                if let result = response.result.value as? Dictionary<String, AnyObject> {
-                                    if result["success"] as? Bool == true {
-                                        self.navigationController?.popToRootViewControllerAnimated(true)
-                                        return
+                if imageData != nil {
+                    let image = ["image": imageData!]
+                    try apiHandler.uploadMultiPartJpegImage(.POST, URLString: ApiUrls.getUrl("askQuestion"), parameters: params, images: image) { (request, error) in
+                        if error == nil {
+                            request?.responseJSON(completionHandler: { (response: Response<AnyObject, NSError>) in
+                                if response.result.isSuccess {
+                                    if let result = response.result.value as? Dictionary<String, AnyObject> {
+                                        if result["success"] as? Bool == true {
+                                            self.navigationController?.popToRootViewControllerAnimated(true)
+                                            return
+                                        }
                                     }
                                 }
-                            }
-                            print("Wrong data received, assuming question is not sent")
+                                print("Wrong data received, assuming question is not sent")
+                                self.displayAlertError()
+                            })
+                        }
+                        else {
+                            print("Error response: \(error)")
                             self.displayAlertError()
-                        })
-                    }
-                    else {
-                        print("Error response: \(error)")
-                        self.displayAlertError()
+                        }
                     }
                 }
-            } catch let error as ApiError {
-                //TODO: Error Handling
-                print("Error exceptions: \(error)")
-                displayAlertError()
-            } catch {
-                print("An unexpected error occured")
-                displayAlertError()
+                else {
+                    try apiHandler.request(.POST, URLString: ApiUrls.getUrl("askQuestion"), parameters: params, completion: { (result, err) in
+                        if err == nil {
+                            if result!["success"] as? Bool == true {
+                                self.navigationController?.popToRootViewControllerAnimated(true)
+                                return
+                            }
+                            else {
+                                print("An error occurred")
+                            }
+                        }
+                        else {
+                            print("error: \(err)")
+                        }
+                    })
+                }
             }
+        } catch let error as ApiError {
+            //TODO: Error Handling
+            print("Error exceptions: \(error)")
+            displayAlertError()
+        } catch {
+            print("An unexpected error occured")
+            displayAlertError()
         }
         //friendsPickerVC?.dismissViewControllerAnimated(true, completion: nil)
         

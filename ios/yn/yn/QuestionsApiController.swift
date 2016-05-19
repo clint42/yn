@@ -71,4 +71,20 @@ class QuestionsApiController {
             })
         }
     }
+    
+    func getQuestion(questionId: Int, completion: (question: Question?, err: ApiError?) -> Void) throws -> Request {
+        do {
+            return try apiHandler.request(.GET, URLString: ApiUrls.getUrl("getQuestion") + "/\(questionId)", parameters: nil, completion: {
+                (result, err) in
+                if err == nil {
+                    if let questionJson = result!["question"] as? Dictionary<String, AnyObject> {
+                        print(questionJson)
+                    }
+                }
+                else {
+                    completion(question: nil, err: err)
+                }
+            })
+        }
+    }
 }

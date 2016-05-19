@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         let _ = FBSDKLoginButton()
-        
+    
         if launchOptions != nil {
             if let notification = launchOptions![UIApplicationLaunchOptionsRemoteNotificationKey] {
                 print("Notification: \(notification)")
@@ -93,7 +93,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        print("Notification received. fetchCompletionHandler")
+        remoteNotificationHandler.handleRemoteNotification(userInfo as! Dictionary<String, AnyObject>, appState: application.applicationState)
+        completionHandler(UIBackgroundFetchResult.NoData)
     }
 }
 
