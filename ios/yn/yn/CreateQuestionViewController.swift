@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class CreateQuestionViewController: UIViewController {
+class CreateQuestionViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var controlsView: UIView!
     
@@ -171,6 +171,10 @@ class CreateQuestionViewController: UIViewController {
     }
     
     @IBAction func galeryButtonTapped(sender: UIButton) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePicker.delegate = self
+        navigationController!.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func textOnlyButtonTapped(sender: UIButton) {
@@ -183,6 +187,14 @@ class CreateQuestionViewController: UIViewController {
         }
         else if currentCameraPosition == AVCaptureDevicePosition.Front {
             previewBackCamera()
+        }
+    }
+    
+    // MARK: - UIImagePickerControllerDelegate
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        tmpImageData = UIImageJPEGRepresentation(image, 1)
+        dismissViewControllerAnimated(true) { 
+            self.performSegueWithIdentifier("editQuestionSegue", sender: self)
         }
     }
     
