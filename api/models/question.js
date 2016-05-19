@@ -48,6 +48,19 @@ module.exports = function(sequelize, DataTypes) {
                         reject(err);
                     });
                 });
+            },
+            getAnswersUsers: function() {
+                var query = "SELECT Users.*, UserAskeds.answer " +
+                    "FROM Users " +
+                    "INNER JOIN UserAskeds ON (UserAskeds.UserId = Users.id) " +
+                    "WHERE UserAskeds.QuestionId = " + this.id + " AND UserAskeds.answer != 'NONE'";
+                return new Promise(function(resolve, reject) {
+                    sequelize.query(query, {type: sequelize.QueryTypes.SELECT, model: sequelize.models.UserAsked}).then(function(users) {
+                        resolve(users);
+                    }).catch(function(err) {
+                        reject(err);
+                    });
+                });
             }
         }
     });

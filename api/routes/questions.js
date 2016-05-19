@@ -150,6 +150,25 @@ router.get('/details/:id((\\d+))', auth, function(req, res, next) {
     });
 });
 
+router.get('/answers/:id((\\d+))', auth, function(req, res, next) {
+    var qId = req.params.id;
+    models.Question.findOne({
+        where: {
+            id: qId
+        }
+    }).then((question) => {
+        question.getAnswersUsers().then((users) => {
+            res.json({
+                users: users
+            });
+        }).catch((error) => {
+            next(error, req, res);
+        });
+    }).catch((error) => {
+        next(error, req, res);
+    });
+});
+
 router.get('/:questionId', [auth], function(req, res, next) {
     var questionId = req.params.questionId;
     if (questionId) {

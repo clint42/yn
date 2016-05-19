@@ -108,5 +108,17 @@ class AnswerDetailsViewController: UIViewController {
         
         barChartView.legend.enabled = false
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "noSegue") {
+            let destination = segue.destinationViewController as? WhoAnsweredWhatViewController
+            destination!.chosenSection = "NO"
+            destination!.questionId = questionId
+        } else if (segue.identifier == "yesSegue") {
+            let destination = segue.destinationViewController as? WhoAnsweredWhatViewController
+            destination!.chosenSection = "YES"
+            destination!.questionId = questionId
+        }
+    }
 
 }

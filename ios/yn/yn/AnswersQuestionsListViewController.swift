@@ -11,6 +11,7 @@ import UIKit
 class AnswersQuestionsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noDataLabel: UILabel!
     
     var paginationOffset: Int = 0
     var questionsSections = [String]()
@@ -96,16 +97,11 @@ class AnswersQuestionsListViewController: UIViewController, UITableViewDelegate,
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if questionsSections.count > 0 {
-            tableView.backgroundView = nil
-            tableView.separatorStyle = .SingleLine
+            tableView.hidden = false
+            noDataLabel.hidden = true
         } else {
-            let noDataLabel: UILabel = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
-            noDataLabel.text = "No question"
-            noDataLabel.textColor = UIColor.lightGrayColor()
-            noDataLabel.textAlignment = NSTextAlignment.Center
-            noDataLabel.font = UIFont(name: "Sansation", size: 30)
-            tableView.backgroundView = noDataLabel
-            tableView.separatorStyle = .None
+            tableView.hidden = true
+            noDataLabel.hidden = false
         }
         return questionsSections.count
     }

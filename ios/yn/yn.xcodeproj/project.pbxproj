@@ -66,6 +66,7 @@
 		E328E0961CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */; };
 		E359FFE91CED8A4D000F6058 /* AnswerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E359FFE81CED8A4D000F6058 /* AnswerDetailsViewController.swift */; };
 		E394EF971CEDC3BC0008468D /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E394EF961CEDC3BC0008468D /* Answer.swift */; };
+		E394EF991CEDE0070008468D /* WhoAnsweredWhatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E394EF981CEDE0070008468D /* WhoAnsweredWhatViewController.swift */; };
 		E39B01211CED333C009E525C /* OverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E39B01201CED333C009E525C /* OverlayView.xib */; };
 		E3B07E231CE959690064FAD8 /* countriesCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3B07E221CE959690064FAD8 /* countriesCode.plist */; };
 		E3DD83551CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DD83541CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift */; };
@@ -158,6 +159,7 @@
 		E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsRequestsViewController.swift; sourceTree = "<group>"; };
 		E359FFE81CED8A4D000F6058 /* AnswerDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerDetailsViewController.swift; sourceTree = "<group>"; };
 		E394EF961CEDC3BC0008468D /* Answer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
+		E394EF981CEDE0070008468D /* WhoAnsweredWhatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoAnsweredWhatViewController.swift; sourceTree = "<group>"; };
 		E39B01201CED333C009E525C /* OverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OverlayView.xib; sourceTree = "<group>"; };
 		E3B07E221CE959690064FAD8 /* countriesCode.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = countriesCode.plist; sourceTree = "<group>"; };
 		E3DD83541CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswersQuestionsListViewController.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 				0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */,
 				E3DD83541CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift */,
 				E359FFE81CED8A4D000F6058 /* AnswerDetailsViewController.swift */,
+				E394EF981CEDE0070008468D /* WhoAnsweredWhatViewController.swift */,
 			);
 			name = Answers;
 			sourceTree = "<group>";
@@ -689,6 +692,7 @@
 				E3DD83551CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift in Sources */,
 				0D8EADA71CDAE34800A4DAED /* FriendsApiController.swift in Sources */,
 				0D2460731CEB103A000BCEB4 /* SignupWithFacebookViewController.swift in Sources */,
+				E394EF991CEDE0070008468D /* WhoAnsweredWhatViewController.swift in Sources */,
 				0D2460781CEBCA76000BCEB4 /* RemoteNotificationError.swift in Sources */,
 				0DDC5AB51CEBD00900EBA597 /* NSDataExtension.swift in Sources */,
 				0DDC5ABE1CED21F300EBA597 /* FriendsListViewControllerDelegate.swift in Sources */,

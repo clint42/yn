@@ -16,15 +16,16 @@ class User {
     var firstname: String?
     var lastname: String?
     var fbId: String?
+    var answer: String?
     
-    init(id: Int, username: String, email: String? = nil, phone: String? = nil, firstname: String? = nil, lastname: String? = nil, fbId: String? = nil) {
+    init(id: Int, username: String, email: String? = nil, phone: String? = nil, firstname: String? = nil, lastname: String? = nil, fbId: String? = nil, answer: String? = nil) {
         self.id = id
         self.username = username
         self.email = email
         self.phone = phone
         self.firstname = firstname
         self.lastname = lastname
-        self.fbId = fbId
+        self.answer = answer
     }
     
     convenience init(json: Dictionary<String, AnyObject>) throws {
@@ -36,6 +37,6 @@ class User {
             else {
                 throw ApiError.ResponseInvalidData
         }
-        self.init(id: id, username: username, email: json["email"] as? String, phone: json["phone"] as? String, firstname: json["firstname"] as? String, lastname: json["lastname"] as? String, fbId: json["fbId"] as? String);
+        self.init(id: id, username: username, email: json["email"] as? String, phone: json["phone"] as? String, firstname: json["firstname"] as? String, lastname: json["lastname"] as? String, fbId: json["fbId"] as? String, answer: json["answer"] as? String);
     }
 }

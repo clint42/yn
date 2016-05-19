@@ -139,7 +139,6 @@ class QuestionsApiController {
         do {
             return try apiHandler.request(.GET, URLString: ApiUrls.getUrl("getQuestionDetails") + "/\(questionId)", parameters: nil, completion: {
                 (questionDetails, err) in
-                //print(questionDetails!)
                 if err == nil {
                     do {
                         let questionJson = questionDetails!["question"] as? Dictionary<String, AnyObject>
@@ -162,6 +161,33 @@ class QuestionsApiController {
                 }
                 else {
                     completion(questionDetails: nil, err: err)
+                }
+            })
+        }
+    }
+    
+    func getAnswers(questionId: Int, completion: (users: [User]?, err: ApiError?) -> Void) throws -> Request {
+        do {
+            return try apiHandler.request(.GET, URLString: ApiUrls.getUrl("getAnswers") + "/\(questionId)", parameters: nil, completion: {
+                (result, err) in
+                if err == nil && result!["users"] != nil && result!["users"] is Array<Dictionary<String, AnyObject>> {
+                    var users = [User]()
+                    for user in result!["users"] as! Array<Dictionary<String, AnyObject>> {
+                        do {
+                            try users.append(User(json: user))
+                        } catch let error as ApiError {
+                            print("error: \(error)")
+                        } catch {
+                            print("Unexpected error")
+                        }
+                    }
+                    completion(users: users, err: nil)
+                }
+                else if err != nil {
+                    completion(users: nil, err: ApiError.ResponseInvalidData)
+                }
+                else {
+                    completion(users: nil, err: err)
                 }
             })
         }
