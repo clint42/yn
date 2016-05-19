@@ -14,6 +14,7 @@
             <string>Sansation</string>
             <string>Sansation</string>
             <string>Sansation</string>
+            <string>Sansation</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -177,7 +178,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendsRequestsCell" id="Eq9-33-m6m" customClass="FriendsRequestsTableViewCell" customModule="yn" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eq9-33-m6m" id="osU-9x-2wl">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -208,8 +209,18 @@
                                     <rect key="frame" x="0.0" y="64" width="400" height="687"/>
                                 </variation>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No pending request" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goA-qO-RsG">
+                                <rect key="frame" x="279" y="290" width="280" height="30"/>
+                                <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="30"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="goA-qO-RsG" firstAttribute="centerX" secondItem="nOq-qN-5mk" secondAttribute="centerX" id="4Xg-y1-fYM"/>
+                            <constraint firstItem="goA-qO-RsG" firstAttribute="centerY" secondItem="nOq-qN-5mk" secondAttribute="centerY" id="EaG-zZ-jaO"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="H2e-tm-HJJ"/>
@@ -223,6 +234,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Friends Request" image="addFriendButton" id="LQZ-0g-JPY"/>
                     <connections>
+                        <outlet property="noPendingLabel" destination="goA-qO-RsG" id="LhS-re-VXU"/>
                         <outlet property="tableView" destination="H2e-tm-HJJ" id="tHk-if-gHA"/>
                     </connections>
                 </viewController>
@@ -373,6 +385,19 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KqV-DJ-anR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="323" y="1100"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="9AP-aE-cKW">
+            <objects>
+                <viewController id="6LD-VD-Wp1" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pg3-f7-VkL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vmE-zl-i7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <resources>

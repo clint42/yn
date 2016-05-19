@@ -10,6 +10,7 @@ import UIKit
 
 class FriendsRequestsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noPendingLabel: UILabel!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
     let apiHandler = ApiHandler.sharedInstance
@@ -17,6 +18,7 @@ class FriendsRequestsViewController: UIViewController, UITableViewDelegate, UITa
     var paginationOffset: Int = 0
     var friendsSections = [String]()
     var friends = [[User]]()
+    var hasLoaded = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,16 +49,11 @@ class FriendsRequestsViewController: UIViewController, UITableViewDelegate, UITa
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if friendsSections.count > 0 {
-            tableView.backgroundView = nil
-            tableView.separatorStyle = .SingleLine
-        } else {
-            let noDataLabel: UILabel = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
-            noDataLabel.text = "No pending request"
-            noDataLabel.textColor = UIColor.lightGrayColor()
-            noDataLabel.textAlignment = NSTextAlignment.Center
-            noDataLabel.font = UIFont(name: "Sansation", size: 30)
-            tableView.backgroundView = noDataLabel
-            tableView.separatorStyle = .None
+            tableView.hidden = false
+            noPendingLabel.hidden = true
+        } else if hasLoaded {
+            tableView.hidden = true
+            noPendingLabel.hidden = false
         }
         return friendsSections.count
     }
@@ -128,10 +125,9 @@ class FriendsRequestsViewController: UIViewController, UITableViewDelegate, UITa
             try FriendsApiController.sharedInstance.getFriendsRequests(nResults: 20, offset: 0, orderBy: "username", orderRule: "ASC", completion: { (users: [User]?, err: ApiError?) in
                 if (err == nil && users != nil) {
                     self.addFriendsToSectionRowArrays(users!)
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.tableView.reloadData()
-                        self.setTabBarBadgeValue()
-                    }
+                    self.hasLoaded = true
+                    self.tableView.reloadData()
+                    self.setTabBarBadgeValue()
                 }
                 else {
                     print("error: \(err)")
