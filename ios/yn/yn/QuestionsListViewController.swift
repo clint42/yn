@@ -19,13 +19,6 @@ class QuestionsListViewController: UIViewController {
     
     private let questionsApiController = QuestionsApiController.sharedInstance
     
-    private var dataSource: Array<UIImage> = {
-        var array: Array<UIImage> = []
-        for index in 0..<numberOfCards {
-            array.append(UIImage(named: "Card_like_\(index + 1)")!)
-        }
-        return array
-    }()
     var questions = [Question]()
     
     override func viewDidLoad() {
@@ -44,6 +37,7 @@ class QuestionsListViewController: UIViewController {
             let questionId = notification.userInfo!["questionId"] as! Int
             try questionsApiController.getQuestion(questionId, completion: { (question, err) in
                 if err == nil {
+                    numberOfCards += 1
                     self.questions.insert(question!, atIndex: 0)
                     self.kolodaView.resetCurrentCardIndex()
                     if (numberOfCards > 0) {
