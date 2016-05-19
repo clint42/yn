@@ -13,9 +13,9 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "root",
-    "database": "database_production",
+    "username": "ynapi",
+    "password": "dRtB{}sZnB",
+    "database": "yn",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
