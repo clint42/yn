@@ -68,6 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("didRegisterForRemoveNotification. DeviceToken: \(deviceToken)")
         do {
             try remoteNotificationHandler.registerDevice(deviceToken.hexString)
+            print(deviceToken.hexString)
         } catch let error as RemoteNotificationError {
             print("Error while registering device: \(error)")
         } catch let error {
