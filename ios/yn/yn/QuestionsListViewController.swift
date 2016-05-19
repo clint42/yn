@@ -30,14 +30,6 @@ class QuestionsListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.buttonView.hidden = true
-//        let noDataLabel: UILabel = UILabel(frame: CGRectMake(0, 0, questionView.bounds.size.width, questionView.bounds.size.height))
-//        noDataLabel.text = "No questions"
-//        noDataLabel.textColor = UIColor.lightGrayColor()
-//        noDataLabel.textAlignment = NSTextAlignment.Center
-//        noDataLabel.font = UIFont(name: "Sansation", size: 30)
-//        questionView.addSubview(noDataLabel)
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -134,10 +126,6 @@ class QuestionsListViewController: UIViewController {
 extension QuestionsListViewController: KolodaViewDelegate {
     
     func kolodaDidRunOutOfCards(koloda: KolodaView) {
-//        print(kolodaView.currentCardIndex - 1)
-//        dataSource.insert(UIImage(named: "Card_like_6")!, atIndex: kolodaView.currentCardIndex - 1)
-//        let position = kolodaView.currentCardIndex
-//        kolodaView.insertCardAtIndexRange(position...position, animated: true)
         self.buttonView.hidden = true
     }
 }
