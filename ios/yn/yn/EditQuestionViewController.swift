@@ -107,6 +107,7 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate, FriendsL
 
     
     private func applyStyle() {
+        
         setQuestionTextViewPlaceholder()
         
         titleTextField.borderStyle = UITextBorderStyle.None
@@ -154,7 +155,6 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate, FriendsL
             friendsPickerVC!.delegate = self
             friendsPickerVC!.presentationOption = FriendsListViewControllerPresentationOption.Picker
             friendsPickerVC!.view.frame.size.height -= UIApplication.sharedApplication().statusBarFrame.height
-            //navigationController!.modalPresentationStyle = UIModalPresentationStyle.CurrentContext
             self.navigationController!.pushViewController(friendsPickerVC!, animated: true)
         }
         
