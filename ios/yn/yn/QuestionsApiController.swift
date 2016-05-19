@@ -55,6 +55,46 @@ class QuestionsApiController {
         }
     }
     
+    func getAllQuestions(nResults nResults: Int, offset: Int, orderBy: String?, orderRule: String?, completion: (result: [String:AnyObject]?, err: ApiError?) -> Void) throws -> Request {
+        var params: [String: AnyObject] = [
+            "nResults": nResults,
+            "offset": offset
+        ]
+        if (orderBy != nil) {
+            params["orderBy"] = orderBy!
+        }
+        if (orderRule != nil) {
+            params["orderRule"] = orderRule!
+        }
+        do {
+            return try apiHandler.request(.GET, URLString: ApiUrls.getUrl("getAllQuestions"), parameters: params, completion: { (result, err) in
+                var questions = [Question]()
+                if err == nil && result!["questions"] != nil && result!["questions"] is Array<Dictionary<String, AnyObject>> {
+                    for question in result!["questions"] as! Array<Dictionary<String, AnyObject>> {
+                        do {
+                            try questions.append(Question(json: question))
+                        } catch let error as ApiError {
+                            print("error: \(error)")
+                        } catch {
+                            print("Unexpected error")
+                        }
+                    }
+                    let res: [String: AnyObject] = [
+                        "questions": questions,
+                        "userid": result!["userId"]!
+                    ]
+                    completion(result: res, err: nil)
+                }
+                else if err != nil {
+                    completion(result: nil, err: ApiError.ResponseInvalidData)
+                }
+                else {
+                    completion(result: nil, err: err)
+                }
+            })
+        }
+    }
+    
     func answerToQuestion(questionId: Int, answer: Bool, completion: (success: Bool?, err: ApiError?) -> Void) throws -> Request {
         let params: [String: AnyObject] = [
             "questionId": questionId,
@@ -90,6 +130,64 @@ class QuestionsApiController {
                 }
                 else {
                     completion(question: nil, err: err)
+                }
+            })
+        }
+    }
+    
+    func getQuestionDetails(questionId: Int, completion: (questionDetails: [String:AnyObject]?, err: ApiError?) -> Void) throws -> Request {
+        do {
+            return try apiHandler.request(.GET, URLString: ApiUrls.getUrl("getQuestionDetails") + "/\(questionId)", parameters: nil, completion: {
+                (questionDetails, err) in
+                if err == nil {
+                    do {
+                        let questionJson = questionDetails!["question"] as? Dictionary<String, AnyObject>
+                        var answers = [Answer]()
+                        for answer in (questionDetails!["answers"] as? NSArray)! {
+                            let q = try Answer(json: answer as! Dictionary<String, AnyObject>)
+                            answers.append(q)
+                        }
+                        let questions = try Question(json: questionJson!)
+                        let params: [String: AnyObject] = [
+                                "question": questions,
+                                "answers": answers
+                            ]
+                        completion(questionDetails: params, err: nil)
+                    } catch let error as ApiError {
+                        completion(questionDetails: nil, err: error)
+                    } catch {
+                        completion(questionDetails: nil, err: ApiError.Unexpected)
+                    }
+                }
+                else {
+                    completion(questionDetails: nil, err: err)
+                }
+            })
+        }
+    }
+    
+    func getAnswers(questionId: Int, completion: (users: [User]?, err: ApiError?) -> Void) throws -> Request {
+        do {
+            return try apiHandler.request(.GET, URLString: ApiUrls.getUrl("getAnswers") + "/\(questionId)", parameters: nil, completion: {
+                (result, err) in
+                if err == nil && result!["users"] != nil && result!["users"] is Array<Dictionary<String, AnyObject>> {
+                    var users = [User]()
+                    for user in result!["users"] as! Array<Dictionary<String, AnyObject>> {
+                        do {
+                            try users.append(User(json: user))
+                        } catch let error as ApiError {
+                            print("error: \(error)")
+                        } catch {
+                            print("Unexpected error")
+                        }
+                    }
+                    completion(users: users, err: nil)
+                }
+                else if err != nil {
+                    completion(users: nil, err: ApiError.ResponseInvalidData)
+                }
+                else {
+                    completion(users: nil, err: err)
                 }
             })
         }

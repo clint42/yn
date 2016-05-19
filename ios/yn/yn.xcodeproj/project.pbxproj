@@ -64,7 +64,12 @@
 		AEF85E201CEC5D5F003F39E5 /* QuestionsApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF85E1F1CEC5D5F003F39E5 /* QuestionsApiController.swift */; };
 		B48E8C6F9B82AC880A27E699 /* Pods_yn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 393003083260291A362A8302 /* Pods_yn.framework */; };
 		E328E0961CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */; };
+		E359FFE91CED8A4D000F6058 /* AnswerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E359FFE81CED8A4D000F6058 /* AnswerDetailsViewController.swift */; };
+		E394EF971CEDC3BC0008468D /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E394EF961CEDC3BC0008468D /* Answer.swift */; };
+		E394EF991CEDE0070008468D /* WhoAnsweredWhatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E394EF981CEDE0070008468D /* WhoAnsweredWhatViewController.swift */; };
+		E39B01211CED333C009E525C /* OverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E39B01201CED333C009E525C /* OverlayView.xib */; };
 		E3B07E231CE959690064FAD8 /* countriesCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3B07E221CE959690064FAD8 /* countriesCode.plist */; };
+		E3DD83551CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DD83541CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,7 +157,12 @@
 		AEF85E1D1CEC5D42003F39E5 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		AEF85E1F1CEC5D5F003F39E5 /* QuestionsApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsApiController.swift; sourceTree = "<group>"; };
 		E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsRequestsViewController.swift; sourceTree = "<group>"; };
+		E359FFE81CED8A4D000F6058 /* AnswerDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerDetailsViewController.swift; sourceTree = "<group>"; };
+		E394EF961CEDC3BC0008468D /* Answer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
+		E394EF981CEDE0070008468D /* WhoAnsweredWhatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoAnsweredWhatViewController.swift; sourceTree = "<group>"; };
+		E39B01201CED333C009E525C /* OverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OverlayView.xib; sourceTree = "<group>"; };
 		E3B07E221CE959690064FAD8 /* countriesCode.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = countriesCode.plist; sourceTree = "<group>"; };
+		E3DD83541CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswersQuestionsListViewController.swift; sourceTree = "<group>"; };
 		EEFFA5B8721943B4C4592A13 /* Pods-ynUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ynUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ynUITests/Pods-ynUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F0B894EB6676C1D1315840D7 /* Pods-yn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-yn/Pods-yn.debug.xcconfig"; sourceTree = "<group>"; };
 		F9B12E9DE9B4172E0653E86E /* Pods-ynUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ynUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ynUITests/Pods-ynUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -288,6 +298,7 @@
 				0D13AFE71CD55B7700D7D51F /* Questions.storyboard */,
 				0DDC5AC11CED225200EBA597 /* OverlayView.xib */,
 				0D13AFE91CD55BA900D7D51F /* QuestionsListViewController.swift */,
+				E39B01201CED333C009E525C /* OverlayView.xib */,
 				AEA15CC01CEAEA17009FE536 /* ExampleOverlayView.swift */,
 				AEA15CB81CEAE05A009FE536 /* BackgroundKolodaAnimator.swift */,
 				AEA15CBC1CEAE522009FE536 /* CustomKolodaView.swift */,
@@ -313,6 +324,7 @@
 			children = (
 				AEF85E1D1CEC5D42003F39E5 /* Question.swift */,
 				0D13B00C1CD845DE00D7D51F /* User.swift */,
+				E394EF961CEDC3BC0008468D /* Answer.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -347,6 +359,9 @@
 			children = (
 				0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */,
 				0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */,
+				E3DD83541CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift */,
+				E359FFE81CED8A4D000F6058 /* AnswerDetailsViewController.swift */,
+				E394EF981CEDE0070008468D /* WhoAnsweredWhatViewController.swift */,
 			);
 			name = Answers;
 			sourceTree = "<group>";
@@ -673,8 +688,10 @@
 				0D13AFD81CD5446300D7D51F /* SendQuestionViewController.swift in Sources */,
 				0D8EADAF1CDAE56F00A4DAED /* ApiError.swift in Sources */,
 				0D13AFEA1CD55BA900D7D51F /* QuestionsListViewController.swift in Sources */,
+				E3DD83551CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift in Sources */,
 				0D8EADA71CDAE34800A4DAED /* FriendsApiController.swift in Sources */,
 				0D2460731CEB103A000BCEB4 /* SignupWithFacebookViewController.swift in Sources */,
+				E394EF991CEDE0070008468D /* WhoAnsweredWhatViewController.swift in Sources */,
 				0D2460781CEBCA76000BCEB4 /* RemoteNotificationError.swift in Sources */,
 				0DDC5AB51CEBD00900EBA597 /* NSDataExtension.swift in Sources */,
 				0DDC5ABE1CED21F300EBA597 /* FriendsListViewControllerDelegate.swift in Sources */,
@@ -684,6 +701,7 @@
 				0D2460761CEBCA08000BCEB4 /* RemoteNotificationHandler.swift in Sources */,
 				0DDC5ABA1CEBEBC400EBA597 /* MasterAnswersViewController.swift in Sources */,
 				0D13AFDE1CD549D600D7D51F /* TransitionAnimator.swift in Sources */,
+				E359FFE91CED8A4D000F6058 /* AnswerDetailsViewController.swift in Sources */,
 				0D13B00D1CD845DE00D7D51F /* User.swift in Sources */,
 				0DAA2FE31CED7CCB0063686C /* InternalNotificationForRemote.swift in Sources */,
 				0D8EADAC1CDAE42A00A4DAED /* ApiUrls.swift in Sources */,
@@ -699,6 +717,7 @@
 				0D13AFF01CD578FB00D7D51F /* SigninViewController.swift in Sources */,
 				0D8EADB31CDBF1EF00A4DAED /* AddFriendViewController.swift in Sources */,
 				0D13AFDC1CD548FD00D7D51F /* SectionNavigationControllerDelegate.swift in Sources */,
+				E394EF971CEDC3BC0008468D /* Answer.swift in Sources */,
 				0D13AFFC1CD5941700D7D51F /* UIColorExtension.swift in Sources */,
 				0D13AF971CD2C91D00D7D51F /* MasterViewController.swift in Sources */,
 				0D13B00A1CD8007000D7D51F /* ApiHandler.swift in Sources */,
