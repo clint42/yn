@@ -51,15 +51,16 @@
 		0DDC5ABA1CEBEBC400EBA597 /* MasterAnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */; };
 		2EC554C93C6B6832BA249C62 /* libPods-ynTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACD3DA9CC393A2CC07676D5 /* libPods-ynTests.a */; };
 		4F8F02ECDA837FC1C8A324FB /* libPods-ynUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D707435FA9072CC1AE9C76 /* libPods-ynUITests.a */; };
+		76DE3B5CDA4B5D789C168C67 /* Pods_yn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 393003083260291A362A8302 /* Pods_yn.framework */; };
 		AEA15CB91CEAE05A009FE536 /* BackgroundKolodaAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15CB81CEAE05A009FE536 /* BackgroundKolodaAnimator.swift */; };
 		AEA15CBD1CEAE522009FE536 /* CustomKolodaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15CBC1CEAE522009FE536 /* CustomKolodaView.swift */; };
 		AEA15CC11CEAEA17009FE536 /* ExampleOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15CC01CEAEA17009FE536 /* ExampleOverlayView.swift */; };
-		AEA15CC61CEAF2B4009FE536 /* OverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA15CC41CEAF2B4009FE536 /* OverlayView.xib */; };
 		AEA15CC81CEAF8A7009FE536 /* QuestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15CC71CEAF8A7009FE536 /* QuestionCard.swift */; };
 		AEA15CCA1CEAFB97009FE536 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA15CC91CEAFB97009FE536 /* CardView.xib */; };
 		AEF85E1E1CEC5D42003F39E5 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF85E1D1CEC5D42003F39E5 /* Question.swift */; };
 		AEF85E201CEC5D5F003F39E5 /* QuestionsApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF85E1F1CEC5D5F003F39E5 /* QuestionsApiController.swift */; };
 		E328E0961CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */; };
+		E39B01211CED333C009E525C /* OverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E39B01201CED333C009E525C /* OverlayView.xib */; };
 		E3B07E231CE959690064FAD8 /* countriesCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3B07E221CE959690064FAD8 /* countriesCode.plist */; };
 		E3DD83551CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DD83541CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift */; };
 /* End PBXBuildFile section */
@@ -140,12 +141,12 @@
 		AEA15CB81CEAE05A009FE536 /* BackgroundKolodaAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundKolodaAnimator.swift; sourceTree = "<group>"; };
 		AEA15CBC1CEAE522009FE536 /* CustomKolodaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomKolodaView.swift; sourceTree = "<group>"; };
 		AEA15CC01CEAEA17009FE536 /* ExampleOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleOverlayView.swift; sourceTree = "<group>"; };
-		AEA15CC51CEAF2B4009FE536 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OverlayView.xib; sourceTree = "<group>"; };
 		AEA15CC71CEAF8A7009FE536 /* QuestionCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionCard.swift; sourceTree = "<group>"; };
 		AEA15CC91CEAFB97009FE536 /* CardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 		AEF85E1D1CEC5D42003F39E5 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		AEF85E1F1CEC5D5F003F39E5 /* QuestionsApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsApiController.swift; sourceTree = "<group>"; };
 		E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsRequestsViewController.swift; sourceTree = "<group>"; };
+		E39B01201CED333C009E525C /* OverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OverlayView.xib; sourceTree = "<group>"; };
 		E3B07E221CE959690064FAD8 /* countriesCode.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = countriesCode.plist; sourceTree = "<group>"; };
 		E3DD83541CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswersQuestionsListViewController.swift; sourceTree = "<group>"; };
 		EEFFA5B8721943B4C4592A13 /* Pods-ynUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ynUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ynUITests/Pods-ynUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -160,6 +161,7 @@
 			files = (
 				0DB736AF1CEAE439001C5B86 /* FBSDKCoreKit.framework in Frameworks */,
 				0D24606E1CEAEA49000BCEB4 /* FBSDKLoginKit.framework in Frameworks */,
+				76DE3B5CDA4B5D789C168C67 /* Pods_yn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,8 +281,8 @@
 			isa = PBXGroup;
 			children = (
 				0D13AFE71CD55B7700D7D51F /* Questions.storyboard */,
-				AEA15CC41CEAF2B4009FE536 /* OverlayView.xib */,
 				0D13AFE91CD55BA900D7D51F /* QuestionsListViewController.swift */,
+				E39B01201CED333C009E525C /* OverlayView.xib */,
 				AEA15CC01CEAEA17009FE536 /* ExampleOverlayView.swift */,
 				AEA15CB81CEAE05A009FE536 /* BackgroundKolodaAnimator.swift */,
 				AEA15CBC1CEAE522009FE536 /* CustomKolodaView.swift */,
@@ -505,12 +507,12 @@
 				0D13AFD51CD2E1C300D7D51F /* Ask.storyboard in Resources */,
 				E3B07E231CE959690064FAD8 /* countriesCode.plist in Resources */,
 				0D13AFFA1CD5922400D7D51F /* Sansation_Light.ttf in Resources */,
+				E39B01211CED333C009E525C /* OverlayView.xib in Resources */,
 				0D13AFEC1CD5618D00D7D51F /* AuthStoryboard.storyboard in Resources */,
 				0D13AFE81CD55B7700D7D51F /* Questions.storyboard in Resources */,
 				0D13AFF81CD5921E00D7D51F /* Sansation_Bold.ttf in Resources */,
 				0D8EADB11CDAE60E00A4DAED /* ApiUrls.plist in Resources */,
 				AEA15CCA1CEAFB97009FE536 /* CardView.xib in Resources */,
-				AEA15CC61CEAF2B4009FE536 /* OverlayView.xib in Resources */,
 				0D13AFF91CD5922000D7D51F /* Sansation_Regular.ttf in Resources */,
 				0D13AF9A1CD2C91D00D7D51F /* Main.storyboard in Resources */,
 			);
@@ -743,14 +745,6 @@
 				0D13AF9E1CD2C91D00D7D51F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		AEA15CC41CEAF2B4009FE536 /* OverlayView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AEA15CC51CEAF2B4009FE536 /* Base */,
-			);
-			name = OverlayView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

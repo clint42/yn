@@ -55,6 +55,47 @@ class QuestionsApiController {
         }
     }
     
+    func getAllQuestions(nResults nResults: Int, offset: Int, orderBy: String?, orderRule: String?, completion: (result: [String:AnyObject]?, err: ApiError?) -> Void) throws -> Request {
+        var params: [String: AnyObject] = [
+            "nResults": nResults,
+            "offset": offset
+        ]
+        if (orderBy != nil) {
+            params["orderBy"] = orderBy!
+        }
+        if (orderRule != nil) {
+            params["orderRule"] = orderRule!
+        }
+        do {
+            return try apiHandler.request(.GET, URLString: ApiUrls.getUrl("getAllQuestions"), parameters: params, completion: { (result, err) in
+                var questions = [Question]()
+                if err == nil && result!["questions"] != nil && result!["questions"] is Array<Dictionary<String, AnyObject>> {
+                    for question in result!["questions"] as! Array<Dictionary<String, AnyObject>> {
+                        do {
+                            try questions.append(Question(json: question))
+                        } catch let error as ApiError {
+                            print("error: \(error)")
+                        } catch {
+                            print("Unexpected error")
+                        }
+                    }
+                    print("RES", result!["userId"]!)
+                    let res: [String: AnyObject] = [
+                        "questions": questions,
+                        "userid": result!["userId"]!
+                    ]
+                    completion(result: res, err: nil)
+                }
+                else if err != nil {
+                    completion(result: nil, err: ApiError.ResponseInvalidData)
+                }
+                else {
+                    completion(result: nil, err: err)
+                }
+            })
+        }
+    }
+    
     func answerToQuestion(questionId: Int, answer: Bool, completion: (success: Bool?, err: ApiError?) -> Void) throws -> Request {
         let params: [String: AnyObject] = [
             "identifier": questionId,

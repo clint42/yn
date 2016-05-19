@@ -7,6 +7,7 @@
     <customFonts key="customFonts">
         <mutableArray key="Sansation_Regular.ttf">
             <string>Sansation</string>
+            <string>Sansation</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -81,7 +82,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="answersQuestionsListCell" id="vE1-n7-Jot" customClass="AnswersQuestionsListTableViewCell" customModule="yn" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="answersQuestionsListHeaderCell" id="vE1-n7-Jot" customClass="AnswersQuestionsListTableViewHeaderCell" customModule="yn" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vE1-n7-Jot" id="pfD-9Z-1Kx">
@@ -102,7 +103,32 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="questionLabel" destination="6Hp-21-dxZ" id="0gc-V3-L8U"/>
+                                            <outlet property="headerLabel" destination="6Hp-21-dxZ" id="uXx-dW-Uoe"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="answersQuestionsListCell" id="xTJ-2r-BUn" customClass="AnswersQuestionsListTableViewCell" customModule="yn" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xTJ-2r-BUn" id="EYd-RE-pmf">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jbD-7t-5a3">
+                                                    <rect key="frame" x="8" y="13" width="584" height="16"/>
+                                                    <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="jbD-7t-5a3" firstAttribute="centerY" secondItem="EYd-RE-pmf" secondAttribute="centerY" id="aS6-iB-kaC"/>
+                                                <constraint firstItem="jbD-7t-5a3" firstAttribute="trailing" secondItem="EYd-RE-pmf" secondAttribute="trailingMargin" id="hZ2-kc-pUX"/>
+                                                <constraint firstItem="jbD-7t-5a3" firstAttribute="leading" secondItem="EYd-RE-pmf" secondAttribute="leadingMargin" id="vRB-Jx-HwZ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="questionLabel" destination="jbD-7t-5a3" id="hIx-9G-nJw"/>
+                                            <segue destination="JY5-RL-lsC" kind="show" id="AEK-ZP-gs8"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -124,7 +150,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UEr-De-2Sy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1095" y="1113"/>
+            <point key="canvasLocation" x="283" y="1905"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="vRq-jL-2sd">
+            <objects>
+                <viewController id="JY5-RL-lsC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uqB-P8-cmN"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hfe-5S-ZuY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IUY-ve-8G7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hf1-MB-sPr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="283" y="2607"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hbr-c4-Aha">

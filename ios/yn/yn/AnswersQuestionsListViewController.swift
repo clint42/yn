@@ -13,8 +13,8 @@ class AnswersQuestionsListViewController: UIViewController, UITableViewDelegate,
     @IBOutlet weak var tableView: UITableView!
     
     var paginationOffset: Int = 0
-    var friendsSections = [String]()
-    var friends = [[User]]()
+    var questionsSections = [String]()
+    var questions = [[Question]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +38,9 @@ class AnswersQuestionsListViewController: UIViewController, UITableViewDelegate,
     
     private func fetchQuestions() {
         do {
-            try FriendsApiController.sharedInstance.getFriends(nResults: 10, offset: 0, orderBy: "username", orderRule: "ASC", completion: { (users: [User]?, err: ApiError?) in
-                if (err == nil && users != nil) {
-                    self.addFriendsToSectionRowArrays(users!)
+            try QuestionsApiController.sharedInstance.getAllQuestions(nResults: 20, offset: 0, orderBy: "UserId", orderRule: "ASC", completion: { (result: [String:AnyObject]?, err: ApiError?) in
+                if (err == nil && result != nil && result!["questions"] != nil && result!["userid"] != nil) {
+                    self.addQuestionsToSectionRowArrays(result!["questions"]! as! [Question], userid: result!["userid"]! as! Int)
                     self.tableView.reloadData()
                 }
                 else {
@@ -54,34 +54,47 @@ class AnswersQuestionsListViewController: UIViewController, UITableViewDelegate,
         }
     }
     
-    private func addFriendsToSectionRowArrays(users: [User]) {
-        for user in users {
-            if (!user.username.isEmpty) {
-                let firstChar = user.username[user.username.startIndex]
-                var index = 0
-                if !friendsSections.contains(String(firstChar)) {
-                    friendsSections.append(String(firstChar))
-                    friends.append([User]())
-                    index = friendsSections.count - 1
+    private func resetQuestionList() {
+        var index = 0
+        for _ in self.questionsSections {
+            self.questions[index].removeAll()
+            index += 1
+        }
+        questionsSections.removeAll()
+        questions.removeAll()
+    }
+    
+    private func addQuestionsToSectionRowArrays(_questions: [Question], userid: Int) {
+        resetQuestionList()
+        for _question in _questions {
+            if (_question.ownerId != 0) {
+                var section = ""
+                if (_question.ownerId == userid) {
+                    section = String("owner")
+                    if (!questionsSections.contains(section)) {
+                        questionsSections.append(section)
+                        questions.append([Question]())
+                    }
+                } else {
+                    section = String("others")
+                    if (!questionsSections.contains(section)) {
+                        questionsSections.append(section)
+                        questions.append([Question]())
+                    }
                 }
-                else {
-                    index = friendsSections.indexOf(String(firstChar))!
-                }
-                friends[index].append(user)
-                print("on passe par laaaaa")
-                print(friends[index].last!.username)
-                friends[index].sortInPlace({ $0.username < $1.username })
+                let index = questionsSections.indexOf(section)!
+                questions[index].append(_question)
             }
         }
     }
     
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friends[section].count
+        return questions[section].count
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if friendsSections.count > 0 {
+        if questionsSections.count > 0 {
             tableView.backgroundView = nil
             tableView.separatorStyle = .SingleLine
         } else {
@@ -93,23 +106,66 @@ class AnswersQuestionsListViewController: UIViewController, UITableViewDelegate,
             tableView.backgroundView = noDataLabel
             tableView.separatorStyle = .None
         }
-        return friendsSections.count
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        return questionsSections.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("answersQuestionsListCell") as! AnswersQuestionsListTableViewCell
-        cell.questionLabel.text = friends[indexPath.section][indexPath.row].username
+        cell.questionLabel.text = questions[indexPath.section][indexPath.row].title
         return cell
     }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let  headerCell = tableView.dequeueReusableCellWithIdentifier("answersQuestionsListHeaderCell") as! AnswersQuestionsListTableViewHeaderCell
+        headerCell.backgroundColor = UIColor.purpleYn()
+        headerCell.headerLabel.textColor = UIColor.whiteColor()
+        headerCell.headerLabel.font = UIFont(name: "Sansation", size: 20)
+        headerCell.headerLabel.textAlignment = NSTextAlignment.Center
+        if (section == questionsSections.indexOf("owner")) {
+            headerCell.headerLabel.text = "Your questions";
+        } else {
+            headerCell.headerLabel.text = "Participated in";
+        }
+        return headerCell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let alertController: UIAlertController
+        if (!(questions[indexPath.section][indexPath.row].title ?? "").isEmpty &&
+            !(questions[indexPath.section][indexPath.row].description ?? "").isEmpty) {
+            alertController = UIAlertController(title: questions[indexPath.section][indexPath.row].title, message: "\(questions[indexPath.section][indexPath.row].description)", preferredStyle: .Alert)
+        } else {
+            alertController = UIAlertController(title: questions[indexPath.section][indexPath.row].title, message: "", preferredStyle: .Alert)
+        }
+        
+        let acceptAction = UIAlertAction(title: "Accept", style: .Default) { (action:UIAlertAction!) in
+            self.test()
+        }
+        alertController.addAction(acceptAction)
+        
+        let denyAction = UIAlertAction(title: "Deny", style: .Default) { (action:UIAlertAction!) in
+            self.test()
+        }
+        alertController.addAction(denyAction)
+        
+        let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
+        }
+        alertController.addAction(CancelAction)
+        
 
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func test() {
+
+    }
 
 }
 
 class AnswersQuestionsListTableViewCell: UITableViewCell {
-    
     @IBOutlet weak var questionLabel: UILabel!
+}
+
+class AnswersQuestionsListTableViewHeaderCell: UITableViewCell {
+    @IBOutlet weak var headerLabel: UILabel!
 }

@@ -76,7 +76,29 @@ router.get('/asked', auth, function(req, res, next) {
         res.status(422);
         res.json({error: "Invalid parameter value"});
     }
+});
 
+router.get('/all', auth, function(req, res, next) {
+    var nResults = req.query.nResults || 10;
+    var offset = req.query.offset || 0;
+    var orderBy = req.query.orderBy || undefined;
+    var orderRule = req.query.orderRule || "ASC";
+
+    if ((orderRule == "DESC" || orderRule == "ASC")) {
+        req.currentUser.getAllQuestions(nResults, offset, orderBy, orderRule).then(function(questions) {
+            res.json({
+                questions: questions,
+                userId: req.currentUser.id
+            });
+        }).catch(function(err) {
+            //TODO: Error handling
+            next(err, req, res);
+        });
+    }
+    else {
+        res.status(422);
+        res.json({error: "Invalid parameter value"});
+    }
 });
 
 module.exports = router;

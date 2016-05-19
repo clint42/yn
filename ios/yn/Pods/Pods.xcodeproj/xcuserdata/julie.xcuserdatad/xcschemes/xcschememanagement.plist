@@ -6,23 +6,63 @@
 	<dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Koloda.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-yn.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ynTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ynUITests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>pop.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2267633E6E9C9C96B5021C09F3C0862E</key>
+		<key>2692A60CA9509B2E2A543556E170DCB4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>290602211D7973CB0B88047371373140</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7F5A7097E8CFFA2AE279FA4D1D50FEEA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C45290004E0078130C91A71711094467</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F4A1C8D3AFA6250F34622CB067082EEF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
