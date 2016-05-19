@@ -174,6 +174,7 @@ class CreateQuestionViewController: UIViewController {
     }
     
     @IBAction func textOnlyButtonTapped(sender: UIButton) {
+        self.performSegueWithIdentifier("editQuestionSegue", sender: self)
     }
     
     @IBAction func switchCameraButtonTapped(sender: UIButton) {
@@ -191,6 +192,7 @@ class CreateQuestionViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editQuestionSegue" {
             (segue.destinationViewController as! EditQuestionViewController).imageData = tmpImageData
+            tmpImageData = nil
         }
     }
     

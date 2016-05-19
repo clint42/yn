@@ -15,6 +15,7 @@ var uploadImage = upload.fields([{
 var questionsService = require(path.resolve('services/questions'));
 
 router.post('/', [auth, uploadImage], function(req, res, next) {
+    console.log("OK");
     var title = req.body.title;
     var questionText = req.body.question;
     var friendsJson = req.body.friends;
@@ -23,7 +24,7 @@ router.post('/', [auth, uploadImage], function(req, res, next) {
                 title: title,
                 question: questionText
             };
-            if (req.files['image']) {
+            if (req.files && req.files['image']) {
                 questionData.imageUrl = req.files['image'][0].filename;
             }
 
@@ -64,9 +65,6 @@ router.post('/', [auth, uploadImage], function(req, res, next) {
                 res.status(500);
                 res.json({error: 'Transaction error: ' + err});
             });
-
-
-
     }
     else {
         res.status(422);
