@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //TODO: Remove, DEV ONLY !
         //application.unregisterForRemoteNotifications()
+        print("didFinishLaunching")
         
         let storyboard = UIStoryboard(name: "AuthStoryboard", bundle: nil)
         let navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
@@ -28,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         let _ = FBSDKLoginButton()
         
+        print(launchOptions);
         if launchOptions != nil {
             if let notification = launchOptions![UIApplicationLaunchOptionsRemoteNotificationKey] {
                 print("Notification: \(notification)")
