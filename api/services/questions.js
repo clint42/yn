@@ -12,9 +12,9 @@ module.exports = (function() {
     questionsService.notifyUsersNewQuestion = function(users, question) {
         for (var i = 0; i < users.length; ++i) {
             var devices = users[i].Devices;
-            for (var i = 0; i < devices.length; ++i) {
+            for (var j = 0; j < devices.length; ++j) {
                 console.log("Send notification");
-                notificationsService.sendNotification(devices[i], {title: question.title, body: question.question.substring(0, 50)}, {type: "newQuestion", idQuestion: question.id});
+                notificationsService.sendNotification(devices[j], {title: question.title, body: question.question.substring(0, 50)}, {type: "newQuestion", questionId: question.id});
             }
         }
     };
