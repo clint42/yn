@@ -184,13 +184,20 @@ module.exports = function(sequelize, DataTypes) {
             },
             deleteFriend: function(userToDelete) {
                 return new Promise((resolve, reject) => {
-                    sequelize.models.Friend.destroy({
-                        where: {
-                            UserId: this.id,
-                            FriendId: userToDelete.id,
+                    sequelize.models.Friend.destroy(
+                        {
+                            where: {
+                                $or: [{
+                                    UserId: this.id,
+                                    FriendId: userToDelete.id
+                                }, {
+                                    UserId: userToDelete.id,
+                                    FriendId: this.id
+                                }]
+                            },
                             status: 'ACCEPTED'
                         }
-                    }).then((success) => {
+                    ).then((success) => {
                         resolve(success);
                     }).catch((err) => {
                         reject(err);
