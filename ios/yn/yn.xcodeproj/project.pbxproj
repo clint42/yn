@@ -45,10 +45,14 @@
 		0D8EADB11CDAE60E00A4DAED /* ApiUrls.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D8EADB01CDAE60E00A4DAED /* ApiUrls.plist */; };
 		0D8EADB31CDBF1EF00A4DAED /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADB21CDBF1EF00A4DAED /* AddFriendViewController.swift */; };
 		0D8EADB51CDD3F3000A4DAED /* UsersApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8EADB41CDD3F3000A4DAED /* UsersApiController.swift */; };
+		0DAA2FE11CED64F40063686C /* RemoteNotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAA2FE01CED64F40063686C /* RemoteNotificationType.swift */; };
+		0DAA2FE31CED7CCB0063686C /* InternalNotificationForRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAA2FE21CED7CCB0063686C /* InternalNotificationForRemote.swift */; };
 		0DB736AF1CEAE439001C5B86 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB736AE1CEAE439001C5B86 /* FBSDKCoreKit.framework */; };
 		0DDC5AB51CEBD00900EBA597 /* NSDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB41CEBD00900EBA597 /* NSDataExtension.swift */; };
 		0DDC5AB81CEBEB1300EBA597 /* Answers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */; };
 		0DDC5ABA1CEBEBC400EBA597 /* MasterAnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */; };
+		0DDC5ABE1CED21F300EBA597 /* FriendsListViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDC5ABD1CED21F300EBA597 /* FriendsListViewControllerDelegate.swift */; };
+		0DDC5AC21CED225200EBA597 /* OverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DDC5AC11CED225200EBA597 /* OverlayView.xib */; };
 		2EC554C93C6B6832BA249C62 /* libPods-ynTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACD3DA9CC393A2CC07676D5 /* libPods-ynTests.a */; };
 		4F8F02ECDA837FC1C8A324FB /* libPods-ynUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D707435FA9072CC1AE9C76 /* libPods-ynUITests.a */; };
 		76DE3B5CDA4B5D789C168C67 /* Pods_yn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 393003083260291A362A8302 /* Pods_yn.framework */; };
@@ -59,6 +63,7 @@
 		AEA15CCA1CEAFB97009FE536 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA15CC91CEAFB97009FE536 /* CardView.xib */; };
 		AEF85E1E1CEC5D42003F39E5 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF85E1D1CEC5D42003F39E5 /* Question.swift */; };
 		AEF85E201CEC5D5F003F39E5 /* QuestionsApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF85E1F1CEC5D5F003F39E5 /* QuestionsApiController.swift */; };
+		B48E8C6F9B82AC880A27E699 /* Pods_yn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 393003083260291A362A8302 /* Pods_yn.framework */; };
 		E328E0961CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */; };
 		E359FFE91CED8A4D000F6058 /* AnswerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E359FFE81CED8A4D000F6058 /* AnswerDetailsViewController.swift */; };
 		E39B01211CED333C009E525C /* OverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E39B01201CED333C009E525C /* OverlayView.xib */; };
@@ -130,10 +135,14 @@
 		0D8EADB01CDAE60E00A4DAED /* ApiUrls.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiUrls.plist; sourceTree = "<group>"; };
 		0D8EADB21CDBF1EF00A4DAED /* AddFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		0D8EADB41CDD3F3000A4DAED /* UsersApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersApiController.swift; sourceTree = "<group>"; };
+		0DAA2FE01CED64F40063686C /* RemoteNotificationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteNotificationType.swift; sourceTree = "<group>"; };
+		0DAA2FE21CED7CCB0063686C /* InternalNotificationForRemote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalNotificationForRemote.swift; sourceTree = "<group>"; };
 		0DB736AE1CEAE439001C5B86 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		0DDC5AB41CEBD00900EBA597 /* NSDataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtension.swift; sourceTree = "<group>"; };
 		0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Answers.storyboard; sourceTree = "<group>"; };
 		0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterAnswersViewController.swift; sourceTree = "<group>"; };
+		0DDC5ABD1CED21F300EBA597 /* FriendsListViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListViewControllerDelegate.swift; sourceTree = "<group>"; };
+		0DDC5AC11CED225200EBA597 /* OverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OverlayView.xib; sourceTree = "<group>"; };
 		266E9170185883DBC7F0E649 /* Pods-yn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yn.release.xcconfig"; path = "Pods/Target Support Files/Pods-yn/Pods-yn.release.xcconfig"; sourceTree = "<group>"; };
 		393003083260291A362A8302 /* Pods_yn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACD3DA9CC393A2CC07676D5 /* libPods-ynTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ynTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,7 +172,7 @@
 			files = (
 				0DB736AF1CEAE439001C5B86 /* FBSDKCoreKit.framework in Frameworks */,
 				0D24606E1CEAEA49000BCEB4 /* FBSDKLoginKit.framework in Frameworks */,
-				76DE3B5CDA4B5D789C168C67 /* Pods_yn.framework in Frameworks */,
+				B48E8C6F9B82AC880A27E699 /* Pods_yn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +283,7 @@
 				0D13AFE21CD557E900D7D51F /* Friends.storyboard */,
 				0D13AFE41CD5587700D7D51F /* FriendsListViewController.swift */,
 				0D8EADB21CDBF1EF00A4DAED /* AddFriendViewController.swift */,
+				0DDC5ABD1CED21F300EBA597 /* FriendsListViewControllerDelegate.swift */,
 				E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */,
 			);
 			name = Friends;
@@ -283,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				0D13AFE71CD55B7700D7D51F /* Questions.storyboard */,
+				0DDC5AC11CED225200EBA597 /* OverlayView.xib */,
 				0D13AFE91CD55BA900D7D51F /* QuestionsListViewController.swift */,
 				E39B01201CED333C009E525C /* OverlayView.xib */,
 				AEA15CC01CEAEA17009FE536 /* ExampleOverlayView.swift */,
@@ -319,6 +330,8 @@
 			children = (
 				0D2460751CEBCA08000BCEB4 /* RemoteNotificationHandler.swift */,
 				0D2460771CEBCA76000BCEB4 /* RemoteNotificationError.swift */,
+				0DAA2FE01CED64F40063686C /* RemoteNotificationType.swift */,
+				0DAA2FE21CED7CCB0063686C /* InternalNotificationForRemote.swift */,
 			);
 			name = RemoteNotification;
 			sourceTree = "<group>";
@@ -516,6 +529,7 @@
 				0D13AFF81CD5921E00D7D51F /* Sansation_Bold.ttf in Resources */,
 				0D8EADB11CDAE60E00A4DAED /* ApiUrls.plist in Resources */,
 				AEA15CCA1CEAFB97009FE536 /* CardView.xib in Resources */,
+				0DDC5AC21CED225200EBA597 /* OverlayView.xib in Resources */,
 				0D13AFF91CD5922000D7D51F /* Sansation_Regular.ttf in Resources */,
 				0D13AF9A1CD2C91D00D7D51F /* Main.storyboard in Resources */,
 			);
@@ -675,6 +689,7 @@
 				0D2460731CEB103A000BCEB4 /* SignupWithFacebookViewController.swift in Sources */,
 				0D2460781CEBCA76000BCEB4 /* RemoteNotificationError.swift in Sources */,
 				0DDC5AB51CEBD00900EBA597 /* NSDataExtension.swift in Sources */,
+				0DDC5ABE1CED21F300EBA597 /* FriendsListViewControllerDelegate.swift in Sources */,
 				0D13AFE51CD5587700D7D51F /* FriendsListViewController.swift in Sources */,
 				0D13AFC61CD2D27800D7D51F /* CreateQuestionViewController.swift in Sources */,
 				0D13AFDA1CD5453700D7D51F /* CustomSegue.swift in Sources */,
@@ -683,12 +698,14 @@
 				0D13AFDE1CD549D600D7D51F /* TransitionAnimator.swift in Sources */,
 				E359FFE91CED8A4D000F6058 /* AnswerDetailsViewController.swift in Sources */,
 				0D13B00D1CD845DE00D7D51F /* User.swift in Sources */,
+				0DAA2FE31CED7CCB0063686C /* InternalNotificationForRemote.swift in Sources */,
 				0D8EADAC1CDAE42A00A4DAED /* ApiUrls.swift in Sources */,
 				AEA15CBD1CEAE522009FE536 /* CustomKolodaView.swift in Sources */,
 				AEA15CB91CEAE05A009FE536 /* BackgroundKolodaAnimator.swift in Sources */,
 				AEF85E201CEC5D5F003F39E5 /* QuestionsApiController.swift in Sources */,
 				0D13B0001CD5A1C600D7D51F /* SignupViewController.swift in Sources */,
 				AEA15CC11CEAEA17009FE536 /* ExampleOverlayView.swift in Sources */,
+				0DAA2FE11CED64F40063686C /* RemoteNotificationType.swift in Sources */,
 				AEA15CC81CEAF8A7009FE536 /* QuestionCard.swift in Sources */,
 				0D4E24A71CE53B0E0035B42D /* CameraError.swift in Sources */,
 				0D8EADB51CDD3F3000A4DAED /* UsersApiController.swift in Sources */,

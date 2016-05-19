@@ -13,7 +13,8 @@ module.exports = function(sequelize, DataTypes) {
         token: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true
+            //TODO: Reset unique to true
+            //unique: true
         },
         deviceOS: {
             type: DataTypes.ENUM('IOS', 'ANDROID', 'WP'),

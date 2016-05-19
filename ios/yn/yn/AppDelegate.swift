@@ -27,6 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         let _ = FBSDKLoginButton()
+    
+        if launchOptions != nil {
+            if let notification = launchOptions![UIApplicationLaunchOptionsRemoteNotificationKey] {
+                print("Notification: \(notification)")
+            }
+        }
+        
         
         // Add any custom logic here.
         return true
@@ -68,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("didRegisterForRemoveNotification. DeviceToken: \(deviceToken)")
         do {
             try remoteNotificationHandler.registerDevice(deviceToken.hexString)
+            print(deviceToken.hexString)
         } catch let error as RemoteNotificationError {
             print("Error while registering device: \(error)")
         } catch let error {
@@ -85,7 +93,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        print("Notification received. fetchCompletionHandler")
+        remoteNotificationHandler.handleRemoteNotification(userInfo as! Dictionary<String, AnyObject>, appState: application.applicationState)
+        completionHandler(UIBackgroundFetchResult.NoData)
     }
 }
 

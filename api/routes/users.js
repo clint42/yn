@@ -152,10 +152,12 @@ router.post('/fb-signup', function(req, res, next) {
     var username = req.body.username;
     var firstname = req.body.firstname;
     var lastname = req.body.lastname;
-    if (email && username) {
+    var fbId = req.body.fbId;
+    if (email && username && fbId) {
         var user = {
             email: email,
             username: username,
+            fbId: fbId,
             authWithFacebook: true
         };
         if (phone) {
@@ -221,9 +223,9 @@ router.get('/search', function(req, res, next) {
 });
 
 router.post('/find', auth, function(req, res, next) {
-    var numbersOrEmails = JSON.parse(req.body.findArray);
-    if (numbersOrEmails) {
-        req.currentUser.findUsers(numbersOrEmails).then(function(users) {
+    var identifier = JSON.parse(req.body.findArray);
+    if (identifier) {
+        req.currentUser.findUsers(identifier).then(function(users) {
             res.json({
                 friends: users,
                 count: users.length

@@ -14,7 +14,10 @@ private var numberOfCards: UInt = 0
 class QuestionsListViewController: UIViewController {
 
     @IBOutlet var questionView: UIView!
+    @IBOutlet weak var buttonView: UIView!
     @IBOutlet weak var kolodaView: KolodaView!
+    
+    private let questionsApiController = QuestionsApiController.sharedInstance
     
     private var dataSource: Array<UIImage> = {
         var array: Array<UIImage> = []
@@ -24,16 +27,37 @@ class QuestionsListViewController: UIViewController {
         return array
     }()
     var questions = [Question]()
-
     
     override func viewDidLoad() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.loadNewQuestion), name: InternalNotificationForRemote.newQuestion.rawValue, object: nil)
         super.viewDidLoad()
-    
-        // Do any additional setup after loading the view.
+        self.buttonView.hidden = true
     }
     
     override func viewWillAppear(animated: Bool) {
         loadData()
+    }
+    
+    //MARK: - Notification handlers
+    @objc private func loadNewQuestion(notification: NSNotification) {
+        do {
+            let questionId = notification.userInfo!["questionId"] as! Int
+            try questionsApiController.getQuestion(questionId, completion: { (question, err) in
+                if err == nil {
+                    print("Insert question \(question)")
+                    self.questions.insert(question!, atIndex: 0)
+                    self.kolodaView.reloadData()
+                }
+                else {
+                    //TODO: Error handling
+                    print("An error occurred: \(err)")
+                }
+            })
+        } catch let error as ApiError {
+            print("An error occured: \(error)")
+        } catch {
+            print("An unexpected error occurred")
+        }
     }
     
     private func loadData() {
@@ -45,7 +69,7 @@ class QuestionsListViewController: UIViewController {
     
     private func fetchQuestions() {
         do {
-            try QuestionsApiController.sharedInstance.getQuestionsAsked(nResults: 20, offset: 0, orderBy: "updatedAt", orderRule: "ASC", completion: { (questions: [Question]?, err: ApiError?) in
+            try questionsApiController.getQuestionsAsked(nResults: 20, offset: 0, orderBy: "createdAt", orderRule: "DESC", completion: { (questions: [Question]?, err: ApiError?) in
                 if (err == nil && questions != nil) {
                     numberOfCards = UInt(questions!.count)
                     self.questions = questions!
@@ -56,6 +80,9 @@ class QuestionsListViewController: UIViewController {
                         }
                         return array
                     }()
+                    if (numberOfCards > 0) {
+                        self.buttonView.hidden = false
+                    }
                     self.kolodaView.reloadData()
                 }
                 else {
@@ -83,14 +110,27 @@ class QuestionsListViewController: UIViewController {
     }
     
     func koloda(koloda: KolodaView, didSwipeCardAtIndex index: UInt, inDirection direction: SwipeResultDirection) {
-        print(index)
+        var answer: Bool = false
         if (direction == SwipeResultDirection.Left) {
-//            print("left")
+            answer = false
         }
         else if (direction == SwipeResultDirection.Right) {
-//            print("right")
+            answer = true
         }
-        
+        do {
+            try QuestionsApiController.sharedInstance.answerToQuestion(questions[Int(index)].id, answer: answer, completion: { (success: Bool?, err: ApiError?) in
+                if (err == nil && success == true) {
+                    print(success)
+                }
+                else {
+                    print("error: \(err)")
+                }
+            })
+        } catch let error as ApiError {
+            print("error: \(error)")
+        } catch {
+            print("Unexpected error")
+        }
     }
 
 
@@ -110,17 +150,7 @@ class QuestionsListViewController: UIViewController {
 extension QuestionsListViewController: KolodaViewDelegate {
     
     func kolodaDidRunOutOfCards(koloda: KolodaView) {
-//        print(kolodaView.currentCardIndex - 1)
-//        dataSource.insert(UIImage(named: "Card_like_6")!, atIndex: kolodaView.currentCardIndex - 1)
-//        let position = kolodaView.currentCardIndex
-//        kolodaView.insertCardAtIndexRange(position...position, animated: true)
-        
-        let noDataLabel: UILabel = UILabel(frame: CGRectMake(0, 0, questionView.bounds.size.width, questionView.bounds.size.height))
-        noDataLabel.text = "No questions"
-        noDataLabel.textColor = UIColor.lightGrayColor()
-        noDataLabel.textAlignment = NSTextAlignment.Center
-        noDataLabel.font = UIFont(name: "Sansation", size: 30)
-        questionView.addSubview(noDataLabel)
+        self.buttonView.hidden = true
     }
 }
 
@@ -133,11 +163,30 @@ extension QuestionsListViewController: KolodaViewDataSource {
     
     func koloda(koloda: KolodaView, viewForCardAtIndex index: UInt) -> UIView {
         let card: QuestionCard = QuestionCard.instanceFromNib() as! QuestionCard
+        let question = self.questions[Int(index)]
         if (index < UInt(questions.count)) {
-            card.setCardTitle(self.questions[Int(index)].title)
-            card.setCardQuestion(self.questions[Int(index)].description!)
-//            card.setCardImageFromUrl(self.questions[Int(index)].imageUrl!)
-            card.setCardImageFromImage(self.dataSource[Int(index)])
+            card.setCardTitle(question.title)
+            if question.description != nil {
+                card.setCardQuestion(question.description!)
+            }
+            else {
+                card.setCardQuestion("")
+            }
+            do {
+                if question.imageUrl != nil {
+                    let imgUrl = try ApiUrls.getUrl("images") + "/" + question.imageUrl!
+                    print("IMAGE URL: \(imgUrl)")
+                    try card.setCardImageFromUrl(ApiUrls.getUrl("images") + "/" + question.imageUrl!)
+                }
+                else {
+                    card.setCardImageFromImage(UIImage(named: "yn_logo")!)
+                }
+                
+            } catch let error as ApiError {
+                print("An error occurred: \(error)")
+            } catch {
+                print("An unexpected error occurred")
+            }
         }
         return card
     }

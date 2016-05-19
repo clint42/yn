@@ -210,7 +210,6 @@ class SigninViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     
     // MARK: - FBSDKLoginButtonDelegate
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        print("LoginButton didCompleteWithResult")
         if error == nil {
             signinWithFacebook(result.token)
         }
@@ -220,11 +219,9 @@ class SigninViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
-        print("loginButton didLogOut");
     }
     
     func loginButtonWillLogin(loginButton: FBSDKLoginButton!) -> Bool {
-        print("loginButton will login");
         return true
     }
     

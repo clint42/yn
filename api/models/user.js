@@ -21,6 +21,10 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true
         },
+        fbId: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         username: DataTypes.STRING,
         email: DataTypes.STRING,
         phone: DataTypes.STRING,
@@ -36,6 +40,7 @@ module.exports = function(sequelize, DataTypes) {
             associate: function(models) {
                 models.User.belongsToMany(models.User, {as: 'Friends', through: models.Friend, onDelete: 'CASCADE', onUpdate: 'CASCADE'})
                 models.User.hasMany(models.Device);
+                models.User.belongsToMany(models.Question, {as: {plural: 'QuestionsAskedA', singular: 'QuestionAskedA'}, through: models.UserAsked, onUpdate: 'CASCADE'});
             },
             getUser: function(identifier) {
                 var self = this;
@@ -207,10 +212,10 @@ module.exports = function(sequelize, DataTypes) {
                     });
                 });
             },
-            findUsers: function(numbersOrEmails) {
+            findUsers: function(identifier) {
                 var self = this;
                 return new Promise(function(resolve, reject) {
-                    if (numbersOrEmails.empty)
+                    if (identifier.empty)
                         return resolve({});
                     var queryId = "SELECT Users.id " +
                         "FROM Users " +
@@ -225,11 +230,11 @@ module.exports = function(sequelize, DataTypes) {
                             if (count < (idFriends.length - 1))
                                 notIn += ",";
                         }
-                        var mylist = "\"" + numbersOrEmails.join("\",\"") + "\"";
+                        var mylist = "\"" + identifier.join("\",\"") + "\"";
                         var query = "SELECT Users.* " +
                             "FROM Users " +
                             "LEFT JOIN Friends ON (Friends.UserId = Users.id OR Friends.FriendId = Users.id) " +
-                            "WHERE (Users.email IN(" + mylist + ") OR Users.phone IN (" + mylist + ")) ";
+                            "WHERE (Users.email IN(" + mylist + ") OR Users.phone IN (" + mylist + ") OR Users.fbId IN (" + mylist + ")) ";
                         if (notIn != "")
                             query += "AND Users.id NOT IN(" + notIn + ") ";
                         query += "GROUP BY Users.id";
@@ -247,18 +252,22 @@ module.exports = function(sequelize, DataTypes) {
                 });
             },
             getQuestionsAsked: function(nbPerPage, offset, orderBy, orderRule) {
+                console.log("------GETQUESTIONSASKED----------");
                 var pagination = nbPerPage && offset;
                 var query = "SELECT " + sequelize.models.Question.tableName + ".* FROM " + sequelize.models.Question.tableName +
                             " INNER JOIN " + sequelize.models.UserAsked.tableName + " ON " + sequelize.models.Question.tableName + ".id = " +
                             sequelize.models.UserAsked.tableName + ".QuestionId WHERE " + sequelize.models.UserAsked.tableName + ".UserId = " + this.id +
-                            " AND " + sequelize.models.UserAsked.tableName + ".status = 'OPEN'";
+                            " AND " + sequelize.models.UserAsked.tableName + ".status = 'OPEN' AND " + sequelize.models.UserAsked.tableName + ".answer = 'NONE'";
+                console.log("----1----");
                 if (orderBy) {
                     query += " ORDER BY " + orderBy + " " + orderRule
                 }
                 if (pagination) {
                     query += " LIMIT " + offset + "," + nbPerPage;
                 }
+                console.log("------2----------");
                 return new Promise(function(resolve, reject) {
+                    console.log(query);
                     sequelize.query(query, {type: sequelize.QueryTypes.SELECT, model: sequelize.models.Question}).then(function(questions) {
                         resolve(questions);
                     }).catch(function(err) {
@@ -277,11 +286,34 @@ module.exports = function(sequelize, DataTypes) {
                 if (pagination) {
                     query += " LIMIT " + offset + "," + nbPerPage;
                 }
-                return new Promise(function(resolve, reject) {
-                    sequelize.query(query, {type: sequelize.QueryTypes.SELECT, model: sequelize.models.Question}).then(function(questions) {
+                return new Promise(function (resolve, reject) {
+                    sequelize.query(query, {
+                        type: sequelize.QueryTypes.SELECT,
+                        model: sequelize.models.Question
+                    }).then(function (questions) {
                         resolve(questions);
-                    }).catch(function(err) {
+                    }).catch(function (err) {
                         reject(err);
+                    });
+                });
+            },
+            answerToQuestion: function(questionId, answer) {
+                return new Promise((resolve, reject) => {
+                    sequelize.models.UserAsked.findOne({
+                        where: {
+                            UserId: this.id,
+                            QuestionId: questionId
+                        }
+                    }).then((questionAsked) => {
+                        questionAsked.update({
+                            answer: (answer !== undefined && answer == true ? "YES" : "NO")
+                        }).then((questionAsked) => {
+                            resolve(true);
+                        }).catch((error) => {
+                            reject(error);
+                        })
+                    }).catch((error) => {
+                        reject(error);
                     });
                 });
             }

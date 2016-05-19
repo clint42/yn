@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class CreateQuestionViewController: UIViewController {
+class CreateQuestionViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var controlsView: UIView!
     
@@ -171,9 +171,14 @@ class CreateQuestionViewController: UIViewController {
     }
     
     @IBAction func galeryButtonTapped(sender: UIButton) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePicker.delegate = self
+        navigationController!.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func textOnlyButtonTapped(sender: UIButton) {
+        self.performSegueWithIdentifier("editQuestionSegue", sender: self)
     }
     
     @IBAction func switchCameraButtonTapped(sender: UIButton) {
@@ -185,12 +190,21 @@ class CreateQuestionViewController: UIViewController {
         }
     }
     
+    // MARK: - UIImagePickerControllerDelegate
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        tmpImageData = UIImageJPEGRepresentation(image, 1)
+        dismissViewControllerAnimated(true) { 
+            self.performSegueWithIdentifier("editQuestionSegue", sender: self)
+        }
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editQuestionSegue" {
             (segue.destinationViewController as! EditQuestionViewController).imageData = tmpImageData
+            tmpImageData = nil
         }
     }
     

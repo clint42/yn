@@ -14,6 +14,10 @@ module.exports = function(sequelize, DataTypes) {
         status: {
             type: DataTypes.ENUM('OPEN', 'CLOSED'),
             defaultValue: 'OPEN'
+        },
+        answer: {
+            type: DataTypes.ENUM('NONE', 'YES', 'NO'),
+            defaultValue: 'NONE'
         }
     }, {
         classMethods: {

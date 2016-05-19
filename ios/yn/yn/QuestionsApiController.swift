@@ -97,16 +97,32 @@ class QuestionsApiController {
     
     func answerToQuestion(questionId: Int, answer: Bool, completion: (success: Bool?, err: ApiError?) -> Void) throws -> Request {
         let params: [String: AnyObject] = [
-            "identifier": questionId,
+            "questionId": questionId,
             "answer": answer
         ]
         do {
-            return try apiHandler.request(.POST, URLString: ApiUrls.getUrl("answerTo"), parameters: params, completion: { (result, err) in
+            return try apiHandler.request(.POST, URLString: ApiUrls.getUrl("answerToQuestion"), parameters: params, completion: { (result, err) in
                 if err == nil {
                     completion(success: result!["success"] as? Bool, err: nil)
                 }
                 else {
                     completion(success: nil, err: err);
+                }
+            })
+        }
+    }
+    
+    func getQuestion(questionId: Int, completion: (question: Question?, err: ApiError?) -> Void) throws -> Request {
+        do {
+            return try apiHandler.request(.GET, URLString: ApiUrls.getUrl("getQuestion") + "/\(questionId)", parameters: nil, completion: {
+                (result, err) in
+                if err == nil {
+                    if let questionJson = result!["question"] as? Dictionary<String, AnyObject> {
+                        print(questionJson)
+                    }
+                }
+                else {
+                    completion(question: nil, err: err)
                 }
             })
         }

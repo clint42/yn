@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class EditQuestionViewController: UIViewController, UITextViewDelegate {
+class EditQuestionViewController: UIViewController, UITextViewDelegate, FriendsListViewControllerDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -17,8 +17,10 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var questionTextView: UITextView!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet weak var sendButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var cancelButtonBottomContraint: NSLayoutConstraint!
     
     var originContentInset: UIEdgeInsets!
     
@@ -33,8 +35,11 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    var friendsPickerVC: FriendsListViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.frame.size.height -= UIApplication.sharedApplication().statusBarFrame.height
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillShow), name:UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillHide), name:UIKeyboardWillHideNotification, object: nil)
         if imageData != nil {
@@ -62,6 +67,7 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate {
             keyboardFrame = self.view.convertRect(keyboardFrame, fromView: nil)
             
             self.sendButtonBottomConstraint.constant = self.sendButtonBottomConstraint.constant + keyboardFrame.size.height
+            self.cancelButtonBottomContraint.constant = self.cancelButtonBottomContraint.constant + keyboardFrame.size.height
             UIView.animateWithDuration(1) {
                 self.view.layoutIfNeeded()
             }
@@ -78,6 +84,7 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate {
         scrollView.contentInset = originContentInset
         
         self.sendButtonBottomConstraint.constant = 0
+        self.cancelButtonBottomContraint.constant = 0
         UIView.animateWithDuration(1) {
             self.view.layoutIfNeeded()
         }
@@ -97,12 +104,18 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate {
         view.endEditing(true)
     }
     
+
+    
     private func applyStyle() {
         setQuestionTextViewPlaceholder()
         
         titleTextField.borderStyle = UITextBorderStyle.None
         
         sendButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        
+        cancelButton.layer.borderWidth = 1
+        cancelButton.layer.borderColor = UIColor.redColor().CGColor
+        //self.sendButtonBottomConstraint.constant = UIApplication.sharedApplication().statusBarFrame.height
     }
     
     private func setQuestionTextViewPlaceholder() {
@@ -129,37 +142,97 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - @IBActions
     @IBAction func sendButtonTapped(sender: UIButton) {
-        if imageData != nil {
-            print("imageData is not nil")
-            let apiHandler = ApiHandler.sharedInstance
-            do {
-                let image = ["image": imageData!]
-                let params = ["title": titleTextField.text!, "question": questionTextView.text!]
-                try apiHandler.uploadMultiPartJpegImage(.POST, URLString: ApiUrls.getUrl("askQuestion"), parameters: params, images: image) { (request, error) in
-                    if error != nil {
-                        request?.responseJSON(completionHandler: { (response: Response<AnyObject, NSError>) in
-                            if response.result.isSuccess {
-                                print("Response result success")
-                                print(response.result.value)
-                            }
-                            else {
-                                print("Response isSuccess is false")
-                            }
-                        })
-                    }
-                    else {
-                        print("Error response: \(error)")
-                    }
-                }
-            } catch let error as ApiError {
-                //TODO: Error Handling
-                print("Error exceptions: \(error)")
-            } catch {
-                print("An unexpected error occured")
-            }
-        }
+        let friendsStoryboard = UIStoryboard(name: "Friends", bundle: nil)
+        friendsPickerVC = friendsStoryboard.instantiateViewControllerWithIdentifier("friendsListViewController") as? FriendsListViewController
+        
+        friendsPickerVC!.delegate = self
+        friendsPickerVC!.presentationOption = FriendsListViewControllerPresentationOption.Picker
+        friendsPickerVC!.view.frame.size.height -= UIApplication.sharedApplication().statusBarFrame.height
+        //navigationController!.modalPresentationStyle = UIModalPresentationStyle.CurrentContext
+        self.navigationController!.pushViewController(friendsPickerVC!, animated: true)
+        
     }
     
+    @IBAction func cancelButtonTapped(sender: UIButton) {
+        print("Cancel buttontapped")
+        self.navigationController!.popViewControllerAnimated(true)
+
+    }
+    
+    private func displayAlertError() {
+        let alertView = UIAlertController(title: "An error occurred", message: "Your question has not been send", preferredStyle: UIAlertControllerStyle.Alert)
+        alertView.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alertView, animated: true, completion: nil)
+    }
+    
+    // MARK: - FriendsListViewControllerDelegate
+    func friendsList(didSelectFriends friends: [User]?) {
+        self.navigationController!.popViewControllerAnimated(true)
+        do {
+            let apiHandler = ApiHandler.sharedInstance
+            if friends != nil {
+                var friendsId = [Int]()
+                for friend in friends! {
+                    friendsId.append(friend.id)
+                }
+                let friendsData = try NSJSONSerialization.dataWithJSONObject(friendsId, options: NSJSONWritingOptions.PrettyPrinted)
+                let friendsJsonString = NSString(data: friendsData, encoding: NSUTF8StringEncoding)!
+                let params = ["title": titleTextField.text!, "question": questionTextView.text!, "friends": String(friendsJsonString)]
+                if imageData != nil {
+                    let image = ["image": imageData!]
+                    try apiHandler.uploadMultiPartJpegImage(.POST, URLString: ApiUrls.getUrl("askQuestion"), parameters: params, images: image) { (request, error) in
+                        if error == nil {
+                            request?.responseJSON(completionHandler: { (response: Response<AnyObject, NSError>) in
+                                if response.result.isSuccess {
+                                    if let result = response.result.value as? Dictionary<String, AnyObject> {
+                                        if result["success"] as? Bool == true {
+                                            self.navigationController?.popToRootViewControllerAnimated(true)
+                                            return
+                                        }
+                                    }
+                                }
+                                print("Wrong data received, assuming question is not sent")
+                                self.displayAlertError()
+                            })
+                        }
+                        else {
+                            print("Error response: \(error)")
+                            self.displayAlertError()
+                        }
+                    }
+                }
+                else {
+                    try apiHandler.request(.POST, URLString: ApiUrls.getUrl("askQuestion"), parameters: params, completion: { (result, err) in
+                        if err == nil {
+                            if result!["success"] as? Bool == true {
+                                self.navigationController?.popToRootViewControllerAnimated(true)
+                                return
+                            }
+                            else {
+                                print("An error occurred")
+                            }
+                        }
+                        else {
+                            print("error: \(err)")
+                        }
+                    })
+                }
+            }
+        } catch let error as ApiError {
+            //TODO: Error Handling
+            print("Error exceptions: \(error)")
+            displayAlertError()
+        } catch {
+            print("An unexpected error occured")
+            displayAlertError()
+        }
+        //friendsPickerVC?.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
+    func cancel() {
+        self.navigationController!.popViewControllerAnimated(true)
+    }
     
     /*
     // MARK: - Navigation

@@ -3,9 +3,11 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Sansation_Regular.ttf">
+            <string>Sansation</string>
             <string>Sansation</string>
             <string>Sansation</string>
         </mutableArray>
@@ -14,7 +16,7 @@
         <!--Create Question View Controller-->
         <scene sceneID="wYf-af-7p6">
             <objects>
-                <viewController id="cfS-bT-JJO" customClass="CreateQuestionViewController" customModule="yn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="cfS-bT-JJO" customClass="CreateQuestionViewController" customModule="yn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Rqe-1Q-kNG"/>
                         <viewControllerLayoutGuide type="bottom" id="o1E-wd-Ocr"/>
@@ -98,6 +100,7 @@
                             <constraint firstItem="EhE-cm-Kaa" firstAttribute="leading" secondItem="cgw-Mt-71N" secondAttribute="leading" id="mQ2-kV-D9B"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="WeX-US-0ex"/>
                     <connections>
                         <outlet property="controlsView" destination="EhE-cm-Kaa" id="Q5D-KP-wXH"/>
@@ -111,7 +114,7 @@
         <!--Edit Question View Controller-->
         <scene sceneID="ko8-eH-6nI">
             <objects>
-                <viewController id="ENg-cW-up2" customClass="EditQuestionViewController" customModule="yn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ENg-cW-up2" customClass="EditQuestionViewController" customModule="yn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="q0T-Mo-D3X"/>
                         <viewControllerLayoutGuide type="bottom" id="te1-es-1VZ"/>
@@ -182,6 +185,7 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="ZpZ-cx-XWY"/>
                                                 <exclude reference="8rY-Qg-J96"/>
                                             </mask>
                                         </variation>
@@ -196,7 +200,7 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCk-Lt-FYG">
-                                <rect key="frame" x="0.0" y="555" width="600" height="45"/>
+                                <rect key="frame" x="300" y="555" width="300" height="45"/>
                                 <color key="backgroundColor" red="0.53333336114883423" green="0.28627452254295349" blue="0.61176472902297974" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="7Ms-Zr-lh3"/>
@@ -209,28 +213,53 @@
                                     <action selector="sendButtonTapped:" destination="ENg-cW-up2" eventType="touchUpInside" id="vbx-uh-l2V"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z4e-Wl-2fi">
+                                <rect key="frame" x="0.0" y="555" width="300" height="45"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="dvq-dN-aVe"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="g7Y-4z-64O"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="16"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="ENg-cW-up2" eventType="touchUpInside" id="YtG-bK-jK7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="XLM-KF-oq2" firstAttribute="top" secondItem="E0n-da-O3d" secondAttribute="top" id="228-10-0f1"/>
                             <constraint firstItem="te1-es-1VZ" firstAttribute="top" secondItem="XLM-KF-oq2" secondAttribute="bottom" id="68G-wN-YAe"/>
+                            <constraint firstItem="Z4e-Wl-2fi" firstAttribute="width" secondItem="FCk-Lt-FYG" secondAttribute="width" id="6oz-kg-6N3"/>
                             <constraint firstItem="FCk-Lt-FYG" firstAttribute="leading" secondItem="E0n-da-O3d" secondAttribute="leading" id="7k4-ob-PoQ"/>
                             <constraint firstItem="te1-es-1VZ" firstAttribute="top" secondItem="FCk-Lt-FYG" secondAttribute="bottom" id="9tS-54-FP1"/>
                             <constraint firstItem="LwR-yp-mG6" firstAttribute="width" secondItem="E0n-da-O3d" secondAttribute="width" id="Hd7-OZ-q5O"/>
+                            <constraint firstItem="FCk-Lt-FYG" firstAttribute="width" secondItem="E0n-da-O3d" secondAttribute="width" multiplier="0.5" id="JTU-iK-FdN"/>
+                            <constraint firstItem="Bsk-Va-36A" firstAttribute="top" secondItem="q0T-Mo-D3X" secondAttribute="bottom" id="SNI-Ux-TO9"/>
+                            <constraint firstItem="Z4e-Wl-2fi" firstAttribute="leading" secondItem="E0n-da-O3d" secondAttribute="leading" id="SfS-ta-vJa"/>
                             <constraint firstItem="FCk-Lt-FYG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="sBS-DQ-Nm8" secondAttribute="bottom" constant="8" id="e2d-Qd-uuT"/>
+                            <constraint firstItem="te1-es-1VZ" firstAttribute="top" secondItem="Z4e-Wl-2fi" secondAttribute="bottom" id="iTL-3K-GTH"/>
                             <constraint firstAttribute="trailing" secondItem="XLM-KF-oq2" secondAttribute="trailing" id="ic6-s0-asv"/>
                             <constraint firstItem="XLM-KF-oq2" firstAttribute="leading" secondItem="E0n-da-O3d" secondAttribute="leading" id="kCp-xT-Fib"/>
                             <constraint firstItem="XLM-KF-oq2" firstAttribute="top" secondItem="q0T-Mo-D3X" secondAttribute="bottom" id="mLp-zH-77T"/>
                             <constraint firstAttribute="trailing" secondItem="FCk-Lt-FYG" secondAttribute="trailing" id="peX-P8-PUM"/>
+                            <constraint firstItem="FCk-Lt-FYG" firstAttribute="width" secondItem="sBS-DQ-Nm8" secondAttribute="width" id="pxc-Tm-PtE"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="228-10-0f1"/>
+                                <exclude reference="7k4-ob-PoQ"/>
                                 <exclude reference="e2d-Qd-uuT"/>
+                                <exclude reference="pxc-Tm-PtE"/>
                             </mask>
                         </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
+                        <outlet property="cancelButton" destination="Z4e-Wl-2fi" id="ynU-xb-h2J"/>
+                        <outlet property="cancelButtonBottomContraint" destination="iTL-3K-GTH" id="Ejg-vO-KBI"/>
                         <outlet property="contentView" destination="LwR-yp-mG6" id="xt1-Cp-NbH"/>
                         <outlet property="imageView" destination="sBS-DQ-Nm8" id="F6N-8f-mkC"/>
                         <outlet property="questionTextView" destination="NtO-iN-Wsl" id="8HZ-tW-JBL"/>
@@ -248,6 +277,7 @@
         <scene sceneID="CTW-gb-OvF">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="z2o-A6-cme" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AxD-og-vu9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
