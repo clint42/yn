@@ -22,8 +22,10 @@ router.get('/my', auth, function(req, res, next) {
             break;
         case "email":
             orderBy = "email";
+            break;
         case "phone":
             orderBy = "phone";
+            break;
         default:
             wrongValue = true
     }
@@ -32,7 +34,9 @@ router.get('/my', auth, function(req, res, next) {
             res.json({friends: friends});
         }).catch(function(err) {
             //TODO: Error handling
-            next(err, req, res);
+            console.log("error: " + err);
+            res.status(500);
+            res.json({error: "Error: " + err});
         });
     }
     else {
@@ -92,6 +96,8 @@ router.post('/add', auth, function(req, res, next) {
             req.currentUser.addFriend(userToAdd, {requestStatus: 'PENDING'}).then(function(associated) {
                 userToAdd.getDevices().then(function(devices) {
                     friendsService.notifyRequest(devices, req.currentUser);
+                    res.status(201);
+                    res.json({success: true});
                 }).catch(function(err) {
                     //TODO: Error handling
                     res.status(500);
