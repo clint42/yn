@@ -28,6 +28,8 @@
 	<string>/friends/my</string>
 	<key>askQuestion</key>
 	<string>/questions</string>
+	<key>answerToQuestion</key>
+	<string>/questions/answerTo</string>
 	<key>getQuestionsAsked</key>
 	<string>/questions/asked</string>
 	<key>registerDeviceForPushNotif</key>

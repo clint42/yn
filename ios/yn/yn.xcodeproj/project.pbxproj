@@ -60,6 +60,7 @@
 		AEA15CCA1CEAFB97009FE536 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA15CC91CEAFB97009FE536 /* CardView.xib */; };
 		AEF85E1E1CEC5D42003F39E5 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF85E1D1CEC5D42003F39E5 /* Question.swift */; };
 		AEF85E201CEC5D5F003F39E5 /* QuestionsApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF85E1F1CEC5D5F003F39E5 /* QuestionsApiController.swift */; };
+		B48E8C6F9B82AC880A27E699 /* Pods_yn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 393003083260291A362A8302 /* Pods_yn.framework */; };
 		E328E0961CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */; };
 		E3B07E231CE959690064FAD8 /* countriesCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3B07E221CE959690064FAD8 /* countriesCode.plist */; };
 		F598C80CEA1C238B3CC73B6E /* Pods_yn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 393003083260291A362A8302 /* Pods_yn.framework */; };
@@ -161,7 +162,7 @@
 			files = (
 				0DB736AF1CEAE439001C5B86 /* FBSDKCoreKit.framework in Frameworks */,
 				0D24606E1CEAEA49000BCEB4 /* FBSDKLoginKit.framework in Frameworks */,
-				F598C80CEA1C238B3CC73B6E /* Pods_yn.framework in Frameworks */,
+				B48E8C6F9B82AC880A27E699 /* Pods_yn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

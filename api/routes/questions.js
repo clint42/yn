@@ -106,4 +106,16 @@ router.get('/asked', auth, function(req, res, next) {
 
 });
 
+router.post('/answerTo', auth, function(req, res, next) {
+    var questionId = req.body.questionId;
+    var answer = req.body.answer;
+
+    req.currentUser.answerToQuestion(questionId, answer).then(function() {
+        res.status(201);
+        res.json({success: true});
+    }).catch(function(err) {
+       next(err, req, res);
+    });
+});
+
 module.exports = router;

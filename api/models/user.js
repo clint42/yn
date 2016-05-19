@@ -252,7 +252,7 @@ module.exports = function(sequelize, DataTypes) {
                 var query = "SELECT " + sequelize.models.Question.tableName + ".* FROM " + sequelize.models.Question.tableName +
                             " INNER JOIN " + sequelize.models.UserAsked.tableName + " ON " + sequelize.models.Question.tableName + ".id = " +
                             sequelize.models.UserAsked.tableName + ".QuestionId WHERE " + sequelize.models.UserAsked.tableName + ".UserId = " + this.id +
-                            " AND " + sequelize.models.UserAsked.tableName + ".status = 'OPEN'";
+                            " AND " + sequelize.models.UserAsked.tableName + ".status = 'OPEN' AND " + sequelize.models.UserAsked.tableName + ".answer = 'NONE'";
                 if (orderBy) {
                     query += " ORDER BY " + orderBy + " " + orderRule
                 }
@@ -264,6 +264,26 @@ module.exports = function(sequelize, DataTypes) {
                         resolve(questions);
                     }).catch(function(err) {
                         reject(err);
+                    });
+                });
+            },
+            answerToQuestion: function(questionId, answer) {
+                return new Promise((resolve, reject) => {
+                    sequelize.models.UserAsked.findOne({
+                        where: {
+                            UserId: this.id,
+                            QuestionId: questionId
+                        }
+                    }).then((questionAsked) => {
+                        questionAsked.update({
+                            answer: (answer !== undefined && answer == true ? "YES" : "NO")
+                        }).then((questionAsked) => {
+                            resolve(true);
+                        }).catch((error) => {
+                            reject(error);
+                        })
+                    }).catch((error) => {
+                        reject(error);
                     });
                 });
             }
