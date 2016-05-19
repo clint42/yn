@@ -9,9 +9,9 @@
 import UIKit
 
 class FriendsRequestsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    @IBOutlet weak var tableView: UITableView!
+    
     @IBOutlet weak var noPendingLabel: UILabel!
-    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableView: UITableView!
     
     let apiHandler = ApiHandler.sharedInstance
     
@@ -188,5 +188,6 @@ class FriendsRequestsViewController: UIViewController, UITableViewDelegate, UITa
 }
 
 class FriendsRequestsTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var usernameLabel: UILabel!
 }

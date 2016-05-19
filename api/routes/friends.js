@@ -122,12 +122,12 @@ router.post('/delete', auth, function(req, res, next) {
              res.status(201);
                res.json({success: true});
            }).catch(function(err) {
-               //TODO: Error handling
-               next(err, req, res);
+               res.status(422);
+               res.json({error: err.detail});
            })
         }).catch(function(err) {
-            //TODO: Error handling
-            next(err, req, res);
+            res.status(422);
+            res.json({error: err.detail});
         });
     }
 });
