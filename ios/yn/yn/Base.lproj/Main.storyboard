@@ -39,13 +39,22 @@
                                             <action selector="answersButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OYb-1E-xne"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQy-WJ-IwU">
+                                        <rect key="frame" x="544" y="8" width="48" height="30"/>
+                                        <state key="normal" title="Logout"/>
+                                        <connections>
+                                            <action selector="logoutButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6c7-kJ-bfC"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.17647059261798859" green="0.40784314274787903" blue="0.66666668653488159" alpha="0.20304581925675674" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="5rw-QH-fFj"/>
                                     <constraint firstItem="oOH-4P-SqT" firstAttribute="top" secondItem="Tbb-Ks-ymh" secondAttribute="top" constant="7" id="FqN-KB-R4s"/>
                                     <constraint firstAttribute="bottom" secondItem="oOH-4P-SqT" secondAttribute="bottom" constant="8" id="P48-3j-yyJ"/>
+                                    <constraint firstItem="mQy-WJ-IwU" firstAttribute="top" secondItem="Tbb-Ks-ymh" secondAttribute="top" constant="8" id="c5q-QV-aaz"/>
                                     <constraint firstItem="oOH-4P-SqT" firstAttribute="centerX" secondItem="Tbb-Ks-ymh" secondAttribute="centerX" id="cst-Zc-9xh"/>
+                                    <constraint firstAttribute="trailing" secondItem="mQy-WJ-IwU" secondAttribute="trailing" constant="8" id="fey-dG-8SB"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -67,11 +76,11 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="X27-gD-eBf"/>
                                 <exclude reference="UY5-co-RfA"/>
                                 <exclude reference="lEn-QO-O8g"/>
                                 <exclude reference="zQ0-2P-rNd"/>
                                 <exclude reference="zcy-ED-LWW"/>
-                                <exclude reference="X27-gD-eBf"/>
                             </mask>
                         </variation>
                     </view>

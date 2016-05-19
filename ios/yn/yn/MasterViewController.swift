@@ -82,8 +82,6 @@ class MasterViewController: UIViewController, MasterViewControllerDelegate, UISc
         addChildViewController(questionsNavigationController)
         scrollView.addSubview(questionsNavigationController.view)
         friendsNavigationController.didMoveToParentViewController(self)
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -136,6 +134,12 @@ class MasterViewController: UIViewController, MasterViewControllerDelegate, UISc
         presentViewController(vc!, animated: true, completion: nil)
     }
     
+    @IBAction func logoutButtonTapped(sender: UIButton) {
+        ApiHandler.sharedInstance.logout()
+        NSNotificationCenter.defaultCenter().postNotificationName("gotoAuthNotification", object: self)
+        self.removeFromParentViewController()
+        self.navigationController?.removeFromParentViewController()
+    }
     
 }
 

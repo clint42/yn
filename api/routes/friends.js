@@ -8,6 +8,7 @@ var path = require('path');
 var router = require('express').Router();
 var models = require(path.resolve('models'));
 var auth = require(path.resolve('middlewares/authentication'));
+var friendsService = require(path.resolve('services/friends'));
 
 router.get('/my', auth, function(req, res, next) {
     var nResults = req.query.nResults || 10;
@@ -85,11 +86,17 @@ router.post('/add', auth, function(req, res, next) {
     var identifier = req.body.identifier;
     if (identifier) {
         //Retrieve user to add as friend
+        //TODO: Put these two query inside a transaction
         models.User.getUser(identifier).then(function(userToAdd) {
             //Associate friend
             req.currentUser.addFriend(userToAdd, {requestStatus: 'PENDING'}).then(function(associated) {
-                res.status(201);
-                res.json({success: true});
+                userToAdd.getDevices().then(function(devices) {
+                    friendsService.notifyRequest(devices, req.currentUser);
+                }).catch(function(err) {
+                    //TODO: Error handling
+                    res.status(500);
+                    res.json({error: "Error while retrieving user devices"});
+                });
             }).catch(function(err) {
                 //TODO: Error handling
                 next(err, req, res);
@@ -124,10 +131,19 @@ router.post('/answer', auth, function(req, res, next) {
         accept = req.body.accept;
     console.log("ACCEPT IN ROUTE: ", accept);
     if (identifier !== undefined && accept !== undefined) {
+        //TODO:  Put these two query inside a transaction
         models.User.getUser(identifier).then(function(user) {
             req.currentUser.answerRequest(user, accept).then(function() {
-                res.status(201);
-                res.json({success: true});
+                user.getDevices().then(function(devices) {
+                    friendsService.notifyAccepted(devices, user);
+                    res.status(201);
+                    res.json({success: true});
+                }).catch(function(err) {
+                    //TODO: Error handling
+                    res.status(500);
+                    res.json({error: "An error occurred while retrieving user devices: " + err});
+                });
+
             }).catch(function(err) {
                 //TODO: Error handling
                 next(err, req, res);

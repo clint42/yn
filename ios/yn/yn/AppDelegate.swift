@@ -16,14 +16,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let remoteNotificationHandler = RemoteNotificationHandler.sharedInstance
 
+    @objc private func gotoAuth() {
+        let storyboard = UIStoryboard(name: "Auth", bundle: nil)
+        let navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
+        
+        window!.rootViewController = navigationController
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //TODO: Remove, DEV ONLY !
         //application.unregisterForRemoteNotifications()
         
-        let storyboard = UIStoryboard(name: "AuthStoryboard", bundle: nil)
-        let navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
-        
-        window!.rootViewController = navigationController
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.gotoAuth), name: "gotoAuthNotification", object: nil)
+        gotoAuth()
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         let _ = FBSDKLoginButton()

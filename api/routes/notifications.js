@@ -42,6 +42,29 @@ router.post('/register-device', [auth], function(req, res, next) {
     }
 });
 
+router.delete('/unregister-device', [auth], function(req, res, next) {
+    var deviceToken = req.query.deviceToken;
+    if (deviceToken) {
+        models.Device.destroy({
+            where: {
+                token: deviceToken,
+                UserId: req.currentUser.id
+            }
+        }).then(function(result) {
+            res.json({success: true});
+        }).catch(function(err) {
+            //TODO: Error handling
+            res.status(500);
+            res.json({error: "An error occurred while deleting user device"});
+        })
+    }
+    else {
+        //TODO: Error handling
+        res.status(422);
+        res.json({error: "Missing parameters"});
+    }
+});
+
 router.post('/test', function(req, res, next) {
     models.User.getUser("prieur.aurelien@gmail.com").then(function(user) {
         if (user) {
