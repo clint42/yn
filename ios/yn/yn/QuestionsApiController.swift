@@ -79,7 +79,6 @@ class QuestionsApiController {
                             print("Unexpected error")
                         }
                     }
-                    print("RES", result!["userId"]!)
                     let res: [String: AnyObject] = [
                         "questions": questions,
                         "userid": result!["userId"]!

@@ -15,6 +15,7 @@ class AnswersQuestionsListViewController: UIViewController, UITableViewDelegate,
     var paginationOffset: Int = 0
     var questionsSections = [String]()
     var questions = [[Question]]()
+    var tappedQuestionId = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,36 +131,17 @@ class AnswersQuestionsListViewController: UIViewController, UITableViewDelegate,
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let alertController: UIAlertController
-        if (!(questions[indexPath.section][indexPath.row].title ?? "").isEmpty &&
-            !(questions[indexPath.section][indexPath.row].description ?? "").isEmpty) {
-            alertController = UIAlertController(title: questions[indexPath.section][indexPath.row].title, message: "\(questions[indexPath.section][indexPath.row].description)", preferredStyle: .Alert)
-        } else {
-            alertController = UIAlertController(title: questions[indexPath.section][indexPath.row].title, message: "", preferredStyle: .Alert)
-        }
-        
-        let acceptAction = UIAlertAction(title: "Accept", style: .Default) { (action:UIAlertAction!) in
-            self.test()
-        }
-        alertController.addAction(acceptAction)
-        
-        let denyAction = UIAlertAction(title: "Deny", style: .Default) { (action:UIAlertAction!) in
-            self.test()
-        }
-        alertController.addAction(denyAction)
-        
-        let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
-        }
-        alertController.addAction(CancelAction)
-        
-
-        presentViewController(alertController, animated: true, completion: nil)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    func test() {
-
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "showAnswer") {
+            let destination = segue.destinationViewController as? AnswerDetailsViewController
+            let section = (tableView.indexPathForSelectedRow?.section)!
+            let row = (tableView.indexPathForSelectedRow?.row)!
+            destination!.questionId = questions[section][row].id
+        }
     }
-
 }
 
 class AnswersQuestionsListTableViewCell: UITableViewCell {

@@ -8,6 +8,9 @@
         <mutableArray key="Sansation_Regular.ttf">
             <string>Sansation</string>
             <string>Sansation</string>
+            <string>Sansation</string>
+            <string>Sansation</string>
+            <string>Sansation</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -128,7 +131,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="questionLabel" destination="jbD-7t-5a3" id="hIx-9G-nJw"/>
-                                            <segue destination="JY5-RL-lsC" kind="show" id="AEK-ZP-gs8"/>
+                                            <segue destination="JY5-RL-lsC" kind="show" identifier="showAnswer" id="AEK-ZP-gs8"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -152,10 +155,10 @@
             </objects>
             <point key="canvasLocation" x="283" y="1905"/>
         </scene>
-        <!--View Controller-->
+        <!--Answer Details View Controller-->
         <scene sceneID="vRq-jL-2sd">
             <objects>
-                <viewController id="JY5-RL-lsC" sceneMemberID="viewController">
+                <viewController id="JY5-RL-lsC" customClass="AnswerDetailsViewController" customModule="yn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uqB-P8-cmN"/>
                         <viewControllerLayoutGuide type="bottom" id="Hfe-5S-ZuY"/>
@@ -163,8 +166,47 @@
                     <view key="view" contentMode="scaleToFill" id="IUY-ve-8G7">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FOE-R2-U6m" customClass="BarChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="123" width="600" height="249"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cz-bY-mCC">
+                                <rect key="frame" x="0.0" y="52" width="600" height="58"/>
+                                <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="30"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Yes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubw-1s-MmA">
+                                <rect key="frame" x="79" y="397" width="103" height="28"/>
+                                <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="25"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="No" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BF-H1-QRk">
+                                <rect key="frame" x="418" y="397" width="103" height="28"/>
+                                <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="25"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="FOE-R2-U6m" secondAttribute="trailing" constant="-20" id="3Tw-3c-3BT"/>
+                            <constraint firstItem="2BF-H1-QRk" firstAttribute="top" secondItem="FOE-R2-U6m" secondAttribute="bottom" constant="25" id="IyU-Qk-KmN"/>
+                            <constraint firstItem="FOE-R2-U6m" firstAttribute="top" secondItem="4cz-bY-mCC" secondAttribute="bottom" constant="13" id="JKQ-jL-ZEJ"/>
+                            <constraint firstItem="ubw-1s-MmA" firstAttribute="leading" secondItem="IUY-ve-8G7" secondAttribute="leadingMargin" constant="59" id="P3v-mo-mRi"/>
+                            <constraint firstItem="4cz-bY-mCC" firstAttribute="top" secondItem="uqB-P8-cmN" secondAttribute="bottom" constant="8" id="fiq-4g-zdD"/>
+                            <constraint firstItem="4cz-bY-mCC" firstAttribute="leading" secondItem="IUY-ve-8G7" secondAttribute="leadingMargin" constant="-20" id="g39-qQ-hdt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2BF-H1-QRk" secondAttribute="trailing" constant="59" id="gPN-CX-zM6"/>
+                            <constraint firstItem="ubw-1s-MmA" firstAttribute="top" secondItem="FOE-R2-U6m" secondAttribute="bottom" constant="25" id="oT2-ns-YBX"/>
+                            <constraint firstItem="FOE-R2-U6m" firstAttribute="leading" secondItem="IUY-ve-8G7" secondAttribute="leadingMargin" constant="-20" id="r8W-aM-5ma"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4cz-bY-mCC" secondAttribute="trailing" constant="-20" id="w8S-vV-NIu"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="barChartView" destination="FOE-R2-U6m" id="1Mm-NL-baf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hf1-MB-sPr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

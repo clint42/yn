@@ -10,6 +10,7 @@ use_frameworks!
 
 pod 'Alamofire', '~> 3.3'
 pod 'Koloda'
+pod 'Charts'
 end
 
 target 'ynTests' do

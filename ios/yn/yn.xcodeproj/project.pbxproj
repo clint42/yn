@@ -60,6 +60,7 @@
 		AEF85E1E1CEC5D42003F39E5 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF85E1D1CEC5D42003F39E5 /* Question.swift */; };
 		AEF85E201CEC5D5F003F39E5 /* QuestionsApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF85E1F1CEC5D5F003F39E5 /* QuestionsApiController.swift */; };
 		E328E0961CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */; };
+		E359FFE91CED8A4D000F6058 /* AnswerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E359FFE81CED8A4D000F6058 /* AnswerDetailsViewController.swift */; };
 		E39B01211CED333C009E525C /* OverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E39B01201CED333C009E525C /* OverlayView.xib */; };
 		E3B07E231CE959690064FAD8 /* countriesCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3B07E221CE959690064FAD8 /* countriesCode.plist */; };
 		E3DD83551CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DD83541CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift */; };
@@ -146,6 +147,7 @@
 		AEF85E1D1CEC5D42003F39E5 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		AEF85E1F1CEC5D5F003F39E5 /* QuestionsApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsApiController.swift; sourceTree = "<group>"; };
 		E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsRequestsViewController.swift; sourceTree = "<group>"; };
+		E359FFE81CED8A4D000F6058 /* AnswerDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerDetailsViewController.swift; sourceTree = "<group>"; };
 		E39B01201CED333C009E525C /* OverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OverlayView.xib; sourceTree = "<group>"; };
 		E3B07E221CE959690064FAD8 /* countriesCode.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = countriesCode.plist; sourceTree = "<group>"; };
 		E3DD83541CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswersQuestionsListViewController.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				0DDC5AB71CEBEB1300EBA597 /* Answers.storyboard */,
 				0DDC5AB91CEBEBC400EBA597 /* MasterAnswersViewController.swift */,
 				E3DD83541CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift */,
+				E359FFE81CED8A4D000F6058 /* AnswerDetailsViewController.swift */,
 			);
 			name = Answers;
 			sourceTree = "<group>";
@@ -678,6 +681,7 @@
 				0D2460761CEBCA08000BCEB4 /* RemoteNotificationHandler.swift in Sources */,
 				0DDC5ABA1CEBEBC400EBA597 /* MasterAnswersViewController.swift in Sources */,
 				0D13AFDE1CD549D600D7D51F /* TransitionAnimator.swift in Sources */,
+				E359FFE91CED8A4D000F6058 /* AnswerDetailsViewController.swift in Sources */,
 				0D13B00D1CD845DE00D7D51F /* User.swift in Sources */,
 				0D8EADAC1CDAE42A00A4DAED /* ApiUrls.swift in Sources */,
 				AEA15CBD1CEAE522009FE536 /* CustomKolodaView.swift in Sources */,

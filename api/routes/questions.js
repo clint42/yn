@@ -101,4 +101,20 @@ router.get('/all', auth, function(req, res, next) {
     }
 });
 
+router.get('/:id((\\d+))', auth, function(req, res, next) {
+    var qId = req.params.id;
+    console.log(qId);
+    models.Question.findOne({
+        where: {
+            id: qId
+        }
+    }).then((question) => {
+        res.json({
+            question: question
+        });
+    }).catch((error) => {
+        next(error, req, res);
+    });
+});
+
 module.exports = router;
