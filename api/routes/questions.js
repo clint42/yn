@@ -15,15 +15,16 @@ var uploadImage = upload.fields([{
 var questionsService = require(path.resolve('services/questions'));
 
 router.post('/', [auth, uploadImage], function(req, res, next) {
-    console.log("OK");
     var title = req.body.title;
     var questionText = req.body.question;
     var friendsJson = req.body.friends;
-    if (title && questionText && friendsJson) {
+    if (title && friendsJson) {
             var questionData = {
-                title: title,
-                question: questionText
+                title: title
             };
+            if (questionText) {
+                questionData.question = questionText
+            }
             if (req.files && req.files['image']) {
                 questionData.imageUrl = req.files['image'][0].filename;
             }

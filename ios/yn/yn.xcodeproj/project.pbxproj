@@ -24,7 +24,7 @@
 		0D13AFE51CD5587700D7D51F /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13AFE41CD5587700D7D51F /* FriendsListViewController.swift */; };
 		0D13AFE81CD55B7700D7D51F /* Questions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D13AFE71CD55B7700D7D51F /* Questions.storyboard */; };
 		0D13AFEA1CD55BA900D7D51F /* QuestionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13AFE91CD55BA900D7D51F /* QuestionsListViewController.swift */; };
-		0D13AFEC1CD5618D00D7D51F /* AuthStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D13AFEB1CD5618D00D7D51F /* AuthStoryboard.storyboard */; };
+		0D13AFEC1CD5618D00D7D51F /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D13AFEB1CD5618D00D7D51F /* Auth.storyboard */; };
 		0D13AFF01CD578FB00D7D51F /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13AFEF1CD578FB00D7D51F /* SigninViewController.swift */; };
 		0D13AFF81CD5921E00D7D51F /* Sansation_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D13AFF51CD591F100D7D51F /* Sansation_Bold.ttf */; };
 		0D13AFF91CD5922000D7D51F /* Sansation_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D13AFF71CD591F100D7D51F /* Sansation_Regular.ttf */; };
@@ -114,7 +114,7 @@
 		0D13AFE41CD5587700D7D51F /* FriendsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
 		0D13AFE71CD55B7700D7D51F /* Questions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Questions.storyboard; sourceTree = "<group>"; };
 		0D13AFE91CD55BA900D7D51F /* QuestionsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsListViewController.swift; sourceTree = "<group>"; };
-		0D13AFEB1CD5618D00D7D51F /* AuthStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AuthStoryboard.storyboard; sourceTree = "<group>"; };
+		0D13AFEB1CD5618D00D7D51F /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		0D13AFEF1CD578FB00D7D51F /* SigninViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		0D13AFF51CD591F100D7D51F /* Sansation_Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sansation_Bold.ttf; sourceTree = "<group>"; };
 		0D13AFF61CD591F100D7D51F /* Sansation_Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sansation_Light.ttf; sourceTree = "<group>"; };
@@ -311,7 +311,7 @@
 		0D13AFEE1CD578E900D7D51F /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				0D13AFEB1CD5618D00D7D51F /* AuthStoryboard.storyboard */,
+				0D13AFEB1CD5618D00D7D51F /* Auth.storyboard */,
 				0D13AFEF1CD578FB00D7D51F /* SigninViewController.swift */,
 				0D13AFFF1CD5A1C600D7D51F /* SignupViewController.swift */,
 				0D2460721CEB1039000BCEB4 /* SignupWithFacebookViewController.swift */,
@@ -528,8 +528,7 @@
 				0D13AFD51CD2E1C300D7D51F /* Ask.storyboard in Resources */,
 				E3B07E231CE959690064FAD8 /* countriesCode.plist in Resources */,
 				0D13AFFA1CD5922400D7D51F /* Sansation_Light.ttf in Resources */,
-				E39B01211CED333C009E525C /* OverlayView.xib in Resources */,
-				0D13AFEC1CD5618D00D7D51F /* AuthStoryboard.storyboard in Resources */,
+				0D13AFEC1CD5618D00D7D51F /* Auth.storyboard in Resources */,
 				0D13AFE81CD55B7700D7D51F /* Questions.storyboard in Resources */,
 				0D13AFF81CD5921E00D7D51F /* Sansation_Bold.ttf in Resources */,
 				0D8EADB11CDAE60E00A4DAED /* ApiUrls.plist in Resources */,

@@ -20,6 +20,9 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var validatePickerButton: UIButton!
     @IBOutlet weak var cancelPickerButton: UIButton!
 
+    @IBOutlet weak var constraintToTopLayoutGuide: NSLayoutConstraint!
+    @IBOutlet weak var constraintToSelectFriendsTitle: NSLayoutConstraint!
+    
     let apiHandler = ApiHandler.sharedInstance
     
     var paginationOffset: Int = 0
@@ -31,9 +34,13 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
         willSet {
             if newValue == .Picker {
                 pickerControlsBtnView?.hidden = false
+                constraintToTopLayoutGuide?.priority = 750
+                constraintToSelectFriendsTitle?.priority = 1000
             }
             else {
                 pickerControlsBtnView?.hidden = true
+                constraintToTopLayoutGuide?.priority = 1000
+                constraintToSelectFriendsTitle?.priority = 750
             }
         }
     }
@@ -44,9 +51,13 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         if presentationOption == .Picker {
             pickerControlsBtnView?.hidden = false
+            constraintToTopLayoutGuide?.priority = 750
+            constraintToSelectFriendsTitle?.priority = 1000
         }
         else {
             pickerControlsBtnView?.hidden = true
+            constraintToTopLayoutGuide?.priority = 1000
+            constraintToSelectFriendsTitle?.priority = 750
         }
         applyStyle()
         // Do any additional setup after loading the view.
@@ -135,6 +146,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
             alertController.addAction(BlockAction)
             
             let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
+            
             }
             alertController.addAction(CancelAction)
             

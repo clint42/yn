@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="z2o-A6-cme">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="z2o-A6-cme">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -7,6 +7,7 @@
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Sansation_Regular.ttf">
+            <string>Sansation</string>
             <string>Sansation</string>
             <string>Sansation</string>
             <string>Sansation</string>
@@ -62,10 +63,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2h-S4-E56">
-                                        <rect key="frame" x="16" y="32" width="44" height="44"/>
+                                        <rect key="frame" x="16" y="24" width="52" height="52"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="44" id="T9n-Rn-XhI"/>
-                                            <constraint firstAttribute="height" constant="44" id="UgP-Ae-1QX"/>
+                                            <constraint firstAttribute="width" constant="52" id="T9n-Rn-XhI"/>
+                                            <constraint firstAttribute="height" constant="52" id="UgP-Ae-1QX"/>
                                         </constraints>
                                         <state key="normal" image="switchCameraButton"/>
                                         <connections>
@@ -79,7 +80,7 @@
                                     <constraint firstAttribute="bottom" secondItem="aIv-OJ-wcP" secondAttribute="bottom" constant="16" id="5xZ-oT-z3J"/>
                                     <constraint firstItem="Q2h-S4-E56" firstAttribute="top" secondItem="EhE-cm-Kaa" secondAttribute="top" constant="8" id="71V-uq-TdB"/>
                                     <constraint firstAttribute="bottom" secondItem="h37-hs-zrf" secondAttribute="bottom" constant="8" id="LDA-me-HYX"/>
-                                    <constraint firstItem="Q2h-S4-E56" firstAttribute="top" secondItem="EhE-cm-Kaa" secondAttribute="top" constant="32" id="Mbu-zQ-M96"/>
+                                    <constraint firstItem="Q2h-S4-E56" firstAttribute="top" secondItem="EhE-cm-Kaa" secondAttribute="top" constant="24" id="Mbu-zQ-M96"/>
                                     <constraint firstAttribute="trailing" secondItem="aIv-OJ-wcP" secondAttribute="trailing" constant="16" id="Xqx-9Y-5Iq"/>
                                     <constraint firstItem="Q2h-S4-E56" firstAttribute="leading" secondItem="EhE-cm-Kaa" secondAttribute="leading" constant="8" id="crm-S7-l7n"/>
                                     <constraint firstItem="j8v-mQ-MEH" firstAttribute="leading" secondItem="EhE-cm-Kaa" secondAttribute="leading" constant="16" id="jtB-h0-aqL"/>
@@ -124,7 +125,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XLM-KF-oq2">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <rect key="frame" x="0.0" y="60" width="600" height="540"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LwR-yp-mG6">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="751"/>
@@ -175,6 +176,7 @@
                                             <constraint firstItem="sBS-DQ-Nm8" firstAttribute="top" secondItem="NtO-iN-Wsl" secondAttribute="bottom" constant="8" id="9TA-Aq-kG3"/>
                                             <constraint firstItem="NtO-iN-Wsl" firstAttribute="top" secondItem="jcj-T8-kwP" secondAttribute="bottom" constant="1" id="BV2-yu-xJX"/>
                                             <constraint firstAttribute="trailing" secondItem="NtO-iN-Wsl" secondAttribute="trailing" constant="8" id="CPM-3b-mAP"/>
+                                            <constraint firstItem="Bsk-Va-36A" firstAttribute="top" secondItem="LwR-yp-mG6" secondAttribute="top" id="JrE-ff-aym"/>
                                             <constraint firstItem="sBS-DQ-Nm8" firstAttribute="leading" secondItem="LwR-yp-mG6" secondAttribute="leading" id="KfE-Bk-oLa"/>
                                             <constraint firstItem="jcj-T8-kwP" firstAttribute="top" secondItem="Bsk-Va-36A" secondAttribute="bottom" constant="1" id="MOw-ei-zpG"/>
                                             <constraint firstItem="Bsk-Va-36A" firstAttribute="top" secondItem="LwR-yp-mG6" secondAttribute="top" id="ZpZ-cx-XWY"/>
@@ -228,28 +230,44 @@
                                     <action selector="cancelButtonTapped:" destination="ENg-cW-up2" eventType="touchUpInside" id="YtG-bK-jK7"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit your question" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCf-Pm-dAe">
+                                <rect key="frame" x="0.0" y="20" width="600" height="40"/>
+                                <color key="backgroundColor" red="0.17647059261798859" green="0.40784314274787903" blue="0.66666668653488159" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="GTB-q7-nk7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="XLM-KF-oq2" firstAttribute="top" secondItem="E0n-da-O3d" secondAttribute="top" id="228-10-0f1"/>
+                            <constraint firstItem="oCf-Pm-dAe" firstAttribute="top" secondItem="q0T-Mo-D3X" secondAttribute="bottom" id="2XK-hD-TpJ"/>
                             <constraint firstItem="te1-es-1VZ" firstAttribute="top" secondItem="XLM-KF-oq2" secondAttribute="bottom" id="68G-wN-YAe"/>
                             <constraint firstItem="Z4e-Wl-2fi" firstAttribute="width" secondItem="FCk-Lt-FYG" secondAttribute="width" id="6oz-kg-6N3"/>
                             <constraint firstItem="FCk-Lt-FYG" firstAttribute="leading" secondItem="E0n-da-O3d" secondAttribute="leading" id="7k4-ob-PoQ"/>
                             <constraint firstItem="te1-es-1VZ" firstAttribute="top" secondItem="FCk-Lt-FYG" secondAttribute="bottom" id="9tS-54-FP1"/>
+                            <constraint firstItem="oCf-Pm-dAe" firstAttribute="leading" secondItem="E0n-da-O3d" secondAttribute="leading" id="Dmo-25-Gih"/>
                             <constraint firstItem="LwR-yp-mG6" firstAttribute="width" secondItem="E0n-da-O3d" secondAttribute="width" id="Hd7-OZ-q5O"/>
                             <constraint firstItem="FCk-Lt-FYG" firstAttribute="width" secondItem="E0n-da-O3d" secondAttribute="width" multiplier="0.5" id="JTU-iK-FdN"/>
                             <constraint firstItem="Bsk-Va-36A" firstAttribute="top" secondItem="q0T-Mo-D3X" secondAttribute="bottom" id="SNI-Ux-TO9"/>
                             <constraint firstItem="Z4e-Wl-2fi" firstAttribute="leading" secondItem="E0n-da-O3d" secondAttribute="leading" id="SfS-ta-vJa"/>
+                            <constraint firstItem="XLM-KF-oq2" firstAttribute="top" secondItem="oCf-Pm-dAe" secondAttribute="bottom" id="bgJ-cm-RxT"/>
                             <constraint firstItem="FCk-Lt-FYG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="sBS-DQ-Nm8" secondAttribute="bottom" constant="8" id="e2d-Qd-uuT"/>
                             <constraint firstItem="te1-es-1VZ" firstAttribute="top" secondItem="Z4e-Wl-2fi" secondAttribute="bottom" id="iTL-3K-GTH"/>
                             <constraint firstAttribute="trailing" secondItem="XLM-KF-oq2" secondAttribute="trailing" id="ic6-s0-asv"/>
                             <constraint firstItem="XLM-KF-oq2" firstAttribute="leading" secondItem="E0n-da-O3d" secondAttribute="leading" id="kCp-xT-Fib"/>
                             <constraint firstItem="XLM-KF-oq2" firstAttribute="top" secondItem="q0T-Mo-D3X" secondAttribute="bottom" id="mLp-zH-77T"/>
+                            <constraint firstAttribute="trailing" secondItem="oCf-Pm-dAe" secondAttribute="trailing" id="mZv-T7-5JB"/>
                             <constraint firstAttribute="trailing" secondItem="FCk-Lt-FYG" secondAttribute="trailing" id="peX-P8-PUM"/>
                             <constraint firstItem="FCk-Lt-FYG" firstAttribute="width" secondItem="sBS-DQ-Nm8" secondAttribute="width" id="pxc-Tm-PtE"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="228-10-0f1"/>
+                                <exclude reference="mLp-zH-77T"/>
+                                <exclude reference="SNI-Ux-TO9"/>
                                 <exclude reference="7k4-ob-PoQ"/>
                                 <exclude reference="e2d-Qd-uuT"/>
                                 <exclude reference="pxc-Tm-PtE"/>

@@ -10,6 +10,7 @@ import UIKit
 
 class FriendsRequestsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noPendingLabel: UILabel!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
     let apiHandler = ApiHandler.sharedInstance
@@ -17,9 +18,12 @@ class FriendsRequestsViewController: UIViewController, UITableViewDelegate, UITa
     var paginationOffset: Int = 0
     var friendsSections = [String]()
     var friends = [[User]]()
+    var hasLoaded = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.fetchPendingRequests), name: InternalNotificationForRemote.friendRequest.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.fetchPendingRequests), name: InternalNotificationForRemote.friendshipAccepted.rawValue, object: nil)
         // Do any additional setup after loading the view.
     }
     
@@ -45,16 +49,11 @@ class FriendsRequestsViewController: UIViewController, UITableViewDelegate, UITa
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if friendsSections.count > 0 {
-            tableView.backgroundView = nil
-            tableView.separatorStyle = .SingleLine
-        } else {
-            let noDataLabel: UILabel = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
-            noDataLabel.text = "No pending request"
-            noDataLabel.textColor = UIColor.lightGrayColor()
-            noDataLabel.textAlignment = NSTextAlignment.Center
-            noDataLabel.font = UIFont(name: "Sansation", size: 30)
-            tableView.backgroundView = noDataLabel
-            tableView.separatorStyle = .None
+            tableView.hidden = false
+            noPendingLabel.hidden = true
+        } else if hasLoaded {
+            tableView.hidden = true
+            noPendingLabel.hidden = false
         }
         return friendsSections.count
     }
@@ -62,7 +61,7 @@ class FriendsRequestsViewController: UIViewController, UITableViewDelegate, UITa
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let alertController: UIAlertController
         if (!(friends[indexPath.section][indexPath.row].firstname ?? "").isEmpty && !(friends[indexPath.section][indexPath.row].lastname ?? "").isEmpty) {
-            alertController = UIAlertController(title: friends[indexPath.section][indexPath.row].username, message: "\(friends[indexPath.section][indexPath.row].firstname) \(friends[indexPath.section][indexPath.row].lastname)", preferredStyle: .Alert)
+            alertController = UIAlertController(title: friends[indexPath.section][indexPath.row].username, message: "\(friends[indexPath.section][indexPath.row].firstname!) \(friends[indexPath.section][indexPath.row].lastname!)", preferredStyle: .Alert)
         } else {
             alertController = UIAlertController(title: friends[indexPath.section][indexPath.row].username, message: "", preferredStyle: .Alert)
         }
@@ -120,16 +119,17 @@ class FriendsRequestsViewController: UIViewController, UITableViewDelegate, UITa
         friends.removeAll()
     }
     
-    private func fetchPendingRequests() {
+    @objc private func fetchPendingRequests() {
         resetRequestsList()
         do {
             try FriendsApiController.sharedInstance.getFriendsRequests(nResults: 20, offset: 0, orderBy: "username", orderRule: "ASC", completion: { (users: [User]?, err: ApiError?) in
                 if (err == nil && users != nil) {
                     self.addFriendsToSectionRowArrays(users!)
-                    self.tableView.reloadData()
-                    self.setTabBarBadgeValue()
-                }
-                else {
+                    self.hasLoaded = true
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.reloadData()
+                        self.setTabBarBadgeValue()
+                    }
                     print("error: \(err)")
                 }
             })

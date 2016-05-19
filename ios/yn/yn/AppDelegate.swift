@@ -16,14 +16,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let remoteNotificationHandler = RemoteNotificationHandler.sharedInstance
 
+    @objc private func gotoAuth() {
+        let storyboard = UIStoryboard(name: "Auth", bundle: nil)
+        let navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
+        
+        window!.rootViewController = navigationController
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //TODO: Remove, DEV ONLY !
         //application.unregisterForRemoteNotifications()
         
-        let storyboard = UIStoryboard(name: "AuthStoryboard", bundle: nil)
-        let navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
-        
-        window!.rootViewController = navigationController
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.gotoAuth), name: "gotoAuthNotification", object: nil)
+        gotoAuth()
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         let _ = FBSDKLoginButton()
@@ -89,12 +94,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        print("Notification received")
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        print("Notification received")
         remoteNotificationHandler.handleRemoteNotification(userInfo as! Dictionary<String, AnyObject>, appState: application.applicationState)
-        completionHandler(UIBackgroundFetchResult.NoData)
+        completionHandler(UIBackgroundFetchResult.NewData)
     }
 }
 

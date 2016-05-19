@@ -34,12 +34,10 @@ class ApiHandler {
     }
     
     private func remoteNotificationRegistration() {
-        if !UIApplication.sharedApplication().isRegisteredForRemoteNotifications() || true {
-            let notificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
-            let pushNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
-            UIApplication.sharedApplication().registerUserNotificationSettings(pushNotificationSettings)
-            UIApplication.sharedApplication().registerForRemoteNotifications()
-        }
+        let notificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
+        let pushNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(pushNotificationSettings)
+        UIApplication.sharedApplication().registerForRemoteNotifications()
     }
     
     func isAuthenticated() -> Bool {
@@ -203,7 +201,8 @@ class ApiHandler {
     }
     
     func logout() {
-        //TODO: Unregister device (push notification)
+        RemoteNotificationHandler.sharedInstance.unregisterDevice()
+        FBSDKAccessToken.setCurrentAccessToken(nil)
         userToken = nil
         password = nil
     }

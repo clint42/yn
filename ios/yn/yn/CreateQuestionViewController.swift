@@ -44,7 +44,6 @@ class CreateQuestionViewController: UIViewController, UIImagePickerControllerDel
         captureOutput.outputSettings = [AVVideoCodecKey:AVVideoCodecJPEG]
     }
     
-    
     // Get camera AVCaptureDevice for a specified position (back or front)
     private func getCameraDevice(forPosition position: AVCaptureDevicePosition) throws -> AVCaptureDevice {
         let devices = AVCaptureDevice.devices()
