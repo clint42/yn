@@ -46,6 +46,9 @@ class QuestionsListViewController: UIViewController {
                 if err == nil {
                     self.questions.insert(question!, atIndex: 0)
                     self.kolodaView.resetCurrentCardIndex()
+                    if (numberOfCards > 0) {
+                        self.buttonView.hidden = false
+                    }
                 }
                 else {
                     //TODO: Error handling
@@ -114,8 +117,10 @@ class QuestionsListViewController: UIViewController {
                 if (err == nil && success == true) {
                     print(success)
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.questions.removeAtIndex(Int(index))
-                        self.kolodaView.resetCurrentCardIndex()
+                        if Int(index) < self.questions.count {
+                            self.questions.removeAtIndex(Int(index))
+                            self.kolodaView.resetCurrentCardIndex()
+                        }
                     }
                 }
                 else {
