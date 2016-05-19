@@ -33,6 +33,6 @@ class Question {
             else {
                 throw ApiError.ResponseInvalidData
         }
-        self.init(id: id, title: title, description: json["question"] as? String, image: json["imageUrl"] as? String, ownerId: json["UserId"] as! Int);
+        self.init(id: id, title: title, description: json["question"] as? String, image: json["imageUrl"] as? String, ownerId: json["OwnerId"] as! Int);
     }
 }

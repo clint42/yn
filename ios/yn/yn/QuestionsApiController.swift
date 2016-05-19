@@ -119,10 +119,49 @@ class QuestionsApiController {
                 if err == nil {
                     if let questionJson = result!["question"] as? Dictionary<String, AnyObject> {
                         print(questionJson)
+                        do {
+                            try completion(question: Question(json: questionJson), err: nil)
+                        } catch let error as ApiError {
+                            completion(question: nil, err: error)
+                        } catch {
+                            completion(question: nil, err: ApiError.Unexpected)
+                        }
                     }
                 }
                 else {
                     completion(question: nil, err: err)
+                }
+            })
+        }
+    }
+    
+    func getQuestionDetails(questionId: Int, completion: (questionDetails: [String:AnyObject]?, err: ApiError?) -> Void) throws -> Request {
+        do {
+            return try apiHandler.request(.GET, URLString: ApiUrls.getUrl("getQuestionDetails") + "/\(questionId)", parameters: nil, completion: {
+                (questionDetails, err) in
+                //print(questionDetails!)
+                if err == nil {
+                    do {
+                        let questionJson = questionDetails!["question"] as? Dictionary<String, AnyObject>
+                        var answers = [Answer]()
+                        for answer in (questionDetails!["answers"] as? NSArray)! {
+                            let q = try Answer(json: answer as! Dictionary<String, AnyObject>)
+                            answers.append(q)
+                        }
+                        let questions = try Question(json: questionJson!)
+                        let params: [String: AnyObject] = [
+                                "question": questions,
+                                "answers": answers
+                            ]
+                        completion(questionDetails: params, err: nil)
+                    } catch let error as ApiError {
+                        completion(questionDetails: nil, err: error)
+                    } catch {
+                        completion(questionDetails: nil, err: ApiError.Unexpected)
+                    }
+                }
+                else {
+                    completion(questionDetails: nil, err: err)
                 }
             })
         }

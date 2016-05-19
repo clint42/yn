@@ -11,6 +11,12 @@ import Charts
 
 class AnswerDetailsViewController: UIViewController {
     
+    @IBOutlet weak var questionDescription: UILabel!
+    @IBOutlet weak var questionTitle: UILabel!
+    
+    @IBOutlet weak var noNbr: UILabel!
+    @IBOutlet weak var yesNbr: UILabel!
+    
     @IBOutlet weak var barChartView: BarChartView!
     var questionId = Int()
     var answers = ["Yes", "No"]
@@ -32,8 +38,38 @@ class AnswerDetailsViewController: UIViewController {
     
     private func loadData() {
         // get question details
-        let nbrAnswers = [20.0, 4.0]
-        setChart(answers, values: nbrAnswers)
+        var nbrAnswers = [0.0, 0.0]
+        
+        do {
+            try QuestionsApiController.sharedInstance.getQuestionDetails(questionId) { (details: [String:AnyObject]?, err: ApiError?) in
+                if (err == nil && details != nil) {
+                    if let q = details!["question"] as? Question {
+                        self.questionTitle.text = q.title
+                        self.questionDescription?.text = q.description
+                    }
+                    if let answers = details!["answers"] as? [Answer] {
+                        for answer in answers {
+                            if answer.answer == "YES" {
+                                nbrAnswers[0] += 1;
+                            } else {
+                                nbrAnswers[1] += 1;
+                            }
+                        }
+                    }
+                    self.yesNbr.text = "(" + String(Int(nbrAnswers[0])) + ")"
+                    self.noNbr.text = "(" + String(Int(nbrAnswers[1])) + ")"
+                    self.setChart(self.answers, values: nbrAnswers)
+                }
+                else {
+                    print("err: \(err)")
+                }
+            }
+            
+        } catch let error as ApiError {
+            print("error: \(error)")
+        } catch {
+            print("Unexpected error")
+        }
     }
     
     func setChart(dataPoints: [String], values: [Double]) {
@@ -53,7 +89,7 @@ class AnswerDetailsViewController: UIViewController {
         chartData.setDrawValues(false)
         
         barChartView.data = chartData
-        barChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
+        barChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5)
         barChartView.descriptionText = ""
         
         barChartView.leftAxis.drawGridLinesEnabled = false

@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>getQuestionDetails</key>
+	<string>/questions/details</string>
 	<key>getAllQuestions</key>
 	<string>/questions/all</string>
 	<key>countPendingRequests</key>
@@ -41,6 +43,6 @@
 	<key>images</key>
 	<string>/images</string>
 	<key>host</key>
-	<string>http://192.168.0.21:3000</string>
+	<string>http://127.0.0.1:3000</string>
 </dict>
 </plist>

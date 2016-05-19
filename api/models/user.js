@@ -279,8 +279,8 @@ module.exports = function(sequelize, DataTypes) {
                 var pagination = nbPerPage && offset;
                 var query = "SELECT " + sequelize.models.Question.tableName + ".* FROM " + sequelize.models.Question.tableName + " INNER JOIN " +
                     sequelize.models.UserAsked.tableName + " ON (" + sequelize.models.Question.tableName + ".id = " + sequelize.models.UserAsked.tableName +
-                    ".QuestionId) WHERE " + sequelize.models.Question.tableName + ".UserId = " + this.id + " OR " +
-                    sequelize.models.UserAsked.tableName + ".UserId = " + this.id;
+                    ".QuestionId) WHERE " + sequelize.models.Question.tableName + ".OwnerId = " + this.id + " OR " +
+                    sequelize.models.UserAsked.tableName + ".UserId = " + this.id + " GROUP BY " + sequelize.models.Question.tableName + ".id";
                 if (orderBy)
                     query += " ORDER BY " + orderBy + " " + orderRule;
                 if (pagination) {

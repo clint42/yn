@@ -130,16 +130,20 @@ router.get('/all', auth, function(req, res, next) {
     }
 });
 
-router.get('/:id((\\d+))', auth, function(req, res, next) {
+router.get('/details/:id((\\d+))', auth, function(req, res, next) {
     var qId = req.params.id;
-    console.log(qId);
     models.Question.findOne({
         where: {
             id: qId
         }
     }).then((question) => {
-        res.json({
-            question: question
+        question.getAnswers().then((answers) => {
+            res.json({
+                question: question,
+                answers: answers
+            });
+        }).catch((error) => {
+            next(error, req, res);
         });
     }).catch((error) => {
         next(error, req, res);

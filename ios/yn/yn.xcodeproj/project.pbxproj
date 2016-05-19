@@ -55,7 +55,6 @@
 		0DDC5AC21CED225200EBA597 /* OverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DDC5AC11CED225200EBA597 /* OverlayView.xib */; };
 		2EC554C93C6B6832BA249C62 /* libPods-ynTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACD3DA9CC393A2CC07676D5 /* libPods-ynTests.a */; };
 		4F8F02ECDA837FC1C8A324FB /* libPods-ynUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D707435FA9072CC1AE9C76 /* libPods-ynUITests.a */; };
-		76DE3B5CDA4B5D789C168C67 /* Pods_yn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 393003083260291A362A8302 /* Pods_yn.framework */; };
 		AEA15CB91CEAE05A009FE536 /* BackgroundKolodaAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15CB81CEAE05A009FE536 /* BackgroundKolodaAnimator.swift */; };
 		AEA15CBD1CEAE522009FE536 /* CustomKolodaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15CBC1CEAE522009FE536 /* CustomKolodaView.swift */; };
 		AEA15CC11CEAEA17009FE536 /* ExampleOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15CC01CEAEA17009FE536 /* ExampleOverlayView.swift */; };
@@ -66,6 +65,7 @@
 		B48E8C6F9B82AC880A27E699 /* Pods_yn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 393003083260291A362A8302 /* Pods_yn.framework */; };
 		E328E0961CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */; };
 		E359FFE91CED8A4D000F6058 /* AnswerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E359FFE81CED8A4D000F6058 /* AnswerDetailsViewController.swift */; };
+		E394EF971CEDC3BC0008468D /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E394EF961CEDC3BC0008468D /* Answer.swift */; };
 		E39B01211CED333C009E525C /* OverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E39B01201CED333C009E525C /* OverlayView.xib */; };
 		E3B07E231CE959690064FAD8 /* countriesCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3B07E221CE959690064FAD8 /* countriesCode.plist */; };
 		E3DD83551CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DD83541CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift */; };
@@ -157,6 +157,7 @@
 		AEF85E1F1CEC5D5F003F39E5 /* QuestionsApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsApiController.swift; sourceTree = "<group>"; };
 		E328E0951CEAAE1400D7EDB3 /* FriendsRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsRequestsViewController.swift; sourceTree = "<group>"; };
 		E359FFE81CED8A4D000F6058 /* AnswerDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerDetailsViewController.swift; sourceTree = "<group>"; };
+		E394EF961CEDC3BC0008468D /* Answer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		E39B01201CED333C009E525C /* OverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OverlayView.xib; sourceTree = "<group>"; };
 		E3B07E221CE959690064FAD8 /* countriesCode.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = countriesCode.plist; sourceTree = "<group>"; };
 		E3DD83541CEC19A1009D6DA2 /* AnswersQuestionsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswersQuestionsListViewController.swift; sourceTree = "<group>"; };
@@ -321,6 +322,7 @@
 			children = (
 				AEF85E1D1CEC5D42003F39E5 /* Question.swift */,
 				0D13B00C1CD845DE00D7D51F /* User.swift */,
+				E394EF961CEDC3BC0008468D /* Answer.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -712,6 +714,7 @@
 				0D13AFF01CD578FB00D7D51F /* SigninViewController.swift in Sources */,
 				0D8EADB31CDBF1EF00A4DAED /* AddFriendViewController.swift in Sources */,
 				0D13AFDC1CD548FD00D7D51F /* SectionNavigationControllerDelegate.swift in Sources */,
+				E394EF971CEDC3BC0008468D /* Answer.swift in Sources */,
 				0D13AFFC1CD5941700D7D51F /* UIColorExtension.swift in Sources */,
 				0D13AF971CD2C91D00D7D51F /* MasterViewController.swift in Sources */,
 				0D13B00A1CD8007000D7D51F /* ApiHandler.swift in Sources */,

@@ -100,7 +100,7 @@ class AnswersQuestionsListViewController: UIViewController, UITableViewDelegate,
             tableView.separatorStyle = .SingleLine
         } else {
             let noDataLabel: UILabel = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
-            noDataLabel.text = "No friends"
+            noDataLabel.text = "No question"
             noDataLabel.textColor = UIColor.lightGrayColor()
             noDataLabel.textAlignment = NSTextAlignment.Center
             noDataLabel.font = UIFont(name: "Sansation", size: 30)
