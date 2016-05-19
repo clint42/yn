@@ -142,14 +142,21 @@ class EditQuestionViewController: UIViewController, UITextViewDelegate, FriendsL
     
     // MARK: - @IBActions
     @IBAction func sendButtonTapped(sender: UIButton) {
-        let friendsStoryboard = UIStoryboard(name: "Friends", bundle: nil)
-        friendsPickerVC = friendsStoryboard.instantiateViewControllerWithIdentifier("friendsListViewController") as? FriendsListViewController
-        
-        friendsPickerVC!.delegate = self
-        friendsPickerVC!.presentationOption = FriendsListViewControllerPresentationOption.Picker
-        friendsPickerVC!.view.frame.size.height -= UIApplication.sharedApplication().statusBarFrame.height
-        //navigationController!.modalPresentationStyle = UIModalPresentationStyle.CurrentContext
-        self.navigationController!.pushViewController(friendsPickerVC!, animated: true)
+        if (titleTextField.text?.isEmpty == true) {
+            let alert = UIAlertController(title: "You have to write a title", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        else {
+            let friendsStoryboard = UIStoryboard(name: "Friends", bundle: nil)
+            friendsPickerVC = friendsStoryboard.instantiateViewControllerWithIdentifier("friendsListViewController") as? FriendsListViewController
+            
+            friendsPickerVC!.delegate = self
+            friendsPickerVC!.presentationOption = FriendsListViewControllerPresentationOption.Picker
+            friendsPickerVC!.view.frame.size.height -= UIApplication.sharedApplication().statusBarFrame.height
+            //navigationController!.modalPresentationStyle = UIModalPresentationStyle.CurrentContext
+            self.navigationController!.pushViewController(friendsPickerVC!, animated: true)
+        }
         
     }
     
