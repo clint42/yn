@@ -16,6 +16,7 @@ mv /home/clint/yn/tmp/yn/api/* /home/clint/yn/deploy/api
 echo "Removing temporary files..."
 rm -fr /home/clint/yn/tmp/yn
 echo "Start application using PM2"
+cd ~
 NODE_ENV=production pm2 start /home/clint/yn/deploy/api/bin/www -i max
 pm2 list
 echo "Done"
