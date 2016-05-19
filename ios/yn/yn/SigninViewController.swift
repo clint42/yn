@@ -141,29 +141,35 @@ class SigninViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     }
     
     private func signinWithFacebook(accessToken: FBSDKAccessToken) {
-        let apiHandler = ApiHandler.sharedInstance
-        apiHandler.authenticateWithFacebook(accessToken: accessToken, completion: { (success: Bool, error: ApiError?) in
-            if success {
-                self.signinSuccess()
-            }
-            else if  let error = error {
-                switch error {
-                case .FBUserNotFound:
-                    //TODO: Redirect to signup view with fields populated with facebook information
-                    print("FB User not found")
-                    let alertView = UIAlertController(title: "Not registered", message: "You have never created a YN account", preferredStyle: UIAlertControllerStyle.Alert)
-                    alertView.addAction(UIAlertAction(title: "Signup with Facebook", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction) in
-                        self.performSegueWithIdentifier("signupFbSegue", sender: self)
-                    }));
-                    self.presentViewController(alertView, animated: true, completion: nil)
-                    break
-                default:
-                    //TODO: Error handling!
-                    
-                    break
+        if accessToken.hasGranted("email") {
+            let apiHandler = ApiHandler.sharedInstance
+            apiHandler.authenticateWithFacebook(accessToken: accessToken, completion: { (success: Bool, error: ApiError?) in
+                if success {
+                    self.signinSuccess()
                 }
-            }
-        })
+                else if  let error = error {
+                    switch error {
+                    case .FBUserNotFound:
+                        //TODO: Redirect to signup view with fields populated with facebook information
+                        print("FB User not found")
+                        let alertView = UIAlertController(title: "Not registered", message: "You have never created a YN account", preferredStyle: UIAlertControllerStyle.Alert)
+                        alertView.addAction(UIAlertAction(title: "Signup with Facebook", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction) in
+                            self.performSegueWithIdentifier("signupFbSegue", sender: self)
+                        }));
+                        self.presentViewController(alertView, animated: true, completion: nil)
+                        break
+                    default:
+                        //TODO: Error handling!
+                        
+                        break
+                    }
+                }
+            })
+        } else {
+            let alertView = UIAlertController(title: "Facebook authorization error", message: "You must grant email permission to login with Facebook", preferredStyle: UIAlertControllerStyle.Alert)
+            alertView.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            presentViewController(alertView, animated: true, completion: nil)
+        }
     }
     
     private func signin() {
@@ -210,7 +216,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     
     // MARK: - FBSDKLoginButtonDelegate
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        if error == nil {
+        if error == nil && result != nil && result.token != nil {
             signinWithFacebook(result.token)
         }
         else {

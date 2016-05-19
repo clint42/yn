@@ -28,8 +28,6 @@
             <string>Sansation</string>
             <string>Sansation</string>
             <string>Sansation</string>
-            <string>Sansation</string>
-            <string>Sansation</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -136,16 +134,21 @@
                                                     <constraint firstAttribute="width" secondItem="vcg-UA-TP7" secondAttribute="height" multiplier="1:1" id="klm-UN-JiD"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ik-9d-51N" customClass="FBSDKLoginButton">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ik-9d-51N" customClass="FBSDKLoginButton">
                                                 <rect key="frame" x="8" y="371" width="584" height="45"/>
-                                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="2xi-LF-cD8"/>
                                                     <constraint firstAttribute="height" constant="45" id="Y24-aV-PjG"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="16"/>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="Sign in with Facebook...">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="Y24-aV-PjG"/>
+                                                    </mask>
+                                                </variation>
                                                 <connections>
                                                     <action selector="signinWithFacebookButton:" destination="WIO-rX-26I" eventType="touchUpInside" id="h62-b2-FRO"/>
                                                 </connections>
@@ -276,13 +279,12 @@
                                                     <constraint firstAttribute="width" secondItem="gkQ-m3-Yge" secondAttribute="height" multiplier="1:1" id="Xo7-6q-yYQ"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6BT-Ok-P4X" customClass="FBSDKLoginButton">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6BT-Ok-P4X" customClass="FBSDKLoginButton">
                                                 <rect key="frame" x="8" y="182" width="584" height="45"/>
-                                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="nh0-RU-roh"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="16"/>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="Sign up with Facebook...">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -919,7 +921,7 @@
         <image name="ynLogoWhite" width="941" height="941"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="y7e-Xa-w0e"/>
         <segue reference="3bx-fd-9kc"/>
+        <segue reference="y7e-Xa-w0e"/>
     </inferredMetricsTieBreakers>
 </document>
