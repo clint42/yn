@@ -14,5 +14,11 @@ module.exports = (function() {
             notificationsService.sendNotification(devices[i], userRequesting.username + " wants to be friend with you", {type: "friendRequest", userId: userRequesting.id});
         }
     };
+
+    friendsService.notifyAccepted = function(devices, friend) {
+        for (var i = 0; i < devices; ++i) {
+            notificationsService.sendNotification(devices[i], "You are now friend with " + friend.username, {type: "friendshipAccepted", userId: friend.id});
+        }
+    };
     return friendsService;
 })();

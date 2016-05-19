@@ -11,4 +11,5 @@ import Foundation
 enum InternalNotificationForRemote: String {
     case newQuestion = "INFRNewQuestionReceived"
     case friendRequest = "INFRFriendRequest"
+    case friendshipAccepted = "INFRFriendshipAccepted"
 }

@@ -131,10 +131,19 @@ router.post('/answer', auth, function(req, res, next) {
         accept = req.body.accept;
     console.log("ACCEPT IN ROUTE: ", accept);
     if (identifier !== undefined && accept !== undefined) {
+        //TODO:  Put these two query inside a transaction
         models.User.getUser(identifier).then(function(user) {
             req.currentUser.answerRequest(user, accept).then(function() {
-                res.status(201);
-                res.json({success: true});
+                user.getDevices().then(function(devices) {
+                    friendsService.notifyAccepted(devices, user);
+                    res.status(201);
+                    res.json({success: true});
+                }).catch(function(err) {
+                    //TODO: Error handling
+                    res.status(500);
+                    res.json({error: "An error occurred while retrieving user devices: " + err});
+                });
+
             }).catch(function(err) {
                 //TODO: Error handling
                 next(err, req, res);

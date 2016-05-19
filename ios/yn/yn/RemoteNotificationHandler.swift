@@ -54,6 +54,8 @@ class RemoteNotificationHandler {
                 case .FriendRequest:
                     handleFriendRequest(notification)
                     break
+                case .FriendshipAccepted:
+                    handleFriendshipAccepted(notification)
                 default:
                     break
                 }
@@ -70,6 +72,12 @@ class RemoteNotificationHandler {
     private func handleFriendRequest(notification: [String: AnyObject]) {
         if let userId = notification["userId"] as? Int {
             NSNotificationCenter.defaultCenter().postNotificationName(InternalNotificationForRemote.friendRequest.rawValue, object: nil, userInfo: ["userId": userId])
+        }
+    }
+    
+    private func handleFriendshipAccepted(notification: [String: AnyObject]) {
+        if let userId = notification["userId"] as? Int {
+            NSNotificationCenter.defaultCenter().postNotificationName(InternalNotificationForRemote.friendshipAccepted.rawValue, object: nil, userInfo: ["userId": userId]);
         }
     }
 }

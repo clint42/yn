@@ -21,6 +21,7 @@ class FriendsRequestsViewController: UIViewController, UITableViewDelegate, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.fetchPendingRequests), name: InternalNotificationForRemote.friendRequest.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.fetchPendingRequests), name: InternalNotificationForRemote.friendshipAccepted.rawValue, object: nil)
         // Do any additional setup after loading the view.
     }
     
