@@ -62,7 +62,7 @@ class FriendsRequestsViewController: UIViewController, UITableViewDelegate, UITa
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let alertController: UIAlertController
         if (!(friends[indexPath.section][indexPath.row].firstname ?? "").isEmpty && !(friends[indexPath.section][indexPath.row].lastname ?? "").isEmpty) {
-            alertController = UIAlertController(title: friends[indexPath.section][indexPath.row].username, message: "\(friends[indexPath.section][indexPath.row].firstname) \(friends[indexPath.section][indexPath.row].lastname)", preferredStyle: .Alert)
+            alertController = UIAlertController(title: friends[indexPath.section][indexPath.row].username, message: "\(friends[indexPath.section][indexPath.row].firstname!) \(friends[indexPath.section][indexPath.row].lastname!)", preferredStyle: .Alert)
         } else {
             alertController = UIAlertController(title: friends[indexPath.section][indexPath.row].username, message: "", preferredStyle: .Alert)
         }
