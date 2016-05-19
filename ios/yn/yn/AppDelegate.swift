@@ -89,12 +89,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        print("Notification received")
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        print("Notification received")
         remoteNotificationHandler.handleRemoteNotification(userInfo as! Dictionary<String, AnyObject>, appState: application.applicationState)
-        completionHandler(UIBackgroundFetchResult.NoData)
+        completionHandler(UIBackgroundFetchResult.NewData)
     }
 }
 

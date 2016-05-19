@@ -79,6 +79,13 @@ class QuestionsApiController {
                 if err == nil {
                     if let questionJson = result!["question"] as? Dictionary<String, AnyObject> {
                         print(questionJson)
+                        do {
+                            try completion(question: Question(json: questionJson), err: nil)
+                        } catch let error as ApiError {
+                            completion(question: nil, err: error)
+                        } catch {
+                            completion(question: nil, err: ApiError.Unexpected)
+                        }
                     }
                 }
                 else {

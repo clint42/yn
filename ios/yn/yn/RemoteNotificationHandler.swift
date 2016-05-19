@@ -46,6 +46,7 @@ class RemoteNotificationHandler {
     func handleRemoteNotification(notification: [String: AnyObject], appState: UIApplicationState) {
         if let typeString = notification["type"] as? String {
             if let type = RemoteNotificationType(rawValue: typeString) {
+                print("handleRemoteNotification. Type: \(type)")
                 switch type {
                 case .NewQuestion:
                     handleNewQuestion(notification)
@@ -53,16 +54,18 @@ class RemoteNotificationHandler {
                 default:
                     break
                 }
-                print(type)
             }
         }
     }
     
     private func handleNewQuestion(notification: [String: AnyObject]) {
-        if let questionIdStr = notification["questionId"] as? String {
-            if let questionId = Int(questionIdStr) {
+        print("handleNewQuestion")
+        print("notification.questionId: \(notification["questionId"])")
+        if let questionId = notification["questionId"] as? Int {
+            //if let questionId = Int(questionIdStr) {
+                print("Send internal notification")
                 NSNotificationCenter.defaultCenter().postNotificationName(InternalNotificationForRemote.newQuestion.rawValue, object: nil, userInfo: ["questionId": questionId])
-            }
+            //}
         }
     }
 }

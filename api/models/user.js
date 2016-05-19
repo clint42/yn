@@ -252,20 +252,17 @@ module.exports = function(sequelize, DataTypes) {
                 });
             },
             getQuestionsAsked: function(nbPerPage, offset, orderBy, orderRule) {
-                console.log("------GETQUESTIONSASKED----------");
                 var pagination = nbPerPage && offset;
                 var query = "SELECT " + sequelize.models.Question.tableName + ".* FROM " + sequelize.models.Question.tableName +
                             " INNER JOIN " + sequelize.models.UserAsked.tableName + " ON " + sequelize.models.Question.tableName + ".id = " +
                             sequelize.models.UserAsked.tableName + ".QuestionId WHERE " + sequelize.models.UserAsked.tableName + ".UserId = " + this.id +
                             " AND " + sequelize.models.UserAsked.tableName + ".status = 'OPEN' AND " + sequelize.models.UserAsked.tableName + ".answer = 'NONE'";
-                console.log("----1----");
                 if (orderBy) {
                     query += " ORDER BY " + orderBy + " " + orderRule
                 }
                 if (pagination) {
                     query += " LIMIT " + offset + "," + nbPerPage;
                 }
-                console.log("------2----------");
                 return new Promise(function(resolve, reject) {
                     console.log(query);
                     sequelize.query(query, {type: sequelize.QueryTypes.SELECT, model: sequelize.models.Question}).then(function(questions) {

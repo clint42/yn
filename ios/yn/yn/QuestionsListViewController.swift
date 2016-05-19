@@ -40,8 +40,10 @@ class QuestionsListViewController: UIViewController {
     
     //MARK: - Notification handlers
     @objc private func loadNewQuestion(notification: NSNotification) {
+        print("loadNewQuestion")
         do {
             let questionId = notification.userInfo!["questionId"] as! Int
+            print("questionId: \(questionId)")
             try questionsApiController.getQuestion(questionId, completion: { (question, err) in
                 if err == nil {
                     print("Insert question \(question)")

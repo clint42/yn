@@ -10,6 +10,7 @@ module.exports = (function() {
     var questionsService = {};
 
     questionsService.notifyUsersNewQuestion = function(users, question) {
+        console.log(users.length);
         for (var i = 0; i < users.length; ++i) {
             var devices = users[i].Devices;
             for (var j = 0; j < devices.length; ++j) {
