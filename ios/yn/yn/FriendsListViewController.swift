@@ -135,6 +135,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
             alertController.addAction(BlockAction)
             
             let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action:UIAlertAction!) in
+            
             }
             alertController.addAction(CancelAction)
             

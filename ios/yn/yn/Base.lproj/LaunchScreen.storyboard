@@ -2,7 +2,14 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Sansation_Regular.ttf">
+            <string>Sansation</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -15,7 +22,36 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ask your friends !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3aD-m6-0le">
+                                <rect key="frame" x="20" y="511.5" width="560" height="24.5"/>
+                                <fontDescription key="fontDescription" name="Sansation" family="Sansation" pointSize="26"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ynLogoWhite" translatesAutoresizingMaskIntoConstraints="NO" id="hsz-ow-BqC">
+                                <rect key="frame" x="175" y="84" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hsz-ow-BqC" secondAttribute="height" multiplier="1:1" id="T2C-qP-ZBL"/>
+                                    <constraint firstAttribute="height" constant="250" id="edE-DN-1cP"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.17647059261798859" green="0.40784314274787903" blue="0.66666668653488159" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="3aD-m6-0le" firstAttribute="top" secondItem="hsz-ow-BqC" secondAttribute="bottom" constant="32" id="IQC-BN-0ZG"/>
+                            <constraint firstItem="hsz-ow-BqC" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="IsD-QR-Sae"/>
+                            <constraint firstItem="3aD-m6-0le" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="SkJ-r3-Xda"/>
+                            <constraint firstItem="hsz-ow-BqC" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="64" id="aj3-h9-pLq"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="3aD-m6-0le" secondAttribute="bottom" priority="750" constant="64" id="cpX-2Y-Ca3"/>
+                            <constraint firstItem="3aD-m6-0le" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hsz-ow-BqC" secondAttribute="bottom" constant="64" id="enj-Gg-cNl"/>
+                            <constraint firstItem="3aD-m6-0le" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="rx7-5U-vqU"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="IQC-BN-0ZG"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -23,4 +59,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ynLogoWhite" width="941" height="941"/>
+    </resources>
 </document>
