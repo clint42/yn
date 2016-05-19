@@ -11,7 +11,8 @@ module.exports = (function() {
 
     var options = {
         cert: path.resolve("apns/apnsCertDev.pem"),
-        key: path.resolve("apns/apnsKeyDev.pem")
+        key: path.resolve("apns/apnsKeyDev.pem"),
+        production: false
     };
 
     var apnConnection = apn.Connection(options);
