@@ -21,6 +21,10 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true
         },
+        fbId: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         username: DataTypes.STRING,
         email: DataTypes.STRING,
         phone: DataTypes.STRING,
@@ -208,10 +212,10 @@ module.exports = function(sequelize, DataTypes) {
                     });
                 });
             },
-            findUsers: function(numbersOrEmails) {
+            findUsers: function(identifier) {
                 var self = this;
                 return new Promise(function(resolve, reject) {
-                    if (numbersOrEmails.empty)
+                    if (identifier.empty)
                         return resolve({});
                     var queryId = "SELECT Users.id " +
                         "FROM Users " +
@@ -226,11 +230,11 @@ module.exports = function(sequelize, DataTypes) {
                             if (count < (idFriends.length - 1))
                                 notIn += ",";
                         }
-                        var mylist = "\"" + numbersOrEmails.join("\",\"") + "\"";
+                        var mylist = "\"" + identifier.join("\",\"") + "\"";
                         var query = "SELECT Users.* " +
                             "FROM Users " +
                             "LEFT JOIN Friends ON (Friends.UserId = Users.id OR Friends.FriendId = Users.id) " +
-                            "WHERE (Users.email IN(" + mylist + ") OR Users.phone IN (" + mylist + ")) ";
+                            "WHERE (Users.email IN(" + mylist + ") OR Users.phone IN (" + mylist + ") OR Users.fbId IN (" + mylist + ")) ";
                         if (notIn != "")
                             query += "AND Users.id NOT IN(" + notIn + ") ";
                         query += "GROUP BY Users.id";

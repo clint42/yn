@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 import Contacts
+import FBSDKCoreKit
+
 
 protocol ResultCellProtocol: class {
     func addFriendButtonDidTapped(identifier: String)
@@ -46,6 +48,7 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.dataSource = self
         searchBar.delegate = self
         getFriendsFromPhone()
+        getFriendsFromFacebook()
     }
     
     // MARK: - UITableViewDataSource
@@ -55,7 +58,7 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
             tableView.separatorStyle = .SingleLine
         } else {
             let noDataLabel: UILabel = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
-            noDataLabel.text = "No friends using YN\nin your contacts"
+            noDataLabel.text = "No friend using YN\nin your contacts"
             noDataLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
             noDataLabel.numberOfLines = 2
             noDataLabel.textColor = UIColor.lightGrayColor()
@@ -96,6 +99,7 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
         } else {
             self.users.removeAll()
             self.getFriendsFromPhone()
+            self.getFriendsFromFacebook()
         }
         
     }
@@ -127,10 +131,48 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
             self.searchBar.text = ""
             self.users.removeAll()
             self.getFriendsFromPhone()
+            self.getFriendsFromFacebook()
         }
         let alert = UIAlertController(title: "Add request", message: "Your request has been sent to " + identifier, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: confirmClosure))
         self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func getFriendsFromFacebook () {
+        let request = FBSDKGraphRequest(graphPath:"/me/friends", parameters: ["fields": "id"]);
+        
+        request.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
+            if error == nil {
+                var fbIds = [String]()
+                let resultdict = result as! NSDictionary
+                let data : NSArray = resultdict.objectForKey("data") as! NSArray
+                
+                for i in 0..<data.count {
+                    let valueDict : NSDictionary = data[i] as! NSDictionary
+                    let id = valueDict.objectForKey("id") as! String
+                    fbIds.append(id)
+                }
+                do {
+                    try FriendsApiController.sharedInstance.findFriends(fbIds) { (friends: [User]?, err: ApiError?) in
+                        if (err == nil && friends != nil) {
+                            self.users += friends!
+                            self.users.sortInPlace({ $0.username < $1.username })
+                            self.tableView.reloadData()
+                        }
+                        else {
+                            print("err: \(err)")
+                        }
+                    }
+                    
+                } catch let error as ApiError {
+                    print("error: \(error)")
+                } catch {
+                    print("Unexpected error")
+                }
+            } else {
+                print("Error Getting Friends \(error)");
+            }
+        }
     }
     
     func getFriendsFromPhone() {
@@ -171,7 +213,6 @@ class AddFriendViewController: UIViewController, UITableViewDataSource, UITableV
             do {
                 try FriendsApiController.sharedInstance.findFriends(numbersOrEmails) { (friends: [User]?, err: ApiError?) in
                     if (err == nil && friends != nil) {
-                        self.users.removeAll()
                         self.users = friends!
                         self.users.sortInPlace({ $0.username < $1.username })
                         self.tableView.reloadData()

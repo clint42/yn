@@ -27,6 +27,7 @@ class SignupWithFacebookViewController: UIViewController, UITextFieldDelegate {
     var email: String?
     var firstname: String?
     var lastname: String?
+    var fbId: String?
     var accessToken: FBSDKAccessToken?
     
     override func viewDidLoad() {
@@ -136,7 +137,8 @@ class SignupWithFacebookViewController: UIViewController, UITextFieldDelegate {
             var params = [
                 "token": accessToken!.tokenString,
                 "email": email!,
-                "username": usernameTextField.text!
+                "username": usernameTextField.text!,
+                "fbId": fbId
             ]
             if let firstname = firstnameTextField.text {
                 params["firstname"] = firstname

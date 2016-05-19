@@ -34,6 +34,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     var fbEmail: String? = nil
     var fbFirstname: String? = nil
     var fbLastname: String? = nil
+    var fbId: String? = nil
     var fbAccessToken: FBSDKAccessToken? = nil
     
     override func viewDidLoad() {
@@ -243,8 +244,9 @@ class SignupViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
                 self.fbEmail = graphResult["email"] as? String
                 self.fbFirstname = graphResult["first_name"] as? String
                 self.fbLastname = graphResult["last_name"] as? String
+                self.fbId = graphResult["id"] as? String
                 self.fbAccessToken = token
-                if self.fbFirstname != nil && self.fbFirstname != nil && self.fbLastname != nil && self.fbAccessToken != nil {
+                if self.fbFirstname != nil && self.fbFirstname != nil && self.fbLastname != nil && self.fbAccessToken != nil && self.fbId != nil {
                     dispatch_async(dispatch_get_main_queue()) {
                         self.performSegueWithIdentifier("signupWithFacebook", sender: self)
                     }
@@ -301,6 +303,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
             vc.firstname = fbFirstname
             vc.lastname = fbLastname
             vc.accessToken = fbAccessToken
+            vc.fbId = fbId
         }
     }
     
