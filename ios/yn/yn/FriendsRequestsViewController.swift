@@ -126,10 +126,10 @@ class FriendsRequestsViewController: UIViewController, UITableViewDelegate, UITa
                 if (err == nil && users != nil) {
                     self.addFriendsToSectionRowArrays(users!)
                     self.hasLoaded = true
-                    self.tableView.reloadData()
-                    self.setTabBarBadgeValue()
-                }
-                else {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.reloadData()
+                        self.setTabBarBadgeValue()
+                    }
                     print("error: \(err)")
                 }
             })

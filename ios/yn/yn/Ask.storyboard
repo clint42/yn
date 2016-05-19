@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="z2o-A6-cme">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="z2o-A6-cme">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -62,10 +62,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2h-S4-E56">
-                                        <rect key="frame" x="16" y="32" width="44" height="44"/>
+                                        <rect key="frame" x="16" y="24" width="52" height="52"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="44" id="T9n-Rn-XhI"/>
-                                            <constraint firstAttribute="height" constant="44" id="UgP-Ae-1QX"/>
+                                            <constraint firstAttribute="width" constant="52" id="T9n-Rn-XhI"/>
+                                            <constraint firstAttribute="height" constant="52" id="UgP-Ae-1QX"/>
                                         </constraints>
                                         <state key="normal" image="switchCameraButton"/>
                                         <connections>
@@ -79,7 +79,7 @@
                                     <constraint firstAttribute="bottom" secondItem="aIv-OJ-wcP" secondAttribute="bottom" constant="16" id="5xZ-oT-z3J"/>
                                     <constraint firstItem="Q2h-S4-E56" firstAttribute="top" secondItem="EhE-cm-Kaa" secondAttribute="top" constant="8" id="71V-uq-TdB"/>
                                     <constraint firstAttribute="bottom" secondItem="h37-hs-zrf" secondAttribute="bottom" constant="8" id="LDA-me-HYX"/>
-                                    <constraint firstItem="Q2h-S4-E56" firstAttribute="top" secondItem="EhE-cm-Kaa" secondAttribute="top" constant="32" id="Mbu-zQ-M96"/>
+                                    <constraint firstItem="Q2h-S4-E56" firstAttribute="top" secondItem="EhE-cm-Kaa" secondAttribute="top" constant="24" id="Mbu-zQ-M96"/>
                                     <constraint firstAttribute="trailing" secondItem="aIv-OJ-wcP" secondAttribute="trailing" constant="16" id="Xqx-9Y-5Iq"/>
                                     <constraint firstItem="Q2h-S4-E56" firstAttribute="leading" secondItem="EhE-cm-Kaa" secondAttribute="leading" constant="8" id="crm-S7-l7n"/>
                                     <constraint firstItem="j8v-mQ-MEH" firstAttribute="leading" secondItem="EhE-cm-Kaa" secondAttribute="leading" constant="16" id="jtB-h0-aqL"/>
